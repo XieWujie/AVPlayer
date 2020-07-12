@@ -1,0 +1,2 @@
+include ':app', ':playerservice', ':common'
+rootProject.name='AVPlayer'
