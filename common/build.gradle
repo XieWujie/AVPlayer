@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+if(isCommonRunaAlone.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -8,6 +12,9 @@ android {
 
 
     defaultConfig {
+        if(isCommonRunaAlone.toBoolean()){
+            applicationId "com.example.common"
+        }
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -15,6 +22,19 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    sourceSets{
+        main{
+            if(isCommonRunaAlone.toBoolean()){
+                manifest.srcFile'src/main/manifest/AndroidManifest.xml'
+            }else{
+                manifest.srcFile'src/main/AndroidManifest.xml'
+            }
+        }
     }
 
     buildTypes {
@@ -33,13 +53,18 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test:runner:1.1.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
 
+
+    api project(':route')
+    api project(':Route-compiler')
+    kapt project(':Route-compiler')
+    annotationProcessor project(':Route-compiler')
     // 基础组件
     api 'org.kodein.di:kodein-di-generic-jvm:6.0.1'
     api 'org.kodein.di:kodein-di-core-jvm:6.0.1'
@@ -47,11 +72,11 @@ dependencies {
 
     //jetpack
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    api "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
+    api 'androidx.room:room-runtime:2.0.0'
+    kapt 'androidx.room:room-compiler:2.0.0'
     api "androidx.paging:paging-runtime-ktx:$paging_version"
-    api "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    api "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    api 'androidx.navigation:navigation-fragment-ktx:2.0.0-rc02'
+    api 'androidx.navigation:navigation-ui-ktx:2.0.0-rc02'
 
     //kotlin协程
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
