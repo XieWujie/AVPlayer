@@ -1,38 +1,56 @@
 package com.example.route
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
-import com.example.route.annotation.Route
-import com.example.route.core.AbstractRoutes
+import com.example.route.core.IRouteRoot
+
 
 class AVRoute private constructor(){
-    private val routes = HashMap<String,Class<*>>()
 
-    fun loadRoutes(){
-        val routesClass = Class.forName("com.example.route.core.RealRoutes");
-        val realRoutes = routesClass.newInstance() as AbstractRoutes
-        realRoutes.loadRoutes(routes)
+    @Throws(IllegalArgumentException::class)
+    fun route(path:String,context: Context,avRouteContext:RouteInfo.(intent:Intent)->Unit = {}):RouteInfo{
+       val activity = routeDispatcher.route(path)
+        val intent = Intent(context,activity)
+        val info = RouteInfo(intent){
+            context.startActivity(intent)
+        }
+        avRouteContext(info,intent)
+        return info
     }
-
+    @Throws(IllegalArgumentException::class)
+     fun getRouteActivityClass(path: String) = routeDispatcher.route(path)
 
 
     companion object{
 
-        val avRoute by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED){
-            AVRoute().apply {
-                loadRoutes()
+        const val PACKAGE_PATH = "com.example.route"
+        @Volatile
+        private var isInit = false
+        val routeDispatcher:RouteDispatcher by lazy { RouteDispatcher() }
+
+        val avRoute by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED){ AVRoute() }
+
+        @Synchronized
+        fun init(application: Application){
+            if(isInit){
+                return
+            }
+            isInit = true
+            val classPaths:Set<String>
+            if(CacheRoute.cacheCanUse(application)){
+                classPaths = CacheRoute.routeMapCacheGet(application)!!
+            }else{
+                classPaths = ClassUtils.getFileNameByPackageName(application, PACKAGE_PATH)
+                CacheRoute.cacheRoutePath(application,classPaths)
+            }
+            for(classPath in classPaths){
+                if(classPath.startsWith(ROOT_ROUTE_PATH)){
+                    (Class.forName(classPath).newInstance() as IRouteRoot).loadInto(routeDispatcher.indexMap)
+                }
             }
         }
 
-        fun route(path:String,context: Context,avRouteContext:RouteInfo.(intent:Intent)->Unit):RouteInfo{
-           if(!avRoute.routes.containsKey(path)){
-               throw IllegalArgumentException("path not find")
-           }
-            val intent = Intent(context,avRoute.routes[path]);
-            val routeInfo = RouteInfo(intent){
-                context.startActivity(intent)
-            }
-            return routeInfo
-        }
+        operator fun invoke() = avRoute
     }
 }

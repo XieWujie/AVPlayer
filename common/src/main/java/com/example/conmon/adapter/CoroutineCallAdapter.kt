@@ -1,7 +1,5 @@
 package com.example.conmon.adapter
 
-import com.example.common.R
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import retrofit2.*
