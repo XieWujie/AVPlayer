@@ -13,9 +13,11 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/find" />
             <option value="$PROJECT_DIR$/login" />
+            <option value="$PROJECT_DIR$/main" />
             <option value="$PROJECT_DIR$/mine" />
             <option value="$PROJECT_DIR$/playerservice" />
             <option value="$PROJECT_DIR$/route" />
+            <option value="$PROJECT_DIR$/songlist" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

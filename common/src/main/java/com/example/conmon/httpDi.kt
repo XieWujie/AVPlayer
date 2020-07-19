@@ -1,6 +1,6 @@
 package com.example.conmon
 
-import com.example.conmon.adapter.CoroutineCallAdapterFactory
+import com.example.conmon.adapter.LiveDataCallAdapterFactory
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val HTTP_CLIENT_MODUEL = "http_client_module"
-private  const val  BASE_URL = "http://localhost:3000/"
+private  const val  BASE_URL = "http://10.0.2.2:3000"
 private const val AUTH_INTERCEPT = "authorization_intercept"
 
 val httpClientModule = Kodein.Module(HTTP_CLIENT_MODUEL){
@@ -24,7 +24,7 @@ val httpClientModule = Kodein.Module(HTTP_CLIENT_MODUEL){
             .baseUrl(BASE_URL)
             .client(instance())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .build()
     }
     bind<OkHttpClient>() with singleton {

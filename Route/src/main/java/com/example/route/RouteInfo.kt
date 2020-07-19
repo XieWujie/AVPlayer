@@ -21,6 +21,9 @@ class RouteInfo (private val intent: Intent,private val execute:()->Unit){
     infix fun String.with(value:Bundle){
         intent.putExtra(this,value)
     }
+    infix fun String.with(value: Int){
+
+    }
 
     fun execute() = execute.invoke()
 }

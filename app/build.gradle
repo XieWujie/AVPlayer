@@ -59,6 +59,9 @@ dependencies {
     if(!isPlayServiceAlone.toBoolean()){
         implementation project(':playerservice')
     }
+    if(!isMainRunAlone.toBoolean()){
+        implementation project(':main')
+    }
     kapt project(':Route-compiler')
     annotationProcessor project(':Route-compiler')
 

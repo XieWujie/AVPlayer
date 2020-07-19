@@ -1,15 +1,13 @@
 package com.example.login
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.conmon.ACCOUNT
-import com.example.conmon.BaseActivity
 import com.example.conmon.PASSWORD
+import com.example.conmon.base.AVActivity
 import com.example.conmon.extension.toast
 import com.example.login.databinding.CellPhoneActivityBinding
 import com.example.login.di.cellPhoneModule
-import com.example.login.http.LoginEntry
 import com.example.login.vm.LoginStrategy
 import com.example.login.vm.LoginViewModel
 import com.example.route.AVRoute
@@ -23,7 +21,7 @@ import org.kodein.di.generic.scoped
 import org.kodein.di.generic.singleton
 
 @Route( "login/cellphone")
-class CellPhoneLoginActivity :BaseActivity(),KodeinAware {
+class CellPhoneLoginActivity : AVActivity<LoginViewModel>(),KodeinAware {
 
 
     override val kodein:Kodein= Kodein.lazy {
@@ -32,11 +30,9 @@ class CellPhoneLoginActivity :BaseActivity(),KodeinAware {
         bind<CellPhoneLoginActivity>() with scoped(AndroidLifecycleScope).singleton {this@CellPhoneLoginActivity}
     }
 
-    private val viewModel:LoginViewModel by instance()
+    override val viewModel: LoginViewModel by instance()
     private val loginStrategy  by instance<LoginStrategy>()
     private lateinit var binding:CellPhoneActivityBinding
-    private val data = MutableLiveData<LoginEntry>()
-    private val error = MutableLiveData<Exception>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,16 +45,16 @@ class CellPhoneLoginActivity :BaseActivity(),KodeinAware {
 
 
     private fun dispatchEvent(){
-        binding.loginButton.setOnClickListener {
-            viewModel.login(loginStrategy,error,data)
-        }
-        data.observe(this, Observer {
-            AVRoute().route("app/main",this).execute()
-        })
-        error.observe(this, Observer {
-            if(!it.message.isNullOrEmpty()){
-                toast(it.message!!)
+        val request = Observer<Throwable?> {
+            when(it){
+                null->{
+                    AVRoute().route("main/main",this).execute()
+                }
+                else->toast(it.message?:"请求出错")
             }
-        })
+        }
+         binding.loginButton.setOnClickListener {
+            viewModel.login(loginStrategy).observe(this,request)
+        }
     }
 }

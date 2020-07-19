@@ -1,5 +1,6 @@
 package com.example.route
 
+import android.app.Activity
 import androidx.fragment.app.FragmentActivity
 import com.example.route.core.IRouteGroup
 
@@ -23,8 +24,8 @@ class RouteDispatcher {
     }
 
     private fun checkClassType(clazz: Class<*>){
-        if (!clazz.isAssignableFrom(FragmentActivity::class.java)){
-            throw RuntimeException("@Route 只能在Fragment下使用，而不是${clazz.canonicalName.toString()}")
+        if (!Activity::class.java.isAssignableFrom(clazz)){
+            throw RuntimeException("@Route 只能在Activity下使用，而不是${clazz.canonicalName.toString()}")
         }
     }
 

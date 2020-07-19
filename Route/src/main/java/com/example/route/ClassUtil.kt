@@ -15,13 +15,6 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import java.util.regex.Pattern
 
-/**
- * Scanner, find out class with any conditions, copy from google source code.
- *
- * @author 正纬 [Contact me.](mailto:zhilong.liu@aliyun.com)
- * @version 1.0
- * @since 16/6/27 下午10:58
- */
 object ClassUtils {
     private val EXTRACTED_NAME_EXT = ".classes"
     private val EXTRACTED_SUFFIX = ".zip"

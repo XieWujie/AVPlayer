@@ -2,7 +2,6 @@ package com.example.login.vm
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.example.login.repository.AbstractLoginRepository
 
 abstract class LoginStrategy :BaseObservable(){
     @Bindable var account:String = ""

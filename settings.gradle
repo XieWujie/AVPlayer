@@ -1,2 +1,2 @@
-include ':app', ':playerservice', ':common', ':find', ':mine', ':login', ':Route-compiler', ':route'
+include ':app', ':playerservice', ':common', ':find', ':mine', ':login', ':Route-compiler', ':route', ':main', ':songlist'
 rootProject.name='AVPlayer'

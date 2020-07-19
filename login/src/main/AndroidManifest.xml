@@ -3,13 +3,7 @@
     package="com.example.login">
 
     <application android:theme="@style/AppTheme">
-        <activity android:name=".CellPhoneLoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".CellPhoneLoginActivity"></activity>
     </application>
 
 </manifest>

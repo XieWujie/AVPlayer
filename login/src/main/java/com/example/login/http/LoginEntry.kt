@@ -52,7 +52,7 @@ data class Profile(
     val backgroundImgId: Long,
     val backgroundImgIdStr: String,
     val backgroundUrl: String,
-    val birthday: Int,
+  //  val birthday: Int,
     val city: Int,
     val defaultAvatar: Boolean,
     val description: String,
