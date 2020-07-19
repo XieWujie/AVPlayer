@@ -13,8 +13,8 @@ class CellPhoneRepository(private val api: LoginApi, override val lifeCycleProvi
 
     override fun login(phone: String, password: String):AVLiveData<LoginEntry>{
         val md5Psw = Md5Encrypt.getMd5(password,32)
-        return api.loginByCellPhone(phone,md5Psw).registerLifeCycle(lifeCycleProvide)
-            .doOnError {
+        return api.loginByCellPhone(phone,md5Psw)
+            .registerLifeCycle(lifeCycleProvide).doOnError {
                 it.printStackTrace()
             }
             .doOnComplete(this::onSuccess).post()

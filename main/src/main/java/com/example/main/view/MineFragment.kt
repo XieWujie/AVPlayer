@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.conmon.Account
 import com.example.conmon.base.AVFragment
 import com.example.conmon.extension.bind
 import com.example.conmon.extension.toast
 import com.example.main.R
+import com.example.main.adapter.MyMusicAdapter
+import com.example.main.adapter.SongListAdapter
 import com.example.main.databinding.FragmentMineBinding
 import com.example.main.di.mine_fragment
 import com.example.main.viewmodel.MineViewModel
@@ -34,13 +39,10 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
     }
     private lateinit var binding:FragmentMineBinding
     override val viewModel:MineViewModel by instance()
+    private val songListAdapter by instance<SongListAdapter>()
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = inflater.bind(R.layout.fragment_mine,container)
         dispatchEvent()
         initView()
@@ -50,6 +52,13 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
     private fun initView(){
         Glide.with(this).load(Account.avatarUrl).into(binding.userAvatarView)
         binding.username.text = Account.nickname
+        val myMusic = binding.myMusicRecycleview
+        myMusic.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+        myMusic.adapter = MyMusicAdapter()
+
+        val playListView = binding.songListRecyclerview
+        playListView.layoutManager = GridLayoutManager(context,2)
+        playListView.adapter = songListAdapter
     }
 
     private fun dispatchEvent(){
@@ -57,7 +66,7 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
             context?.toast(it.message?:"")
         })
         viewModel.subCount().observe(this, Observer {
-            binding.createSongListCountText.text = "${it.createDjRadioCount}"
+            binding.createSongListCountText.text = "${it.djRadioCount}"
             binding.collectionSongListCountTextview.text = "${it.subPlaylistCount}"
         })
         viewModel.played().observe(this, Observer {
@@ -66,6 +75,11 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
                 Glide.with(this).load(it.weekData[0].song.al.picUrl).into(binding.latestSongImgView)
             }
         })
+        viewModel.playedList().registerLifeCycle(lifeCycleProvide)
+            .doOnError { context?.toast(it.message?:"歌单请求错误") }
+            .doOnComplete {
+                songListAdapter.setList(it)
+            }.post()
     }
 
 }

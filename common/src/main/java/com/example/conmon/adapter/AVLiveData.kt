@@ -17,6 +17,7 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
     fun postError(throwable: Throwable){
         dataWrap = AVLiveDataWrap(throwable,null)
         throwable.printStackTrace()
+        postValue(dataWrap)
     }
     fun hasCanceled() = canceled
 
@@ -45,7 +46,7 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
         val complete = onComplete
         val er = error
         val observer =  Observer<AVLiveData.AVLiveDataWrap<T>>{
-            val value =value()!!
+            val value =dataWrap!!
             when(value.error){
                 null->complete?.invoke(value.data!!)
                 else->er?.invoke(value.error!!)
@@ -75,7 +76,19 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
         call =null
     }
 
-    fun value() = dataWrap
+    fun value(value: T){
+        dataWrap = AVLiveDataWrap(null,value)
+        super.setValue(dataWrap)
+    }
+
+    fun getData() = dataWrap?.data
+    fun getError() = dataWrap?.error
+
+    fun error(error: Throwable){
+        dataWrap = AVLiveDataWrap(error,null)
+        super.setValue(dataWrap)
+    }
+
 
 
    data class AVLiveDataWrap<T>(var error:Throwable?,var data:T?)

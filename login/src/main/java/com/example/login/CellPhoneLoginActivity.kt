@@ -3,6 +3,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.conmon.ACCOUNT
+import com.example.conmon.Account
 import com.example.conmon.PASSWORD
 import com.example.conmon.base.AVActivity
 import com.example.conmon.extension.toast
@@ -48,7 +49,7 @@ class CellPhoneLoginActivity : AVActivity<LoginViewModel>(),KodeinAware {
         val request = Observer<Throwable?> {
             when(it){
                 null->{
-                    AVRoute().route("main/main",this).execute()
+                    AVRoute().route("main/main",this){}.execute()
                 }
                 else->toast(it.message?:"请求出错")
             }

@@ -71,22 +71,22 @@ data class Ar(
 data class H(
     val br: Int,
     val fid: Int,
-    val size: Int,
-    val vd: Int
+    val size: Int
+   // val vd: Int
 )
 
 data class L(
     val br: Int,
     val fid: Int,
     val size: Int,
-    val vd: Int
+    val vd: String
 )
 
 data class M(
     val br: Int,
     val fid: Int,
-    val size: Int,
-    val vd: Int
+    val size: Int
+ //   val vd: Int
 )
 
 data class Privilege(

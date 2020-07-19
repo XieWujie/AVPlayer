@@ -37,27 +37,10 @@ inline fun<reified T> AVLiveData<T>.lifecycleObserve(provider:AndroidLifeCyclePr
 
 }
 
-inline fun<reified T> AVLiveData<T>.lifecycleHandle(provider:AndroidLifeCycleProvide, crossinline success:(data:T)->Unit,crossinline error:(error:Throwable)->Unit){
-    val observer =  Observer<AVLiveData.AVLiveDataWrap<T>>{
-        val value =value()!!
-        when(value.error){
-            null->success.invoke(value.data!!)
-            else->error.invoke(value.error!!)
-        }
-    }
-    this.observeForever(observer)
-    provider.provide{
-        removeObserver(observer)
-        if(!hasCanceled()){
-            cancel()
-        }
-    }
-
-}
 
 inline fun <reified T>AVLiveData<T>.toErrorLiveData(lifeCycleProvide: AndroidLifeCycleProvide):LiveData<Throwable?>{
     val error = MutableLiveData<Throwable>()
-    this.doOnError { error.value = this.value()?.error }
+    this.doOnError { error.value = getError() }
         .doOnComplete { error.value = null }
         .registerLifeCycle(lifeCycleProvide)
         .post()

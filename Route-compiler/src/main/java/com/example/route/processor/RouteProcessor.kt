@@ -6,16 +6,10 @@ import com.example.route.annotation.Route
 import com.google.auto.service.AutoService
 import com.squareup.javapoet.*
 import java.io.IOException
-import java.lang.Exception
 import java.util.*
 import javax.annotation.processing.*
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
-import javax.lang.model.type.DeclaredType
-import javax.lang.model.type.NoType
-import javax.lang.model.type.TypeKind
-import javax.lang.model.type.TypeMirror
-import javax.tools.Diagnostic
 import kotlin.collections.HashMap
 
 
@@ -153,6 +147,7 @@ class RouteProcessor : AbstractProcessor() {
             JavaFile.builder(PACKAGE_PATH, typeSpec)
                 .build()
                 .writeTo(filer)
+
         } catch (e: IOException) {
             e.printStackTrace()
         }

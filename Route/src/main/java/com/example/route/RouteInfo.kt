@@ -6,7 +6,7 @@ import android.os.Bundle
 class RouteInfo (private val intent: Intent,private val execute:()->Unit){
 
 
-    infix  fun String.with(value:String){
+    infix fun String.with(value:String){
         intent.putExtra(this,value)
     }
 

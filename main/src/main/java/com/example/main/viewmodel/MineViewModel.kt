@@ -2,10 +2,12 @@ package com.example.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.conmon.adapter.AVLiveData
 import com.example.conmon.base.AVViewModel
 import com.example.conmon.base.AndroidLifeCycleProvide
 import com.example.conmon.extension.viewModelFactory
 import com.example.main.http.entry.PlayRecordList
+import com.example.main.http.entry.Playlist
 import com.example.main.http.entry.SubCountEntry
 import com.example.main.repository.IMineIRepository
 
@@ -31,6 +33,10 @@ class MineViewModel internal constructor(repository: IMineIRepository,
             .doOnError { error.value = it }
             .post()
         return playedEntry
+    }
+
+    fun playedList():AVLiveData<List<Playlist>>{
+        return repository.playList()
     }
 
 

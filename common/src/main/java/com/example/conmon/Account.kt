@@ -8,7 +8,7 @@ import java.util.prefs.Preferences
 /**
  * 使用前必须先调用init函数初始化
  */
-class AccountAccessor private constructor(val preferences: SharedPreferences) {
+class AccountAccessor private constructor( preferences: SharedPreferences) {
 
     var uid by preferences.int()
     var nickname by preferences.string()

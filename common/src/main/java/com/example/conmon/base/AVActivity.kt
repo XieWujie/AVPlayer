@@ -11,4 +11,5 @@ abstract class AVActivity<R:AVViewModel<*>> : AppCompatActivity(),ErrorAware{
     abstract  val viewModel: R
 
     override val error: MutableLiveData<Throwable> by lazy { viewModel.error }
+
 }

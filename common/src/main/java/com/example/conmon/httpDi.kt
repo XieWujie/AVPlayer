@@ -31,7 +31,7 @@ val httpClientModule = Kodein.Module(HTTP_CLIENT_MODUEL){
         instance<OkHttpClient.Builder>()
             .connectTimeout(8000, TimeUnit.MILLISECONDS)
             .readTimeout(8000, TimeUnit.MILLISECONDS)
-         //   .addInterceptor(instance(AUTH_INTERCEPT))
+           // .addInterceptor(instance(AUTH_INTERCEPT))
             .build()
     }
     bind<Gson>() with singleton { Gson() }

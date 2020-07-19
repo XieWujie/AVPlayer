@@ -15,8 +15,6 @@ class LoginViewModel (repository: ILoginRepository,
                       override var lifeCycleProvide: AndroidLifeCycleProvide
 ):AVViewModel<ILoginRepository>(repository){
 
-    private var data:LoginEntry? = null
-
     fun login(loginStrategy: LoginStrategy): LiveData<Throwable?>{
         val checkMessage = loginStrategy.check()
         if(!checkMessage.isNullOrEmpty()){
@@ -27,9 +25,6 @@ class LoginViewModel (repository: ILoginRepository,
       val error = repository.login(loginStrategy.account,loginStrategy.password).toErrorLiveData(lifeCycleProvide)
         return error
     }
-
-
-
 }
 class CellPhoneViewModelFactory(val repository: CellPhoneRepository,private val lifeCycleProvide: AndroidLifeCycleProvide):ViewModelProvider.NewInstanceFactory(){
 

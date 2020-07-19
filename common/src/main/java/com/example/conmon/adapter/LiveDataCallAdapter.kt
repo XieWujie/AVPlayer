@@ -44,7 +44,9 @@ class LiveDataCallAdapterFactory private constructor() : CallAdapter.Factory() {
 
         override fun adapt(call: Call<T>):AVLiveData<T> {
             val liveData = AVLiveData<T>()
-            liveData.registerCancelEvent { call.cancel() }
+            liveData.registerCancelEvent {
+                call.cancel()
+            }
             call.enqueue(object :Callback<T>{
                 override fun onFailure(call: Call<T>, t: Throwable) {
                     liveData.postError(t)
@@ -54,7 +56,7 @@ class LiveDataCallAdapterFactory private constructor() : CallAdapter.Factory() {
                     when(response.code()){
                         200->liveData.postValueOfTarget(response.body()!!)
                         else ->{
-                            liveData.postError(Throwable(response.message()?:response.errorBody()?.string()?:"请求错误"))
+                            liveData.postError(Throwable(response.message()?:response.message()?:"请求错误"))
                         }
                     }
                 }

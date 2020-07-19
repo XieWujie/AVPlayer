@@ -8,13 +8,14 @@
 <LinearLayout
     android:id="@+id/mine_constraint"
     android:layout_width="match_parent"
+    android:background="#000000"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="180dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_avatar_view"
@@ -32,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="level"
+            android:textColor="@color/font_while"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/username"
             app:layout_constraintHorizontal_bias="0.0"
@@ -44,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="username"
+            android:textColor="@color/font_while"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.1"
@@ -56,6 +59,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="本地音乐"
+            android:textColor="@color/font_while"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/download_manage"
             app:layout_constraintHorizontal_bias="0.5"
@@ -68,6 +73,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="下载管理"
+            android:textColor="@color/font_while"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textview5"
             app:layout_constraintHorizontal_bias="0.5"
@@ -80,6 +87,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的电台"
+            android:textColor="@color/font_while"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/my_collect"
             app:layout_constraintHorizontal_bias="0.5"
@@ -92,6 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的收藏"
+            android:textColor="@color/font_while"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/attention_new_songs"
             app:layout_constraintHorizontal_bias="0.5"
@@ -104,6 +115,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="关注新歌"
+            android:textColor="@color/font_while"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -111,10 +124,71 @@
             app:layout_constraintTop_toBottomOf="@+id/user_avatar_view"
             app:layout_constraintVertical_bias="0.85" />
 
+        <ImageView
+            android:id="@+id/ic_music_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/localmusic"
+            app:layout_constraintEnd_toEndOf="@+id/localmusic"
+            app:layout_constraintStart_toStartOf="@+id/localmusic"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar_view"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_music" />
+
+        <ImageView
+            android:id="@+id/ic_download_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/download_manage"
+            app:layout_constraintEnd_toEndOf="@+id/download_manage"
+            app:layout_constraintStart_toStartOf="@+id/download_manage"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar_view"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_download" />
+
+        <ImageView
+            android:id="@+id/ic_radio_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textview5"
+            app:layout_constraintEnd_toEndOf="@+id/textview5"
+            app:layout_constraintStart_toStartOf="@+id/textview5"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar_view"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_radio" />
+
+        <ImageView
+            android:id="@+id/ic_follow_new_song_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/attention_new_songs"
+            app:layout_constraintEnd_toEndOf="@+id/attention_new_songs"
+            app:layout_constraintStart_toStartOf="@+id/attention_new_songs"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar_view"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_follow_new_song" />
+
+        <ImageView
+            android:id="@+id/ic_favorite_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/my_collect"
+            app:layout_constraintEnd_toEndOf="@+id/my_collect"
+            app:layout_constraintStart_toStartOf="@+id/my_collect"
+            app:layout_constraintTop_toBottomOf="@+id/user_avatar_view"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_favorite" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/my_music_card_view"
+        app:cardCornerRadius="15dp"
         android:layout_width="match_parent"
         android:background="#ffffffff"
         android:layout_height="wrap_content">
@@ -131,6 +205,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="我的音乐"
+                android:textColor="@color/font_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -139,9 +214,9 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/my_music_recycleview"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,11 +231,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="最近播放"
+                android:textColor="@color/font_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/my_music_recycleview"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -170,11 +246,12 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="更多"
+                android:textColor="@color/font_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/resent_play_textview"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/my_music_recycleview"
                 app:layout_constraintVertical_bias="0.0" />
 
             <androidx.cardview.widget.CardView
@@ -201,6 +278,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="全部已播放歌曲"
+                android:textColor="@color/font_black"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toBottomOf="@+id/resent_play_textview"
@@ -211,7 +289,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="300首"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView"
                 app:layout_constraintEnd_toEndOf="@+id/all_play_textview"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -237,7 +314,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="1"
+                android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/create_song_list_textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -260,7 +337,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="10"
                 app:layout_constraintBottom_toBottomOf="@+id/collection_songs_textview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
