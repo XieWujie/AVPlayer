@@ -1,6 +1,7 @@
 package com.example.main.di
 
 import androidx.lifecycle.ViewModelProvider
+import com.example.main.adapter.DiscoveryTopAdapter
 import com.example.main.http.entry.DiscoveryApi
 import com.example.main.repository.DiscoveryRepository
 import com.example.main.repository.IDiscoveryRepository
@@ -21,6 +22,7 @@ val DISCOVERY_FRAGMENT_MODULE = Kodein.Module(TAG){
         instance<Retrofit>().create(DiscoveryApi::class.java)
     }
 
+    bind<DiscoveryTopAdapter>() with provider { DiscoveryTopAdapter() }
     bind<IDiscoveryRepository>() with provider {
         DiscoveryRepository(instance(),instance())
     }

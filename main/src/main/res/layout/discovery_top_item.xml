@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="130dp">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:id="@+id/cover_view"
+            android:scaleType="centerCrop"
+            android:src="@drawable/my_love_default_background"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+</layout>
