@@ -2,6 +2,7 @@ package com.example.main.di
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.main.MainActivity
 import com.example.main.adapter.SongListAdapter
 import com.example.main.http.MineApi
 import com.example.main.repository.IMineIRepository
@@ -24,9 +25,9 @@ val mine_fragment = Kodein.Module(MINE_FRAGMENT_MODULE){
   bind<MineLocal>() with provider {
       MineLocal(instance())
   }
-    bind<AndroidLifeCycleProvide>() with provider {
-        AndroidLifeCycleProvide(instance<MineFragment>())
-    }
+//    bind<AndroidLifeCycleProvide>() with provider {
+//        AndroidLifeCycleProvide(instance<MineFragment>())
+//    }
 
     bind<SongListAdapter>() with provider {
         SongListAdapter()
@@ -35,6 +36,6 @@ val mine_fragment = Kodein.Module(MINE_FRAGMENT_MODULE){
         MineRepository(instance(),instance(),instance())
     }
     bind<MineViewModel>() with provider {
-        ViewModelProvider(instance<MineFragment>(),MineViewModel.factory(instance<IMineIRepository>(),instance()))[MineViewModel::class.java]
+        ViewModelProvider(instance<MainActivity>(),MineViewModel.factory(instance<IMineIRepository>(),instance()))[MineViewModel::class.java]
     }
 }

@@ -60,6 +60,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     implementation project(':common')
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
     kapt project(':Route-compiler')
     annotationProcessor project(':Route-compiler')
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

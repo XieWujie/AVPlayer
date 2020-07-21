@@ -35,7 +35,6 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
     override val kodein = Kodein.lazy {
         extend(parent)
         import(mine_fragment)
-        bind<MineFragment>() with scoped(AndroidLifecycleScope).singleton{ this@MineFragment }
     }
     private lateinit var binding:FragmentMineBinding
     override val viewModel:MineViewModel by instance()
