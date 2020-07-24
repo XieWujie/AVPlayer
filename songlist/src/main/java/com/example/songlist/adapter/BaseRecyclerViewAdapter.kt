@@ -1,12 +1,16 @@
 package com.example.songlist.adapter
 
 import android.content.Context
+import android.util.Log
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerViewAdapter<T>(private val layoutId: Int, var list: ArrayList<T>) :
+abstract class BaseRecyclerViewAdapter<T>(
+    private val layoutId: Int,
+    protected var list: ArrayList<T>
+) :
     RecyclerView.Adapter<ViewHolder>() {
     lateinit var context: Context
     var itemClickListener: ((View, T, Int) -> Unit)? = null
@@ -26,7 +30,10 @@ abstract class BaseRecyclerViewAdapter<T>(private val layoutId: Int, var list: A
 
     override fun getItemCount(): Int = getCount()
 
-    open fun getCount() = list.size
+    open fun getCount(): Int {
+        Log.e(TAG, list.size.toString())
+        return list.size
+    }
 
     /**
      * 设置数据 全局刷新
@@ -71,4 +78,5 @@ abstract class BaseRecyclerViewAdapter<T>(private val layoutId: Int, var list: A
 
     abstract fun bindViewHolder(holder: ViewHolder, item: T, position: Int)
 
+    private val TAG = this.javaClass.simpleName
 }

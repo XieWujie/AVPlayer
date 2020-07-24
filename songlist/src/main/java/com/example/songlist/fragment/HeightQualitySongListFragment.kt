@@ -69,7 +69,7 @@ class HeightQualitySongListFragment(override var mCat: String) : AVFragment<Song
     }
 
 
-    override fun createFragment(): Fragment {
+    override fun createFragment(cat: String): Fragment {
         return this
     }
 

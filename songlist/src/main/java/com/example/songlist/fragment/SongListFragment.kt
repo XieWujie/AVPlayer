@@ -50,6 +50,7 @@ class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_song_square, container, false)
         initView(view)
         bindViewData()
@@ -60,7 +61,7 @@ class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
         recyclerView = f(R.id.song_square_recycler_view, view)
     }
 
-    private fun initData() {
+    public fun initData() {
         viewModel.getSongList(cat = mCat)
         Log.e(TAG, mCat)
     }
@@ -69,13 +70,12 @@ class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
         sourceList = ArrayList()
         recyclerAdapter = AllSongListAdapter(R.layout.item_all_song_list, sourceList)
         viewModel.songList.lifecycleObserve(lifeCycleProvide, Observer {
-            Log.e(TAG, it.toString())
+            sourceList.clear()
             sourceList.addAll(it)
-            recyclerAdapter.addData(sourceList)
+            recyclerAdapter.setData(sourceList)
         })
         recyclerView.layoutManager = GridLayoutManager(activity, 3)
         recyclerView.adapter = recyclerAdapter
-
     }
 
     override var mCat: String = ""
@@ -86,8 +86,8 @@ class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
     }
 
 
-    override fun createFragment(): Fragment {
-        return this
+    override fun createFragment(cat: String): Fragment {
+        return SongListFragment().setCat(cat) as Fragment
     }
 
     private fun <T : View> f(id: Int, view: View): T {

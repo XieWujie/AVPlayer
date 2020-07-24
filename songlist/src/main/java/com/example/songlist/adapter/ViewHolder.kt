@@ -48,9 +48,11 @@ class ViewHolder(context: Context, parent: ViewGroup, @LayoutRes layoutId: Int) 
 
     fun setImage(@IdRes viewId: Int, url: String): ViewHolder {
         val imageView: ImageView = getView(viewId)
+        imageView.tag = url
         imageView.load(url)
         return this
     }
+
 
     fun gone(@IdRes viewId: Int): ViewHolder {
         val view: View = getView(viewId)

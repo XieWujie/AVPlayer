@@ -31,7 +31,7 @@
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorColor="@color/tabSelectColor" />
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/song_square_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"

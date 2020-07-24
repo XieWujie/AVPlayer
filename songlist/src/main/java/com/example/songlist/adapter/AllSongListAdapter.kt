@@ -19,7 +19,7 @@ class AllSongListAdapter(@LayoutRes layoutId: Int, list: ArrayList<Playlists>) :
         return when {
             num < 100_000 -> num.toString()
             num < 100_000_000 -> "${(num / 100_000)}万"
-            else -> "${num.toFloat() / 100_000_000.toFloat()}亿"
+            else -> "${(num / 10_000_000).toFloat() / 10.toFloat()}亿"
         }
     }
 
