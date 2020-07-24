@@ -1,2 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.songlist" />
+    package="com.example.songlist">
+
+    <application>
+        <activity android:name=".SongSquareActivity"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/893763821/AVPlayer.iml" filepath="$PROJECT_DIR$/.idea/modules/893763821/AVPlayer.iml" group="AVPlayer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-92313339/Route-compiler.iml" filepath="$PROJECT_DIR$/.idea/modules/-92313339/Route-compiler.iml" group="AVPlayer/Route-compiler" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1450681857/app.iml" filepath="$PROJECT_DIR$/.idea/modules/-1450681857/app.iml" group="AVPlayer/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1245915827/common.iml" filepath="$PROJECT_DIR$/.idea/modules/-1245915827/common.iml" group="AVPlayer/common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2021322341/find.iml" filepath="$PROJECT_DIR$/.idea/modules/-2021322341/find.iml" group="AVPlayer/find" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1769230279/login.iml" filepath="$PROJECT_DIR$/.idea/modules/1769230279/login.iml" group="AVPlayer/login" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2021121637/main.iml" filepath="$PROJECT_DIR$/.idea/modules/-2021121637/main.iml" group="AVPlayer/main" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2021113803/mine.iml" filepath="$PROJECT_DIR$/.idea/modules/-2021113803/mine.iml" group="AVPlayer/mine" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/20676370/playerservice.iml" filepath="$PROJECT_DIR$/.idea/modules/20676370/playerservice.iml" group="AVPlayer/playerservice" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1774785191/route.iml" filepath="$PROJECT_DIR$/.idea/modules/1774785191/route.iml" group="AVPlayer/route" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/songlist.iml" filepath="$PROJECT_DIR$/.idea/modules/songlist.iml" group="AVPlayer/songlist" />
+    </modules>
+  </component>
+</project>

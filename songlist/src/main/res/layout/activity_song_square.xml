@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/songSquareConstraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".SongSquareActivity"
+    android:background="#CCB3B3">
+
+    <com.example.songlist.view.ToolbarLayout
+        android:id="@+id/song_square_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:leftText="歌单广场"
+        app:showLeftText="true" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/song_square_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toTopOf="@id/song_square_viewpager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/song_square_toolbar"
+        app:tabMode="scrollable"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorColor="@color/tabSelectColor" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/song_square_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/song_square_tablayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

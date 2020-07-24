@@ -13,7 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val HTTP_CLIENT_MODUEL = "http_client_module"
-private  const val  BASE_URL = "http://10.0.2.2:3000"
+//private  const val  BASE_URL = "http://10.0.2.2:3000"
+private  const val  BASE_URL = "http://10.62.130.126:3000"
 private const val AUTH_INTERCEPT = "authorization_intercept"
 
 val httpClientModule = Kodein.Module(HTTP_CLIENT_MODUEL){

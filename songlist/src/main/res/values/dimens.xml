@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    大标题-->
+    <dimen name="textSizeBigTitle">24sp</dimen>
+    <!--    AppBar字体大小-->
+    <dimen name="textSizeAppBar">20sp</dimen>
+    <!--    小标题-->
+    <dimen name="textSizeSmallTitle">16sp</dimen>
+    <!--    普通/按钮字体大小-->
+    <dimen name="textSizeNormal">14sp</dimen>
+    <!--    小提示字体大小-->
+    <dimen name="textSizeSmall">12sp</dimen>
+
+</resources>

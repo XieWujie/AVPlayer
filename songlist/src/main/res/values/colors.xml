@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--    普通字体颜色-->
+    <color name="textColor">#DE000000</color>
+    <!--    减淡字体颜色-->
+    <color name="textColorLight">#8A000000</color>
+    <!--    提示/禁用字体颜色-->
+    <color name="textColorHint">#42000000</color>
+
+    <!--    分割线颜色-->
+    <color name="lineColor">#1F000000</color>
+
+    <color name="tabSelectColor">#DEFF0000</color>
+    
+    <color name="white">#FFFFFF</color>
+</resources>
