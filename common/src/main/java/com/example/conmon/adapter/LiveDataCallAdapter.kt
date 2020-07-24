@@ -55,6 +55,7 @@ class LiveDataCallAdapterFactory private constructor() : CallAdapter.Factory() {
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     when(response.code()){
                         200->liveData.postValueOfTarget(response.body()!!)
+                        300,301->call.request()
                         else ->{
                             liveData.postError(Throwable(response.message()?:response.message()?:"请求错误"))
                         }

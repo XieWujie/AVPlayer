@@ -1,32 +1,31 @@
 package com.example.playerservice.core
 
-import android.os.IBinder
+import android.content.Context
+import com.example.playerservice.IAVService
+import com.example.playerservice.IPlayerService
 
-class PlayerConnection : IPlayerService.Stub() {
+class PlayerConnection(val context: Context, val player: IAVPlayer) : IPlayerService.Stub(){
 
-    override fun songListID(songListId: IntArray?): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    val house = player.getHouse()
+    override fun rquestPlaySong(id: Int,ids:String?) {
+       house.requestId(id,ids){
+           player.play(id)
+       }
     }
 
-    override fun rquestPlaySong(id: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun registerCallback(callback:IAVService){
+        player.registerCallback(callback)
+    }
+    override fun pause() {
+        player.pause()
     }
 
-    override fun requestPlayList(): IntArray {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun start() {
+        player.start()
     }
 
-    override fun playTime(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun seek(time: Int) {
+        player.seekTo(time)
     }
-
-    override fun getLyric(): MutableList<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun currentLyric(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 
 }

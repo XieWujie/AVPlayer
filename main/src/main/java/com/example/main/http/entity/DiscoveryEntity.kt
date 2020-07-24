@@ -1,8 +1,19 @@
-package com.example.main.di.entity
+package com.example.main.http.entity
 data class DiscoveryEntity(
     val code: Int,
     val `data`: Data,
     val message: String
+)
+data class Block(
+
+    val action: String,
+    val actionType: String,
+    val blockCode: String,
+    val canClose: Boolean,
+    val creatives: List<Creative>,
+    //val extInfo: ExtInfo,
+    val showType: String,
+    val uiElement: UiElementX
 )
 
 data class Data(
@@ -12,17 +23,6 @@ data class Data(
     val guideToast: GuideToast,
     val hasMore: Boolean,
     val pageConfig: PageConfig
-)
-
-data class Block(
-    val action: String,
-    val actionType: String,
-    val blockCode: String,
-    val canClose: Boolean,
-    val creatives: List<Creative>,
-    val extInfo: ExtInfo,
-    val showType: String,
-    val uiElement: UiElementX
 )
 
 data class Creative(
@@ -46,7 +46,7 @@ data class Resource(
     val resourceId: String,
     val resourceType: String,
     val resourceUrl: Any,
-    val uiElement: Any,
+    val uiElement: UiElement,
     val valid: Boolean
 )
 
@@ -57,7 +57,8 @@ data class ResourceExtInfo(
 
 data class UiElement(
     val image: Image,
-    val mainTitle: MainTitle
+    val mainTitle: MainTitle,
+    val subTitle: SubTitle
 )
 
 data class Image(

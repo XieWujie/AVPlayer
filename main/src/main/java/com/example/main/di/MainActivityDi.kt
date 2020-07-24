@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.conmon.base.AndroidLifeCycleProvide
 import com.example.main.MainActivity
-import com.example.main.adapter.PageTabAdapter
+import com.example.main.adapter.mine.PageTabAdapter
 import com.example.main.http.MainApi
 import com.example.main.repository.IMainRepository
 import com.example.main.repository.MainRepository
@@ -31,7 +31,7 @@ val MAIN_ACTIVITY_MODULE = Kodein.Module(TAG){
             add(instance<MineFragment>())
             add(instance<DiscoveryFragment>())
         }
-        PageTabAdapter(instance(),list)
+        PageTabAdapter(instance(), list)
     }
 
     bind<MainApi>() with provider {

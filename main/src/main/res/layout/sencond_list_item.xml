@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_height="wrap_content">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="@color/bg_red"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/item_view"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:textSize="12sp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/font_gray"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
+</layout>

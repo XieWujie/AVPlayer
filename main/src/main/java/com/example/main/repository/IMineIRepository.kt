@@ -5,7 +5,6 @@ import com.example.conmon.base.IRepository
 import com.example.main.http.entry.PlayRecordList
 import com.example.main.http.entry.Playlist
 import com.example.main.http.entry.SubCountEntry
-import com.example.main.http.entry.UserSongList
 
 
 interface IMineIRepository :IRepository{

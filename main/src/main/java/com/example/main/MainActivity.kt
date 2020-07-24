@@ -1,19 +1,14 @@
 package com.example.main
 
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.Shape
 import android.os.Bundle
-import android.util.Log
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.conmon.ACCOUNT
 import com.example.conmon.Account
 import com.example.conmon.PASSWORD
 import com.example.conmon.base.AVActivity
-import com.example.main.adapter.PageTabAdapter
+import com.example.conmon.util.StatusBarUtils
+import com.example.main.adapter.mine.PageTabAdapter
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MAIN_ACTIVITY_MODULE
 import com.example.main.view.MainAppBar
@@ -59,6 +54,7 @@ class MainActivity : AVActivity<MainViewModel>(),KodeinAware {
     private fun dispatchEvent(){
         val drawable = PanDrawable()
         val decorView = window.decorView
+        decorView.background = drawable
         binding.mainPage.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
               when(position){

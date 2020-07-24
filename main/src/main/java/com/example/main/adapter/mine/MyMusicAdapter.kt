@@ -1,4 +1,4 @@
-package com.example.main.adapter
+package com.example.main.adapter.mine
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +12,7 @@ class MyMusicAdapter :RecyclerView.Adapter<MyMusicAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val view =  when(viewType){
-            MY_LOVE->{
+            MY_LOVE ->{
                val view =  LayoutInflater.from(parent.context).inflate(R.layout.my_love_layout,parent,false)
                 view.setOnClickListener {
 

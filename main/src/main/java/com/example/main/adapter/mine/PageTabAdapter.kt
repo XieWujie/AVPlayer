@@ -1,4 +1,4 @@
-package com.example.main.adapter
+package com.example.main.adapter.mine
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

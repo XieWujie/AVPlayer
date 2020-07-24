@@ -14,18 +14,14 @@ import com.example.conmon.base.AVFragment
 import com.example.conmon.extension.bind
 import com.example.conmon.extension.toast
 import com.example.main.R
-import com.example.main.adapter.MyMusicAdapter
-import com.example.main.adapter.SongListAdapter
+import com.example.main.adapter.mine.MyMusicAdapter
+import com.example.main.adapter.mine.SongListAdapter
 import com.example.main.databinding.FragmentMineBinding
 import com.example.main.di.mine_fragment
 import com.example.main.viewmodel.MineViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.AndroidLifecycleScope
-import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.scoped
-import org.kodein.di.generic.singleton
 
 /**
  * 主页下我的 tab下的UI

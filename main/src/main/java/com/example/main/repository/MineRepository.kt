@@ -1,7 +1,6 @@
 package com.example.main.repository
 
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.conmon.Account
 import com.example.conmon.adapter.AVLiveData
 import com.example.conmon.base.AndroidLifeCycleProvide
@@ -51,8 +50,10 @@ class MineRepository(val mineLocal: MineLocal,val api:MineApi,override val lifeC
         val data = AVLiveData<SubCountEntry>()
         mineLocal.apply {
             val subCountEntry =
-                SubCountEntry(artistCount,code,createDjRadioCount,createdPlaylistCount,
-                    djRadioCount,mvCount,newProgramCount,programCount,subPlaylistCount)
+                SubCountEntry(
+                    artistCount, code, createDjRadioCount, createdPlaylistCount,
+                    djRadioCount, mvCount, newProgramCount, programCount, subPlaylistCount
+                )
             data.value(subCountEntry)
         }
         return data

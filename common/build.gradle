@@ -72,11 +72,13 @@ dependencies {
 
     //jetpack
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    api 'androidx.room:room-runtime:2.2.5'
-    kapt 'androidx.room:room-compiler:2.2.5'
     api "androidx.paging:paging-runtime-ktx:$paging_version"
     api 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     api 'androidx.navigation:navigation-ui-ktx:2.3.0'
+
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    api "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 
     api 'org.kodein.di:kodein-di-framework-android-core:6.0.1'
     // ViewModel and LiveData

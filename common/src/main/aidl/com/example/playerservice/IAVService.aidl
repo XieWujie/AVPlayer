@@ -9,4 +9,6 @@ interface IAVService {
   void lyricChange(int item);
   void lyric(in Map lyric);
   void playList(in int[] ids);
+  void pause(int id);
+  void started(int id);
 }

@@ -1,6 +1,5 @@
 package com.example.login.http
 
-import android.os.Parcelable
 
 data class LoginEntry(
     val account: Account,

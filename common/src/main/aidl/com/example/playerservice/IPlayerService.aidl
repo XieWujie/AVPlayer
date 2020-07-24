@@ -10,4 +10,5 @@ interface IPlayerService {
     void pause();
     void start();
     void seek(int time);
+
 }
