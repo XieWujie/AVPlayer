@@ -3,7 +3,7 @@ package com.example.route
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import com.example.route.core.IRouteRoot
+import com.example.route.apt.IRouteRoot
 
 
 class AVRoute private constructor(){
@@ -24,7 +24,7 @@ class AVRoute private constructor(){
 
     companion object{
 
-        const val PACKAGE_PATH = "com.example.route"
+
         @Volatile
         private var isInit = false
         val routeDispatcher:RouteDispatcher by lazy { RouteDispatcher() }

@@ -75,8 +75,8 @@ class  RouteProcessor : AbstractProcessor() {
     private fun generatedRoot(rootMap:Map<String,String>) {
         //创建参数类型 Map<String,Class<? extends IRouteGroup>> routes>
         //Wildcard 通配符
-        val iRouteGroup = ClassName.get("$PACKAGE_PATH.core","IRouteGroup")
-        val iRouteRoot = ClassName.get("$PACKAGE_PATH.core","IRouteRoot")
+        val iRouteGroup = ClassName.get(PACKAGE_PATH,"IRouteGroup")
+        val iRouteRoot = ClassName.get(PACKAGE_PATH,"IRouteRoot")
         val parameterizedTypeName = ParameterizedTypeName.get(
             ClassName.get(HashMap::class.java),
             ClassName.get(String::class.java),
@@ -137,7 +137,7 @@ class  RouteProcessor : AbstractProcessor() {
             methodBuilder.addStatement("routes.put(\$S, \$T.class)", key, getClassName(value))
         }
 
-        val superClass = ClassName.get("$PACKAGE_PATH.core","IRouteGroup")
+        val superClass = ClassName.get("$PACKAGE_PATH","IRouteGroup")
         val typeSpec = TypeSpec.classBuilder(className)
             .addModifiers(Modifier.PUBLIC)
             .addSuperinterface(superClass)

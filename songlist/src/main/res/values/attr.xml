@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ToolbarLayout">
+        <attr name="showBack" format="boolean" />
+        <attr name="showLeftFrameLayout" format="boolean" />
+        <attr name="showLeftText" format="boolean" />
+        <attr name="showEditText" format="boolean" />
+        <attr name="showRightText" format="boolean" />
+        <attr name="showRightFirstIcon" format="boolean" />
+        <attr name="showRightSecondIcon" format="boolean" />
+        <attr name="showLine" format="boolean" />
+        <attr name="leftText" format="string" />
+        <attr name="rightText" format="string" />
+    </declare-styleable>
+
+
+</resources>

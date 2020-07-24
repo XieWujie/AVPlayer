@@ -2,7 +2,7 @@ package com.example.route
 
 import android.app.Activity
 import androidx.fragment.app.FragmentActivity
-import com.example.route.core.IRouteGroup
+import com.example.route.apt.IRouteGroup
 
 class RouteDispatcher {
 
@@ -33,7 +33,7 @@ class RouteDispatcher {
 
     @Throws(IllegalArgumentException::class)
     private fun loadgroupRoute(path:String){
-        val rootName = findRootName(path)?:throw IllegalArgumentException("找不到指定分组$path")
+        val rootName = findRootName(path)?:throw IllegalArgumentException("找不到指定分组${path}")
         val group = indexMap[rootName]?:throw IllegalArgumentException("找不到指定分组$path")
         val groupRoute = group.newInstance()
         groupRoute.loadInto(pathMap)

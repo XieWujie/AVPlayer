@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.main.databinding.DiscoveryFirstItemBinding
 import com.example.main.databinding.DiscoveryListItemBinding
 import com.example.main.http.entity.Block
+import com.example.route.AVRoute
 
 class DiscoveryAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -87,6 +88,9 @@ class DiscoveryAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                     recyclerView.layoutManager = LinearLayoutManager(binding.root.context,RecyclerView.HORIZONTAL,false)
                     recyclerView.adapter = SongListCommendAdapter().apply {
                         setList(block.creatives?: emptyList())
+                    }
+                    binding.actionText.setOnClickListener {
+                        AVRoute().route("songlist/songsquare",binding.root.context,{}).execute()
                     }
                 }
                 SLIDE_SONGLIST_ALIGN->{

@@ -62,6 +62,9 @@ dependencies {
     if(!isMainRunAlone.toBoolean()){
         implementation project(':main')
     }
+    if(!isSongListAlone.toBoolean()){
+        implementation project(':songlist')
+    }
     kapt project(':Route-compiler')
     annotationProcessor project(':Route-compiler')
 
