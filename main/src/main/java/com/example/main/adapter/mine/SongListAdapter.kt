@@ -9,7 +9,6 @@ import com.example.conmon.extension.bind
 import com.example.main.R
 import com.example.main.databinding.PlayListItemBinding
 import com.example.main.http.entry.Playlist
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SongListAdapter :RecyclerView.Adapter<SongListAdapter.ViewHolder>(){
@@ -40,7 +39,7 @@ class SongListAdapter :RecyclerView.Adapter<SongListAdapter.ViewHolder>(){
     inner class ViewHolder(val binding:PlayListItemBinding):RecyclerView.ViewHolder(binding.root){
 
         @SuppressLint("SetTextI18n")
-        fun bind(playList:Playlist){
+        fun bind(playList: Playlist){
             binding.listCountText.text = "${playList.trackCount}首"
             binding.listNameText.text = playList.name
             Glide.with(binding.listCoverView).load(playList.coverImgUrl).into(binding.listCoverView)

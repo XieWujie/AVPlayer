@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/list_cover_card"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <ImageView
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/my_love_default_background"
+            android:id="@+id/list_cover_view"
+            android:layout_height="match_parent"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/list_discription_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/font_gray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/list_cover_card"
+        app:layout_constraintStart_toStartOf="@+id/list_cover_card"
+        app:layout_constraintTop_toBottomOf="@+id/list_cover_card"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/play_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="32"
+        android:textColor="@color/font_while"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/list_discription_text"
+        app:layout_constraintEnd_toEndOf="@+id/list_cover_card"
+        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintStart_toStartOf="@+id/list_cover_card"
+        app:layout_constraintTop_toTopOf="@+id/list_cover_card"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
