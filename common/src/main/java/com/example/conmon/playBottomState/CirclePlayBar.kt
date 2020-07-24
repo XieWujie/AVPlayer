@@ -43,8 +43,8 @@ class CirclePlayBar :View{
     }
 
 
-    fun setTime(time:Float){
-       val  angle = (time/allTime) *360
+    fun setTime(time:Int){
+       val  angle = (time.toFloat()/allTime) *360
         post {
             this.angle = angle
             invalidate()
@@ -53,9 +53,17 @@ class CirclePlayBar :View{
     fun setAllTime(time: Int){
         post {
             allTime = time.toFloat()
+            angle = 0f
+            invalidate()
         }
     }
 
+    fun setIsPlaying(state:Boolean){
+        post {
+            isPlaying = state
+        }
+    }
+    fun getPlayState() = isPlaying
 
     private fun cacheResult(radius:Float){
         val b = radius/10
@@ -68,9 +76,9 @@ class CirclePlayBar :View{
 
     override fun onDraw(canvas: Canvas) {
         if(isPlaying){
-            canvas.drawPath(info.pausePath,redPaint)
-        }else{
             canvas.drawPath(info.playingPath,redPaint)
+        }else{
+            canvas.drawPath(info.pausePath,redPaint)
         }
         canvas.drawArc(0f,0f,radius,radius,0f,angle,false,redPaint)
         canvas.drawArc(0f,0f,radius,radius,angle,360f,false,redPaint)
@@ -84,7 +92,8 @@ class CirclePlayBar :View{
         init {
             pausePath.moveTo(left,top)
             pausePath.lineTo(left,bottom)
-            pausePath.lineTo(right,radius)
+            pausePath.lineTo(right,radius/2)
+            pausePath.lineTo(left,top)
             playingPath.moveTo(left,top)
             playingPath.lineTo(left,bottom)
             playingPath.moveTo(right,top)

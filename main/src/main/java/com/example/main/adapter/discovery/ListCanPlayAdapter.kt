@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.conmon.base.AndroidLifeCycleProvide
 import com.example.conmon.extension.runOnMainThread
+import com.example.conmon.playservice.IConnectionCallback
 import com.example.conmon.playservice.PlayerService
 import com.example.conmon.playservice.ResponseConnection
 import com.example.main.R
@@ -12,7 +14,7 @@ import com.example.main.databinding.DiscoveryCanPlayItemBinding
 import com.example.main.http.entity.Creative
 import com.example.main.http.entity.Resource
 
-class ListCanPlayAdapter :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
+class ListCanPlayAdapter(val lifeCycleProvide: AndroidLifeCycleProvide) :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
 
     private val mList = ArrayList<Resource>()
 
@@ -32,34 +34,33 @@ class ListCanPlayAdapter :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
         mList.addAll(list)
     }
 
-    class ViewHolder(val binding:DiscoveryCanPlayItemBinding):RecyclerView.ViewHolder(binding.root){
-
+    inner class ViewHolder(val binding:DiscoveryCanPlayItemBinding):RecyclerView.ViewHolder(binding.root),IConnectionCallback{
+        private @Volatile var id = 0
         fun bind(resource: Resource){
             binding.songTitle.text = resource.uiElement?.mainTitle?.title?:""
             binding.songSubTitle.text = resource.uiElement?.subTitle?.title?:""
             Glide.with(binding.songCoverView).load(resource.uiElement.image.imageUrl).into(binding.songCoverView)
             binding.songPlayStateView.setOnClickListener {view->
                 if(!view.isSelected) {
-                    val id = resource.resourceId.toInt()
-                    PlayerService.playConnection?.rquestPlaySong(id, null)
-                    ResponseConnection.registerStartedEvent {
-                        if(id== it){
-                            runOnMainThread {
-                                view.isSelected = true
-                                view.background = null
-                            }
-                        }
-                    }
-                    ResponseConnection.registerPauseEvent {
-                        if(id == it){
-                            runOnMainThread {
-                                view.isSelected = false
-                                view.setBackgroundResource(R.drawable.radius_rectangle)
-                            }
-                        }
-                    }
+                    id = resource.resourceId.toInt()
+                    PlayerService.playConnection?.rquestPlaySong(id,null)
+                    ResponseConnection.registerObservable(this, lifeCycleProvide)
                 }
             }
         }
+
+        override fun started(id: Int) {
+            if(id == this.id){
+                binding.songPlayStateView.isSelected = true
+                binding.songPlayStateView.background = null
+            }else{
+                binding.songPlayStateView.isSelected = false
+                binding.songPlayStateView.setBackgroundResource(R.drawable.radius_rectangle)
+            }
+        }
+
+    }
+    companion object{
+        private const val BIND_CONNECTION_TAG = 1
     }
 }

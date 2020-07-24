@@ -11,4 +11,5 @@ interface IAVService {
   void playList(in int[] ids);
   void pause(int id);
   void started(int id);
+  void playTime(int time);
 }

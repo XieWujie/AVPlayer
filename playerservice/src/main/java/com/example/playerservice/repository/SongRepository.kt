@@ -32,8 +32,13 @@ class SongRepository(val api:Api) :ISongRepository{
 
             override fun onResponse(call: Call<LyricEntity>, response: Response<LyricEntity>) {
                 if(response.code() == 200){
-                    Util.lyricFormal(response.body()!!.lrc.lyric,lyric)
-                    callback.invoke(null)
+                    val lyr = response.body()?.lrc?.lyric
+                    if(lyr == null){
+                        callback.invoke(Throwable("歌词请求错误"))
+                    }else{
+                        Util.lyricFormal(lyr,lyric)
+                        callback.invoke(null)
+                    }
                 }else{
                     callback.invoke(Throwable(response.message()?:"请求错误"))
                 }

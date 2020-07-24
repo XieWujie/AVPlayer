@@ -28,6 +28,5 @@ object Util {
                 lyrics[time] = group(4)
             }
         }
-        Log.d("lyric",lyrics.toString())
     }
 }

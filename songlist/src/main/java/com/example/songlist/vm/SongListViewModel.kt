@@ -17,8 +17,8 @@ class SongListViewModel(
     repository: SongSquareFragmentRepository,
     override var lifeCycleProvide: AndroidLifeCycleProvide
 ) : AVViewModel<SongSquareFragmentRepository>(repository) {
-    var songList = SafeMutableLiveData<List<Playlists>>()
-    var heightQualitySongList = MutableLiveData<List<Playlists>>()
+    val songList = SafeMutableLiveData<List<Playlists>>()
+    val heightQualitySongList = MutableLiveData<List<Playlists>>()
 
 
     fun getHeightQualitySongList(

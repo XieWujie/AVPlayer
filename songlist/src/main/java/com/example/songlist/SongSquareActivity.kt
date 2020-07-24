@@ -28,6 +28,7 @@ import org.kodein.di.newInstance
 
 @Route("songlist/songsquare")
 class SongSquareActivity : AVActivity<SongSquareViewModel>(), KodeinAware {
+
     private lateinit var toolbarLayout: ToolbarLayout
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager

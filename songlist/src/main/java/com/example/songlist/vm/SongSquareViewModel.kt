@@ -16,6 +16,7 @@ class SongSquareViewModel(
     override var lifeCycleProvide: AndroidLifeCycleProvide
 ) : AVViewModel<ISongSquareRepository>(repository) {
     var songCategorys = MutableLiveData<List<Sub>>()
+    private set
 
     fun getSongCategoryList() {
         repository.getSongCategoryList()

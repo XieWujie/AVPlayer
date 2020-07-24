@@ -26,7 +26,7 @@ class DiscoveryFragment :AVFragment<DiscoveryViewModel>(),KodeinAware{
     }
     override val viewModel: DiscoveryViewModel by instance()
     lateinit var binding:FragmentDiscoveryBinding
-    private val adapter = DiscoveryAdapter()
+    private val adapter = DiscoveryAdapter(lifeCycleProvide)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {

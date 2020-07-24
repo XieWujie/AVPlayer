@@ -2,7 +2,9 @@ package com.example.playerservice.core
 
 import android.content.Context
 import android.media.MediaPlayer
+import com.example.conmon.extension.toast
 import com.example.playerservice.IAVService
+import com.example.playerservice.http.Song
 
 interface IAVPlayer{
 
@@ -12,7 +14,6 @@ interface IAVPlayer{
     fun seekTo(time:Int)
     fun next()
     fun pre()
-    fun prepareNext()
     fun play(id:Int)
     fun getHouse():SongHouse
     fun registerCallback(callback:IAVService)
@@ -22,16 +23,11 @@ class AVPlayer(val context: Context,private val house: SongHouse) : IAVPlayer,Me
 
 
     private var currentMedia:MediaPlayer? = null
-    private var nextMedia:MediaPlayer? = null
     private var playCallback:IAVService? = null
 
     override fun start() {
         currentMedia?.start()
-        house.invalidCurrentPlay = false
-        playCallback?.apply {
-            started(house.currentPlayId)
-            pause(house.lastId)
-        }
+        playCallback?.started(house.currentPlayId)
     }
 
     override fun registerCallback(callback: IAVService) {
@@ -40,9 +36,14 @@ class AVPlayer(val context: Context,private val house: SongHouse) : IAVPlayer,Me
     }
 
 
-    override fun prepareNext() {
-        val url = house.next().url
-        nextMedia =  MediaPlayer().apply {
+     fun preparedSong(song:Song) {
+         releaseCurrentMedia()
+        val url = song?.url
+         if(url == null){
+             context.toast("找不到歌曲URL")
+             return
+         }
+         MediaPlayer().apply {
             setDataSource(url)
             prepareAsync()
             setOnPreparedListener(this@AVPlayer)
@@ -56,42 +57,29 @@ class AVPlayer(val context: Context,private val house: SongHouse) : IAVPlayer,Me
     }
 
     override fun onPrepared(mp: MediaPlayer?) {
-        val media = mp?:return
-        if(currentMedia == null){
-            currentMedia = media
-            nextMedia = null
-            start()
+        currentMedia = mp?:return
+        currentMedia?.apply {
+            this@AVPlayer.start()
+            playCallback?.playTime(duration)
+            house.play = this
         }
-        if(nextMedia == media){
-            currentMedia?.setNextMediaPlayer(media)
-        }
-        house.play = currentMedia
     }
 
 
 
     override fun play(id: Int) {
-        releaseCurrentMedia()
         house.jumpToSong(id)
-        prepareNext()
+        preparedSong(house.currentSong())
     }
 
     private fun releaseCurrentMedia(){
-        currentMedia?.apply {
-            house.invalidCurrentPlay = true
-            release()
-        }
-        currentMedia = null
+        currentMedia?.release()
+        house.play = null
     }
 
     override fun onCompletion(mp: MediaPlayer?) {
-        val media = mp?:return
-        if(media == currentMedia){
-            releaseCurrentMedia()
-            currentMedia == nextMedia
-            nextMedia == null
-            prepareNext()
-        }
+        mp?:return
+        preparedSong(house.next())
     }
 
 
@@ -101,17 +89,17 @@ class AVPlayer(val context: Context,private val house: SongHouse) : IAVPlayer,Me
 
     override fun next() {
         releaseCurrentMedia()
-        currentMedia = nextMedia
-        start()
+        preparedSong(house.currentSong())
     }
 
     override fun pre() {
-        releaseCurrentMedia()
+        preparedSong(house.pre())
     }
 
 
     override fun pause() {
         currentMedia?.pause()
+        playCallback?.pause(house.currentPlayId)
     }
 
     override fun stop() {

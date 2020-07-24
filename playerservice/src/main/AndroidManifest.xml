@@ -11,5 +11,5 @@
             </intent-filter>
         </service>
     </application>
-<!--    android:process="com.avplay.play_service"-->
+    <!--            android:process="com.avplay.play_service"-->
 </manifest>
