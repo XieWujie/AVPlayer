@@ -2,20 +2,17 @@ package com.example.songlist.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.example.common.base.AVViewModel
-import com.example.common.base.AndroidLifeCycleProvide
-import com.example.common.extension.viewModelFactory
+import com.example.songlist.SongSquareActivity
 import com.example.songlist.bean.Sub
 import com.example.songlist.repository.ISongSquareRepository
-import com.example.songlist.repository.SongSquareRepository
+import com.xie.di.DiBus
+import com.xie.di.ViewModelService
 
-class SongSquareViewModel(
-    repository: ISongSquareRepository,
-    override var lifeCycleProvide: AndroidLifeCycleProvide
-) : AVViewModel<ISongSquareRepository>(repository) {
+class SongSquareViewModel @ViewModelService(SongSquareActivity::class) constructor(
+    val repository: ISongSquareRepository):ViewModel() {
     var songCategorys = MutableLiveData<List<Sub>>()
-    private set
+
+    val lifeCycleProvide = DiBus.lifeCycle<SongSquareActivity>()
 
     fun getSongCategoryList() {
         repository.getSongCategoryList()
@@ -25,21 +22,6 @@ class SongSquareViewModel(
             .post()
     }
 
-    companion object {
-        fun factory(
-            repository: ISongSquareRepository,
-            lifeCycleProvide: AndroidLifeCycleProvide
-        ) =
-            viewModelFactory { SongSquareViewModel(repository, lifeCycleProvide) }
-    }
+
 }
 
-class SongSquareViewModelFactory(
-    val repository: SongSquareRepository,
-    private val lifeCycleProvide: AndroidLifeCycleProvide
-) : ViewModelProvider.NewInstanceFactory() {
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SongSquareViewModel(repository, lifeCycleProvide) as T
-    }
-}

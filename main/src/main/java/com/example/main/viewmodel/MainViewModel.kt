@@ -1,17 +1,12 @@
 package com.example.main.viewmodel
 
-import com.example.common.base.AVViewModel
-import com.example.common.base.AndroidLifeCycleProvide
-import com.example.common.extension.viewModelFactory
+
+import androidx.lifecycle.ViewModel
+import com.example.main.MainActivity
 import com.example.main.repository.IMainRepository
+import com.xie.di.ViewModelService
 
-class MainViewModel(repository:IMainRepository,
-                    override var lifeCycleProvide: AndroidLifeCycleProvide
-) :AVViewModel<IMainRepository>(repository){
+class MainViewModel @ViewModelService(MainActivity::class) constructor(val repository:IMainRepository):ViewModel() {
 
 
-    companion object{
-
-        fun getFactory(repository: IMainRepository,lifeCycleProvide: AndroidLifeCycleProvide) = viewModelFactory { MainViewModel(repository,lifeCycleProvide) }
-    }
 }

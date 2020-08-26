@@ -4,21 +4,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AVViewModel
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.songlist.bean.HeightQualitySongListBean
 import com.example.songlist.bean.Playlists
 import com.example.songlist.bean.SongListBean
+import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.repository.SongSquareFragmentRepository
 import com.example.songlist.utils.SafeMutableLiveData
+import com.xie.di.DiBus
+import com.xie.di.ViewModelService
 
-class SongListViewModel(
-    repository: SongSquareFragmentRepository,
-    override var lifeCycleProvide: AndroidLifeCycleProvide
-) : AVViewModel<SongSquareFragmentRepository>(repository) {
+class SongListViewModel @ViewModelService(SongListFragment::class)constructor(
+    val repository: SongSquareFragmentRepository
+) :ViewModel() {
     val songList = SafeMutableLiveData<List<Playlists>>()
     val heightQualitySongList = MutableLiveData<List<Playlists>>()
-
+   val  lifeCycleProvide = DiBus.lifeCycle<SongListFragment>()
 
     fun getHeightQualitySongList(
         before: Long = 0,
@@ -47,14 +47,4 @@ class SongListViewModel(
             .post()
     }
 
-}
-
-class SongListViewModelFactory(
-    val repository: SongSquareFragmentRepository,
-    private val lifeCycleProvide: AndroidLifeCycleProvide
-) : ViewModelProvider.NewInstanceFactory() {
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SongListViewModel(repository, lifeCycleProvide) as T
-    }
 }

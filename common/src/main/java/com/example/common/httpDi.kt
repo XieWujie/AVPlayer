@@ -1,8 +1,11 @@
 package com.example.common
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.common.adapter.LiveDataCallAdapterFactory
 import com.google.gson.Gson
 import com.xie.di.CREATE_SINGLETON
+import com.xie.di.DiBus
 import com.xie.di.Provide
 import com.xie.di.Service
 import okhttp3.OkHttpClient
@@ -65,4 +68,7 @@ class HttpDiService{
 
     @Provide(CREATE_SINGLETON)
     fun provideGson() = Gson()
+
+    @Provide(CREATE_SINGLETON)
+    fun provide(): SharedPreferences = DiBus.load<Context>().getSharedPreferences("av",Context.MODE_PRIVATE)
 }

@@ -17,24 +17,20 @@ import com.example.main.R
 import com.example.main.adapter.mine.MyMusicAdapter
 import com.example.main.adapter.mine.SongListAdapter
 import com.example.main.databinding.FragmentMineBinding
-import com.example.main.di.mine_fragment
 import com.example.main.viewmodel.MineViewModel
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
+import com.xie.di.AutoWire
+import com.xie.di.DiBus
 
 /**
  * 主页下我的 tab下的UI
  */
-class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
+class MineFragment :AVFragment(){
 
-    override val kodein = Kodein.lazy {
-        extend(parent)
-        import(mine_fragment)
-    }
+
     private lateinit var binding:FragmentMineBinding
-    override val viewModel:MineViewModel by instance()
-    private val songListAdapter by instance<SongListAdapter>()
+    @AutoWire
+    lateinit var viewModel:MineViewModel
+    private val songListAdapter = SongListAdapter()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,9 +53,7 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
     }
 
     private fun dispatchEvent(){
-        error.observe(viewLifecycleOwner, Observer {
-            context?.toast(it.message?:"")
-        })
+
         viewModel.subCount().observe(viewLifecycleOwner, Observer {
             binding.createSongListCountText.text = "${it.djRadioCount}"
             binding.collectionSongListCountTextview.text = "${it.subPlaylistCount}"
@@ -70,7 +64,7 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
                 Glide.with(this).load(it.weekData[0].song.al.picUrl).into(binding.latestSongImgView)
             }
         })
-        viewModel.playedList().registerLifeCycle(lifeCycleProvide)
+        viewModel.playedList().registerLifeCycle(DiBus.lifeCycle(this))
             .doOnError { context?.toast(it.message?:"歌单请求错误") }
             .doOnComplete {
                 songListAdapter.setList(it)

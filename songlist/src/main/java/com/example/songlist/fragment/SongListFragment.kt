@@ -15,24 +15,23 @@ import com.example.songlist.R
 import com.example.songlist.adapter.AllSongListAdapter
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.bean.Playlists
-import com.example.songlist.di.songListModel
 import com.example.songlist.vm.SongListViewModel
+import com.xie.di.AutoWire
+import com.xie.di.DiBus
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 
-class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
+class SongListFragment() : AVFragment(),
     FragmentCreator {
-    override val viewModel: SongListViewModel by instance<SongListViewModel>()
+    @AutoWire
+    lateinit var viewModel: SongListViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: AllSongListAdapter
     private lateinit var sourceList: ArrayList<Playlists>
 
 
-    override val kodein = Kodein.lazy {
-        extend(parent)
-        import(songListModel)
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +61,7 @@ class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
     private fun bindViewData() {
         sourceList = ArrayList()
         recyclerAdapter = AllSongListAdapter(R.layout.item_all_song_list, sourceList)
-        viewModel.songList.lifecycleObserve(lifeCycleProvide, Observer {
+        viewModel.songList.lifecycleObserve(DiBus.lifeCycle(this), Observer {
             Log.e(TAG, it.toString())
             sourceList.addAll(it)
             recyclerAdapter.addData(sourceList)

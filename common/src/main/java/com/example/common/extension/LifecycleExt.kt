@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.*
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AndroidLifeCycleProvide
+import com.xie.di.AndroidLifeCycleProvide
 
 
 inline fun< reified R> viewModelFactory(crossinline creator:()->R) = object: ViewModelProvider.NewInstanceFactory(){

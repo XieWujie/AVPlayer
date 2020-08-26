@@ -1,54 +1,49 @@
 package com.example.common.playservice
 
 import com.example.common.IAVService
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.common.entity.SongDetail
+import com.xie.di.DiBus
 import java.util.*
 import kotlin.collections.HashSet
 
 class ResponseConnection private constructor(): IAVService.Stub(){
+
+    val diBus = DiBus()
 
     override fun currentSongDetail(songDetail: SongDetail?) {
 
     }
 
     override fun pause(id: Int) {
-        iConnectionCallbacks.forEach {
-            it.pause(id)
-        }
+        diBus.sendEvent(PlayEvent.Pause(id))
+
     }
 
 
 
     override fun started(id: Int) {
-        iConnectionCallbacks.forEach {
-            it.started(id)
-        }
+        diBus.sendEvent(PlayEvent.Started(id))
+
     }
 
     override fun playTime(time: Int) {
-        iConnectionCallbacks.forEach {
-            it.playTime(time)
-        }
+        diBus.sendEvent(PlayEvent.PlayTime(time))
+
     }
 
-
+    private val playTime =  PlayEvent.PlayTime(0)
     override fun playedTime(time: Int) {
-        iConnectionCallbacks.forEach {
-            it.playedTime(time)
-        }
+        diBus.sendEvent(playTime.copy(time = time))
     }
+
 
     override fun lyricChange(time: Int) {
-        iConnectionCallbacks.forEach {
-            it.lyricChange(time)
-        }
+        diBus.sendEvent(PlayEvent.LyricChange(time))
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun lyric(lyric: MutableMap<Any?, Any?>?) {
-        iConnectionCallbacks.forEach {
-            it.lyric((lyric as MutableMap<Int, String>).toSortedMap())
-        }
+        diBus.sendEvent(PlayEvent.Lyric((lyric as MutableMap<Int, String>).toSortedMap()))
     }
 
     override fun playList(ids: IntArray?) {
@@ -62,18 +57,6 @@ class ResponseConnection private constructor(): IAVService.Stub(){
         private val iConnectionCallbacks = HashSet<IConnectionCallback>()
         private val INSTANCE = ResponseConnection()
         operator fun invoke() = INSTANCE
-
-        fun registerObservable(observable:IConnectionCallback,lifeCycleProvide: AndroidLifeCycleProvide){
-            iConnectionCallbacks.add(observable)
-
-            lifeCycleProvide.provide {
-                iConnectionCallbacks.remove(observable)
-            }
-        }
-
-        fun removeObservable(observable: IConnectionCallback){
-            iConnectionCallbacks.remove(observable)
-        }
 
     }
 }

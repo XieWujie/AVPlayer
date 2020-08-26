@@ -1,16 +1,18 @@
 package com.example.main.viewmodel
 
+import androidx.lifecycle.ViewModel
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AVViewModel
-import com.example.common.base.AndroidLifeCycleProvide
-import com.example.common.extension.viewModelFactory
 import com.example.main.http.entity.Block
 import com.example.main.repository.IDiscoveryRepository
+import com.example.main.view.DiscoveryFragment
+import com.xie.di.AndroidLifeCycleProvide
+import com.xie.di.DiBus
+import com.xie.di.ViewModelService
 
-class DiscoveryViewModel(repository: IDiscoveryRepository,
-                         override var lifeCycleProvide: AndroidLifeCycleProvide)
-    :AVViewModel<IDiscoveryRepository>(repository){
+class DiscoveryViewModel @ViewModelService(DiscoveryFragment::class) constructor(val repository: IDiscoveryRepository):ViewModel() {
 
+
+    private val  lifeCycleProvide:AndroidLifeCycleProvide = DiBus.lifeCycle<DiscoveryFragment>()
 
     fun blocks():AVLiveData<List<Block>>{
         val newBlocks = AVLiveData<List<Block>>()
@@ -28,8 +30,4 @@ class DiscoveryViewModel(repository: IDiscoveryRepository,
         return newBlocks
     }
 
-    companion object{
-        fun getFactory(repository: IDiscoveryRepository,lifeCycleProvide: AndroidLifeCycleProvide) =
-            viewModelFactory { DiscoveryViewModel(repository,lifeCycleProvide) }
-    }
 }

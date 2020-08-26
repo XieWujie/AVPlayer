@@ -1,6 +1,7 @@
 package com.example.main
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.common.ACCOUNT
@@ -9,32 +10,22 @@ import com.example.common.PASSWORD
 import com.example.common.base.AVActivity
 import com.example.main.adapter.mine.PageTabAdapter
 import com.example.main.databinding.ActivityMainBinding
-import com.example.main.di.MAIN_ACTIVITY_MODULE
 import com.example.main.view.MainAppBar
 import com.example.main.view.PanDrawable
 import com.example.main.viewmodel.MainViewModel
 import com.example.route.AVRoute
 import com.example.route.annotation.Route
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.AndroidLifecycleScope
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.scoped
-import org.kodein.di.generic.singleton
+import com.xie.di.AutoWire
 
 @Route("main/main")
-class MainActivity : AVActivity<MainViewModel>(),KodeinAware {
+class MainActivity : AVActivity() {
 
-    override val kodein = Kodein.lazy {
-        extend(parent)
-        import(MAIN_ACTIVITY_MODULE)
-        bind<MainActivity>() with scoped(AndroidLifecycleScope).singleton {
-            this@MainActivity
-        }
-    }
-    override val viewModel: MainViewModel by instance()
-    private val mainTapAdapter by instance<PageTabAdapter>()
+
+    @AutoWire
+     lateinit var viewModel: MainViewModel
+    @AutoWire
+    lateinit var mainTapAdapter:PageTabAdapter
+
     private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

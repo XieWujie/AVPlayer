@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.main.databinding.DiscoveryFirstItemBinding
 import com.example.main.databinding.DiscoveryListItemBinding
 import com.example.main.http.entity.Block
 import com.example.route.AVRoute
 
-class DiscoveryAdapter(val lifeCycleProvide: AndroidLifeCycleProvide) :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class DiscoveryAdapter() :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val mList = ArrayList<Block>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -96,7 +95,7 @@ class DiscoveryAdapter(val lifeCycleProvide: AndroidLifeCycleProvide) :RecyclerV
                 SLIDE_SONGLIST_ALIGN->{
                     binding.actionView.visibility = View.VISIBLE
                     recyclerView.layoutManager = GridLayoutManager(binding.root.context,3,RecyclerView.HORIZONTAL,false)
-                    val adapter = ListCanPlayAdapter(lifeCycleProvide)
+                    val adapter = ListCanPlayAdapter()
                     recyclerView.adapter = adapter
                     val resources = block.creatives.flatMap { it.resources }
                     adapter.setList(resources)

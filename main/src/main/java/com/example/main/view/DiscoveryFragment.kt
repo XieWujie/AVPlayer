@@ -11,21 +11,17 @@ import com.example.common.extension.toast
 import com.example.main.R
 import com.example.main.adapter.discovery.DiscoveryAdapter
 import com.example.main.databinding.FragmentDiscoveryBinding
-import com.example.main.di.DISCOVERY_FRAGMENT_MODULE
 import com.example.main.viewmodel.DiscoveryViewModel
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
+import com.xie.di.AutoWire
+import com.xie.di.DiBus
 
-class DiscoveryFragment :AVFragment<DiscoveryViewModel>(),KodeinAware{
+class DiscoveryFragment :AVFragment(){
 
-    override val kodein = Kodein.lazy {
-        extend(parent)
-        import(DISCOVERY_FRAGMENT_MODULE)
-    }
-    override val viewModel: DiscoveryViewModel by instance()
+
+    @AutoWire
+    lateinit var viewModel: DiscoveryViewModel
     private lateinit var binding:FragmentDiscoveryBinding
-    private val adapter = DiscoveryAdapter(lifeCycleProvide)
+    private val adapter = DiscoveryAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -41,7 +37,7 @@ class DiscoveryFragment :AVFragment<DiscoveryViewModel>(),KodeinAware{
     }
 
     private fun dispatchEvent(){
-        viewModel.blocks().registerLifeCycle(lifeCycleProvide)
+        viewModel.blocks().registerLifeCycle(DiBus.lifeCycle<DiscoveryFragment>())
             .doOnError { context?.toast(it.message?:"请求错误") }
             .doOnComplete {
                 adapter.setList(it)

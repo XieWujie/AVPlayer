@@ -1,8 +1,10 @@
 package com.example.avplayer
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import com.example.common.AccountAccessor
+import com.example.common.database.AppDbInstance
 import com.example.common.httpClientModule
 import com.example.common.playservice.PlayerService
 import com.example.route.AVRoute
@@ -18,25 +20,27 @@ import org.kodein.di.generic.singleton
 /**
  * 初始路由，本地信息，绑定网络模块
  */
-open class App:Application(),KodeinAware{
+open class App:Application(){
 
-//注入全局单例
-    override val kodein: Kodein = Kodein.lazy {
-        bind<App>() with singleton { this@App }
-        import(androidXModule(this@App))
-        import(httpClientModule)
-    }
-    private val preferences by instance<SharedPreferences>()
 
     override fun onCreate() {
         super.onCreate()
-        AVRoute.init(this)//路由初始化，遍历app，查找相应类，耗时操作
-        AccountAccessor.init(preferences)//注入本地信息
+        app = this
+        DiBus.addModelInfo("common","main","songlist","login")
+        DiBus.getInstance().fetcher.onlyRegister(Context::class.java.canonicalName!!,this)
+        val sharedPreferences = DiBus.load<SharedPreferences>()
+        AVRoute.init(this)
+        AccountAccessor.init(sharedPreferences)
+        DiBus.register(sharedPreferences)//注入本地信息
         PlayerService.bindPlayService(this)//启动后台服务
-        DiBus.addModelInfo("common")
-      //  AppDbInstance.registerAppDb(AppDatabase.getInstance(this))//数据库实例注入
+        DiBus.register(this)
+        AppDbInstance.registerAppDb(AppDatabase.getInstance(this))
     }
 
-    val gson:Gson by instance()
+    companion object{
+        lateinit var app: App
+        fun get() = app
+    }
+
 }
 

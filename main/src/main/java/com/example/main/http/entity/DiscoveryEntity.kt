@@ -52,7 +52,7 @@ data class Resource(
 
 data class ResourceExtInfo(
     val highQuality: Boolean,
-    val playCount: Int
+    val playCount: Long
 )
 
 data class UiElement(

@@ -3,14 +3,18 @@ package com.example.main.repository
 import android.content.SharedPreferences
 import com.example.common.Account
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.common.extension.int
 import com.example.main.http.MineApi
 import com.example.main.http.entry.PlayRecordList
 import com.example.main.http.entry.Playlist
 import com.example.main.http.entry.SubCountEntry
+import com.example.main.view.MineFragment
+import com.xie.di.DiBus
+import com.xie.di.Service
 
-class MineRepository(val mineLocal: MineLocal,val api:MineApi,override val lifeCycleProvide: AndroidLifeCycleProvide) :IMineIRepository{
+class MineRepository @Service constructor(private val mineLocal: MineLocal, val api:MineApi) :IMineIRepository{
+
+    private val lifeCycleProvide = DiBus.lifeCycle<MineFragment>()
 
     override fun playList(): AVLiveData<List<Playlist>> {
         val playList = AVLiveData<List<Playlist>>()
@@ -73,7 +77,8 @@ class MineRepository(val mineLocal: MineLocal,val api:MineApi,override val lifeC
 
 }
 
-class MineLocal(preferences: SharedPreferences){
+
+class MineLocal @Service constructor(preferences: SharedPreferences){
     var artistCount by preferences.int()
     var code by preferences.int()
     var createDjRadioCount by preferences.int()

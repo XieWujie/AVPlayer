@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.common.ACCOUNT
 import com.example.common.PASSWORD
-import com.example.common.base.AndroidLifeCycleProvide
+import com.example.common.base.AVActivity
 import com.example.common.extension.toast
 import com.example.login.databinding.CellPhoneActivityBinding
 import com.example.login.vm.LoginStrategy
@@ -18,8 +18,7 @@ import com.xie.di.DiBus
 import com.xie.di.Provide
 
 @Route("login/cellphone")
-class CellPhoneLoginActivity : AppCompatActivity() {
-
+class CellPhoneLoginActivity : AVActivity() {
 
     @AutoWire
     lateinit var viewModel: LoginViewModel
@@ -31,8 +30,6 @@ class CellPhoneLoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DiBus.addModelInfo("login")
-        DiBus.register(this)
         binding = DataBindingUtil.setContentView(this, R.layout.cell_phone_activity)
         loginStrategy.password = intent.getStringExtra(PASSWORD) ?: ""
         loginStrategy.account = intent.getStringExtra(ACCOUNT) ?: ""
@@ -40,8 +37,6 @@ class CellPhoneLoginActivity : AppCompatActivity() {
         dispatchEvent()
     }
 
-    @Provide(TAG = LIFE_CYCLE_TAG)
-    fun provideLifeCycle() = AndroidLifeCycleProvide(this)
 
     private fun dispatchEvent() {
         val request = Observer<Throwable?> {

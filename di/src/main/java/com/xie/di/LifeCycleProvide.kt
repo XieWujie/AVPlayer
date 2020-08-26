@@ -1,4 +1,4 @@
-package com.example.common.base
+package com.xie.di
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver

@@ -2,7 +2,8 @@ package com.example.common.adapter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.example.common.base.AndroidLifeCycleProvide
+import com.xie.di.AndroidLifeCycleProvide
+
 
 class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
 

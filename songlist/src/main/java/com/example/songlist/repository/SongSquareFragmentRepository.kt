@@ -2,15 +2,19 @@ package com.example.songlist.repository
 
 import android.util.Log
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.songlist.bean.HeightQualitySongListBean
 import com.example.songlist.bean.SongListBean
+import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.http.SongSquareApi
+import com.xie.di.AndroidLifeCycleProvide
+import com.xie.di.DiBus
+import com.xie.di.Service
 
-class SongSquareFragmentRepository(
-    private var api: SongSquareApi,
-    override val lifeCycleProvide: AndroidLifeCycleProvide
+class SongSquareFragmentRepository @Service constructor(
+    private var api: SongSquareApi
 ) : ISongSquareFragmentRepository {
+
+    val lifeCycleProvide: AndroidLifeCycleProvide = DiBus.lifeCycle<SongListFragment>()
 
     override fun getHeightQualitySongList(
         before: Long,

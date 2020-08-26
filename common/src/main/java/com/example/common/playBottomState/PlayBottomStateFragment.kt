@@ -1,33 +1,32 @@
 package com.example.common.playBottomState
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.example.common.R
 import com.example.common.databinding.PlayBottomLayoutBinding
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.common.extension.bind
-import com.example.common.playservice.IConnectionCallback
+import com.example.common.playservice.PlayEvent
 import com.example.common.playservice.PlayerService
-import com.example.common.playservice.ResponseConnection
+import com.xie.di.BusEvent
+import com.xie.di.DiBus
+import com.xie.di.THREAD_POLICY_MAIN
 import java.util.*
 
-class PlayBottomStateFragment :Fragment(),IConnectionCallback{
+class PlayBottomStateFragment :Fragment(){
 
     private lateinit var binding:PlayBottomLayoutBinding
     private var lyric:SortedMap<Int,String>? = null
-    private val handle = Handler()
     private var songId = 0
     private lateinit var viewModel: ViewModel
-    private lateinit var lifeCycleProvide: AndroidLifeCycleProvide
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifeCycleProvide = AndroidLifeCycleProvide(this)
+        DiBus.register(this)
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
     }
 
@@ -39,8 +38,8 @@ class PlayBottomStateFragment :Fragment(),IConnectionCallback{
     }
 
 
-    fun dispatchEvent(){
-        ResponseConnection.registerObservable(this, lifeCycleProvide)
+    private fun dispatchEvent(){
+
         val barView = binding.circlePlayBar
         barView.setOnClickListener {
             if(barView.getPlayState()){
@@ -49,44 +48,45 @@ class PlayBottomStateFragment :Fragment(),IConnectionCallback{
                 PlayerService.playConnection?.start()
             }
         }
-        viewModel.songDetailLiveData.observe(viewLifecycleOwner,androidx.lifecycle.Observer {
-//            Glide.with(this).load(it.al.picUrl).into(binding.songCoverView)
-//            binding.songNameText.text = it.name
+        viewModel.songDetailLiveData.observe(viewLifecycleOwner,Observer {
+          //  Glide.with(this).load(it.al.picUrl).into(binding.songCoverView)
+        //    binding.songNameText.text = it.name
         })
     }
 
-    override fun started(id: Int) {
-        if(songId != id){
-            songId = id
-            viewModel.getSongDetail(id)
+    @BusEvent
+     fun started(event:PlayEvent.Started) {
+        if(songId !=event.id){
+            songId = event.id
+            viewModel.getSongDetail(event.id)
         }
         binding.circlePlayBar.setIsPlaying(true)
 
     }
 
-    override fun pause(id: Int) {
+    @BusEvent
+     fun pause(pause: PlayEvent.Pause) {
         binding.circlePlayBar.setIsPlaying(false)
     }
 
-    override fun playTime(time: Int) {
-        binding.circlePlayBar.setAllTime(time)
+    @BusEvent
+     fun playTime(playTime: PlayEvent.PlayTime) {
+        binding.circlePlayBar.setAllTime(playTime.time)
     }
 
-    override fun playedTime(time: Int) {
-        binding.circlePlayBar.setTime(time)
+    @BusEvent
+     fun playedTime(playedTime: PlayEvent.PlayedTime) {
+        binding.circlePlayBar.setTime(playedTime.time)
     }
 
-    override fun lyric(lyric: SortedMap<Int, String>) {
-        handle.post {
-            this.lyric = lyric
-        }
+    @BusEvent(threadPolicy = THREAD_POLICY_MAIN)
+     fun lyric(lyric: PlayEvent.Lyric) {
+        this.lyric = lyric.lyric
     }
 
-    override fun lyricChange(time: Int) {
-        ResponseConnection.registerObservable(this, lifeCycleProvide)
-        handle.post {
-            val lyric = lyric?:return@post
-            binding.songLrcView.text = lyric[time]
-        }
+    @BusEvent(threadPolicy = THREAD_POLICY_MAIN)
+     fun lyricChange(lyricChange: PlayEvent.LyricChange) {
+        val lyric = lyric?:return
+        binding.songLrcView.text = lyric[lyricChange.time]
     }
 }

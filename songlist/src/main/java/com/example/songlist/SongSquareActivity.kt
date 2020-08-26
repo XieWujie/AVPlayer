@@ -10,7 +10,6 @@ import com.example.common.extension.lifecycleObserve
 import com.example.route.annotation.Route
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.adapter.FragmentPagerAdapter
-import com.example.songlist.di.songSquareModule
 import com.example.songlist.extentions.getResourceColor
 import com.example.songlist.extentions.setText
 import com.example.songlist.fragment.HeightQualitySongListFragment
@@ -19,13 +18,16 @@ import com.example.songlist.utils.setBarLightTransparent
 import com.example.songlist.view.ToolbarLayout
 import com.example.songlist.vm.SongSquareViewModel
 import com.google.android.material.tabs.TabLayout
+import com.xie.di.AutoWire
+import com.xie.di.BusEvent
+import com.xie.di.DiBus
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.AndroidLifecycleScope
 import org.kodein.di.generic.*
 
 @Route("songlist/songsquare")
-class SongSquareActivity : AVActivity<SongSquareViewModel>(), KodeinAware {
+class SongSquareActivity : AVActivity() {
 
     private lateinit var toolbarLayout: ToolbarLayout
     private lateinit var tabLayout: TabLayout
@@ -33,13 +35,9 @@ class SongSquareActivity : AVActivity<SongSquareViewModel>(), KodeinAware {
     private lateinit var fragmentList: ArrayList<FragmentCreator>
     private lateinit var pagerAdapter: FragmentPagerAdapter
 
-    override val viewModel: SongSquareViewModel by instance<SongSquareViewModel>()
+    @AutoWire
+    lateinit var viewModel: SongSquareViewModel
 
-    override val kodein: Kodein = Kodein.lazy {
-        extend(parent)
-        import(songSquareModule)
-        bind<SongSquareActivity>() with scoped(AndroidLifecycleScope).singleton { this@SongSquareActivity }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +73,7 @@ class SongSquareActivity : AVActivity<SongSquareViewModel>(), KodeinAware {
         tabLayout.setText("精品")
         fragmentList.add(HeightQualitySongListFragment("精品"))
         viewModel.songCategorys.lifecycleObserve(
-            lifeCycleProvide,
+            DiBus.lifeCycle(this),
             Observer {
                 Log.e(TAG, it.toString())
                 it.forEach { sub ->

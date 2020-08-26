@@ -92,10 +92,10 @@ dependencies {
     api 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     api 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
-    api "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
+    api 'androidx.room:room-runtime:2.0.0'
+    kapt 'androidx.room:room-compiler:2.0.0'
 
-    api 'org.kodein.di:kodein-di-framework-android-core:6.0.1'
+    //api 'org.kodein.di:kodein-di-framework-android-core:6.0.1'
     // ViewModel and LiveData
     api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit

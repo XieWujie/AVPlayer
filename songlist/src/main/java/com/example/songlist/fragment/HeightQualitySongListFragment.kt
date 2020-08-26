@@ -11,20 +11,16 @@ import com.example.common.base.AVFragment
 import com.example.common.extension.lifecycleObserve
 import com.example.songlist.R
 import com.example.songlist.adapter.FragmentCreator
-import com.example.songlist.di.songListModel
 import com.example.songlist.vm.SongListViewModel
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
+import com.xie.di.AutoWire
+import com.xie.di.DiBus
+import com.xie.di.Service
 
-class HeightQualitySongListFragment(override var mCat: String) : AVFragment<SongListViewModel>(),
-    KodeinAware, FragmentCreator {
+class HeightQualitySongListFragment @Service constructor(override var mCat: String) : AVFragment(), FragmentCreator {
     private lateinit var recyclerView: RecyclerView
-    override val viewModel: SongListViewModel by instance<SongListViewModel>()
-    override val kodein = Kodein.lazy {
-        extend(parent)
-        import(songListModel)
-    }
+    @AutoWire
+    lateinit var viewModel: SongListViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +48,9 @@ class HeightQualitySongListFragment(override var mCat: String) : AVFragment<Song
     }
 
     private fun bindViewData() {
-        viewModel.heightQualitySongList.lifecycleObserve(lifeCycleProvide, Observer {
-
-        })
+//        viewModel.heightQualitySongList.lifecycleObserve(DiBus.lifeCycle(this), Observer {
+//
+//        })
     }
 
 

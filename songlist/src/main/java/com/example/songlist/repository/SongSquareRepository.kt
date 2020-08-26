@@ -2,15 +2,20 @@ package com.example.songlist.repository
 
 import android.util.Log
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AndroidLifeCycleProvide
+import com.example.songlist.SongSquareActivity
 import com.example.songlist.bean.IBean
 import com.example.songlist.bean.SongCategoryBean
+import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.http.SongSquareApi
+import com.xie.di.AndroidLifeCycleProvide
+import com.xie.di.DiBus
+import com.xie.di.Service
 
-class SongSquareRepository(
-    private val api: SongSquareApi,
-    override val lifeCycleProvide: AndroidLifeCycleProvide
+class SongSquareRepository @Service constructor(
+    private val api: SongSquareApi
+
 ) : ISongSquareRepository {
+    private val lifeCycleProvide: AndroidLifeCycleProvide = DiBus.lifeCycle<SongSquareActivity>()
     override fun getSongCategoryList(): AVLiveData<SongCategoryBean> {
         return api.getSongCategoryList()
             .registerLifeCycle(lifeCycleProvide)

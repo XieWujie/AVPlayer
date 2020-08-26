@@ -17,7 +17,7 @@ import com.example.common.entity.SongDetail
 @TypeConverters(ARTypeConverter::class)
 abstract class AppDatabase: RoomDatabase(){
 
-   // abstract fun getSongDetail():SongDetailDao
+    abstract fun getSongDetail():SongDetailDao
 
     companion object {
 

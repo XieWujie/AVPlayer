@@ -8,28 +8,28 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
+import com.xie.di.DiBus
 import org.kodein.di.android.closestKodein
 
 
-abstract class AVActivity<R : AVViewModel<*>> : AppCompatActivity(), ErrorAware {
+abstract class AVActivity : AppCompatActivity() {
 
-    protected val parent by closestKodein()
-    protected val lifeCycleProvide = AndroidLifeCycleProvide(this)
+
     protected val STATE_STYLE_LIGHT = 1
     protected val STATE_STYLE_DARK = 0
-    abstract val viewModel: R
 
-    override val error: MutableLiveData<Throwable> by lazy { viewModel.error }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        DiBus.getInstance().registerLifeCycle(this)
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
- //       window.decorView.systemUiVisibility =  window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        //       window.decorView.systemUiVisibility =  window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 //        window.decorView.systemUiVisibility =
 //            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 //        window.statusBarColor = Color.TRANSPARENT
     }
+
 
 
     protected fun fitStateStyle(color: Int,style:Int = STATE_STYLE_LIGHT) {

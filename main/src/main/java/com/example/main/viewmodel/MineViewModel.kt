@@ -2,26 +2,27 @@ package com.example.main.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.AVViewModel
-import com.example.common.base.AndroidLifeCycleProvide
 import com.example.common.extension.viewModelFactory
 import com.example.main.http.entry.PlayRecordList
 import com.example.main.http.entry.Playlist
 import com.example.main.http.entry.SubCountEntry
 import com.example.main.repository.IMineIRepository
+import com.example.main.view.MineFragment
+import com.xie.di.DiBus
+import com.xie.di.ViewModelService
 
 
-class MineViewModel internal constructor(repository: IMineIRepository,
-                                         override var lifeCycleProvide: AndroidLifeCycleProvide
-):AVViewModel<IMineIRepository>(repository){
+class MineViewModel @ViewModelService(MineFragment::class) internal constructor(private val repository: IMineIRepository
+):ViewModel(){
 
+    val lifeCycleProvide = DiBus.lifeCycle<MineFragment>()
 
     fun subCount():LiveData<SubCountEntry>{
         val subCountEntry = MutableLiveData<SubCountEntry>()
         repository.subCount().registerLifeCycle(lifeCycleProvide)
             .doOnComplete { subCountEntry.value = it }
-            .doOnError { error.value = it }
             .post()
         return subCountEntry
     }
@@ -30,7 +31,6 @@ class MineViewModel internal constructor(repository: IMineIRepository,
         val playedEntry = MutableLiveData<PlayRecordList>()
         repository.played().registerLifeCycle(lifeCycleProvide)
             .doOnComplete { playedEntry.value = it }
-            .doOnError { error.value = it }
             .post()
         return playedEntry
     }
@@ -40,7 +40,4 @@ class MineViewModel internal constructor(repository: IMineIRepository,
     }
 
 
-    companion object{
-        fun factory(repository: IMineIRepository,lifeCycleProvide: AndroidLifeCycleProvide) = viewModelFactory { MineViewModel(repository,lifeCycleProvide) }
-    }
 }
