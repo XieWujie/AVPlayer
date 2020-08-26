@@ -31,6 +31,7 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
     sourceSets {
         main {
@@ -70,6 +71,8 @@ dependencies {
     implementation project(':common')
     kapt project(':Route-compiler')
     annotationProcessor project(':Route-compiler')
+    kapt project(":di-compiler")
+    annotationProcessor project(":di-compiler")
 
     //material design
     implementation 'com.google.android.material:material:1.1.0'

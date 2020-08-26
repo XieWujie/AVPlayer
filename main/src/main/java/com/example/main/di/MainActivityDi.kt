@@ -3,7 +3,7 @@ package com.example.main.di
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.common.base.AndroidLifeCycleProvide
 import com.example.main.MainActivity
 import com.example.main.adapter.mine.PageTabAdapter
 import com.example.main.http.MainApi

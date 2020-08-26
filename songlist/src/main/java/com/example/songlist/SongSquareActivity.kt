@@ -5,9 +5,8 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
-import com.example.conmon.base.AVActivity
-import com.example.conmon.base.AndroidLifeCycleProvide
-import com.example.conmon.extension.lifecycleObserve
+import com.example.common.base.AVActivity
+import com.example.common.extension.lifecycleObserve
 import com.example.route.annotation.Route
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.adapter.FragmentPagerAdapter
@@ -24,7 +23,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.AndroidLifecycleScope
 import org.kodein.di.generic.*
-import org.kodein.di.newInstance
 
 @Route("songlist/songsquare")
 class SongSquareActivity : AVActivity<SongSquareViewModel>(), KodeinAware {

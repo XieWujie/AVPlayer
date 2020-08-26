@@ -1,7 +1,7 @@
 package com.example.songlist.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.common.base.AndroidLifeCycleProvide
 import com.example.songlist.SongSquareActivity
 import com.example.songlist.http.SongSquareApi
 import com.example.songlist.repository.SongSquareFragmentRepository

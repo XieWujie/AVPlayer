@@ -1,14 +1,10 @@
 package com.example.songlist.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.common.base.AndroidLifeCycleProvide
 import com.example.songlist.SongSquareActivity
-import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.http.SongSquareApi
-import com.example.songlist.repository.SongSquareFragmentRepository
 import com.example.songlist.repository.SongSquareRepository
-import com.example.songlist.vm.SongListViewModel
-import com.example.songlist.vm.SongListViewModelFactory
 import com.example.songlist.vm.SongSquareViewModel
 import com.example.songlist.vm.SongSquareViewModelFactory
 import org.kodein.di.Kodein

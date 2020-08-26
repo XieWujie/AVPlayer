@@ -10,8 +10,8 @@ import android.os.Message
 import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.containsKey
-import com.example.conmon.extension.toast
-import com.example.playerservice.IAVService
+import com.example.common.IAVService
+import com.example.common.extension.toast
 import com.example.playerservice.http.Song
 import com.example.playerservice.repository.ISongRepository
 import java.util.*
@@ -70,8 +70,8 @@ class SongHouse(val repository: ISongRepository, val context: Context) : Handler
             message.what = ONE_SECOND_EVENT
             message.arg1 = position
             sendMessage(message)
+            Log.d(TAG, "current position $position")
         }
-        Log.d(TAG, "current position $position")
         ++oneSecond
         val lyrics = lyricTree ?: return
         if (lyricPosition > lyrics.size) {
@@ -141,6 +141,7 @@ class SongHouse(val repository: ISongRepository, val context: Context) : Handler
     @SuppressLint("NewApi")
     private fun lyricSchedule() {
         lyricPosition = 0
+        Log.d(TAG,"$currentPlayId 开始时间调度")
         if (!isScheduleStart) {
             scheduleExecutor.scheduleWithFixedDelay(this, 0, 250, TimeUnit.MILLISECONDS)
             isScheduleStart = true

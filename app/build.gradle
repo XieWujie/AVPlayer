@@ -22,6 +22,7 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
     buildTypes {
         release {
@@ -47,6 +48,11 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     implementation project(':common')
+   // annotationProcessor  "android.arch.persistence.room:compiler:$room_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+//    implementation "androidx.lifecycle:lifecycle-commone-java8:$lifecycle_version"
+ //   annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     if(!isLoginRunAlone.toBoolean()){
         implementation project(':login')
     }
@@ -67,6 +73,9 @@ dependencies {
     }
     kapt project(':Route-compiler')
     annotationProcessor project(':Route-compiler')
+
+    kapt project(":di-compiler")
+    annotationProcessor project(":di-compiler")
 
    // androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

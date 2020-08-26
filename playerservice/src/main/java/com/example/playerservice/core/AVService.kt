@@ -6,9 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import com.example.conmon.PLAY_CALLBACK_SERVICE_ACTION
-import com.example.playerservice.IAVService
-import com.example.playerservice.IPlayerService
+import com.example.common.IAVService
+import com.example.common.PLAY_CALLBACK_SERVICE_ACTION
 import com.example.playerservice.util.ServiceInject
 
 
@@ -31,6 +30,9 @@ class AVService : Service(){
         return connection
     }
 
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return super.onStartCommand(intent, flags, startId)
+    }
 
     fun bindCallback(){
         val intent = Intent(PLAY_CALLBACK_SERVICE_ACTION)

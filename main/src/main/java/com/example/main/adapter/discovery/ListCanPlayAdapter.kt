@@ -4,14 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.conmon.base.AndroidLifeCycleProvide
-import com.example.conmon.extension.runOnMainThread
-import com.example.conmon.playservice.IConnectionCallback
-import com.example.conmon.playservice.PlayerService
-import com.example.conmon.playservice.ResponseConnection
+import com.example.common.base.AndroidLifeCycleProvide
+import com.example.common.playservice.IConnectionCallback
+import com.example.common.playservice.PlayerService
+import com.example.common.playservice.ResponseConnection
 import com.example.main.R
 import com.example.main.databinding.DiscoveryCanPlayItemBinding
-import com.example.main.http.entity.Creative
 import com.example.main.http.entity.Resource
 
 class ListCanPlayAdapter(val lifeCycleProvide: AndroidLifeCycleProvide) :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){

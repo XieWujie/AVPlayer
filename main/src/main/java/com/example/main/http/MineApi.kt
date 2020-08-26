@@ -1,6 +1,6 @@
 package com.example.main.http
 
-import com.example.conmon.adapter.AVLiveData
+import com.example.common.adapter.AVLiveData
 import com.example.main.http.entry.*
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -19,6 +19,4 @@ interface MineApi{
     @GET("/likelist")
     fun likeList(@Query("uid")uid:Int):AVLiveData<LikeList>
 
-    @GET("song/detail")
-    fun songsDetail(@Query("ids")ids:String):AVLiveData<SongsDetailEntry>
 }

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager2.widget.ViewPager2
-import com.example.conmon.extension.bind
+import com.example.common.extension.bind
 import com.example.main.R
 import com.example.main.databinding.MainAppBarLayoutBinding
 

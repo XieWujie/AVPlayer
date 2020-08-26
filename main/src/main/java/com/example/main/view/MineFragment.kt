@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.conmon.Account
-import com.example.conmon.base.AVFragment
-import com.example.conmon.extension.bind
-import com.example.conmon.extension.toast
+import com.example.common.Account
+import com.example.common.base.AVFragment
+import com.example.common.extension.bind
+import com.example.common.extension.toast
 import com.example.main.R
 import com.example.main.adapter.mine.MyMusicAdapter
 import com.example.main.adapter.mine.SongListAdapter
@@ -57,14 +57,14 @@ class MineFragment :AVFragment<MineViewModel>(),KodeinAware{
     }
 
     private fun dispatchEvent(){
-        error.observe(this, Observer {
+        error.observe(viewLifecycleOwner, Observer {
             context?.toast(it.message?:"")
         })
-        viewModel.subCount().observe(this, Observer {
+        viewModel.subCount().observe(viewLifecycleOwner, Observer {
             binding.createSongListCountText.text = "${it.djRadioCount}"
             binding.collectionSongListCountTextview.text = "${it.subPlaylistCount}"
         })
-        viewModel.played().observe(this, Observer {
+        viewModel.played().observe(viewLifecycleOwner, Observer {
             binding.playedCountTextview.text = "${it.weekData.size}"
             if(it.weekData.isNotEmpty()) {
                 Glide.with(this).load(it.weekData[0].song.al.picUrl).into(binding.latestSongImgView)

@@ -1,3 +1,5 @@
+include ':di'
+include ':di-compiler'
 include ':app', ':playerservice', ':common', ':find', ':mine', ':login', ':Route-compiler', ':route', ':main'
 include ':songlist'
 rootProject.name='AVPlayer'

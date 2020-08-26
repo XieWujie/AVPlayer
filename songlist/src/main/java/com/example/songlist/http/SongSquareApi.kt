@@ -1,12 +1,11 @@
 package com.example.songlist.http
 
-import com.example.conmon.adapter.AVLiveData
+import com.example.common.adapter.AVLiveData
 import com.example.songlist.bean.HeightQualitySongListBean
 import com.example.songlist.bean.SongCategoryBean
 import com.example.songlist.bean.SongListBean
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.nio.ByteOrder
 
 interface SongSquareApi {
 

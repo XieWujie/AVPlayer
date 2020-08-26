@@ -1,6 +1,6 @@
 package com.example.login.http
 
-import com.example.conmon.adapter.AVLiveData
+import com.example.common.adapter.AVLiveData
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query

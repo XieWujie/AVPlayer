@@ -8,10 +8,12 @@ import com.squareup.javapoet.*
 import java.io.IOException
 import java.util.*
 import javax.annotation.processing.*
+import javax.lang.model.SourceVersion
+import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
+import javax.tools.Diagnostic
 import kotlin.collections.HashMap
-
 
 @AutoService(Processor::class)
 class  RouteProcessor : AbstractProcessor() {
@@ -31,13 +33,18 @@ class  RouteProcessor : AbstractProcessor() {
         moduleName = processingEnvironment.options["moduleName"]?:""
     }
 
+    override fun getSupportedSourceVersion(): SourceVersion {
+        return SourceVersion.latestSupported()
+    }
     override fun process(set: Set<TypeElement>, roundEnvironment: RoundEnvironment): Boolean {
         if (set.isEmpty()){
             return false
         }
         val elements = roundEnvironment.getElementsAnnotatedWith(Route::class.java)
+
         val groups = HashMap<String,HashMap<String,String>>()
         for (element in elements) {
+            logUtil.printMessage(Diagnostic.Kind.MANDATORY_WARNING,"hello")
             val typeElement = element as TypeElement
             val path = typeElement.getAnnotation(Route::class.java).path
             val groupName = getRootName(path)
@@ -59,6 +66,8 @@ class  RouteProcessor : AbstractProcessor() {
         }
         generatedRoot(roots)
     }
+
+
 
     private fun getRootName(path:String):String{
         val index = path.indexOf("/")

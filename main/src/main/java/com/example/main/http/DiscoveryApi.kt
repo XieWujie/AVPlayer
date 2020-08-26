@@ -1,6 +1,6 @@
 package com.example.main.http
 
-import com.example.conmon.adapter.AVLiveData
+import com.example.common.adapter.AVLiveData
 import com.example.main.http.entity.DiscoveryEntity
 import retrofit2.http.GET
 

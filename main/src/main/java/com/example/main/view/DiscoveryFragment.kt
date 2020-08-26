@@ -1,14 +1,13 @@
 package com.example.main.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.conmon.base.AVFragment
-import com.example.conmon.extension.bind
-import com.example.conmon.extension.toast
+import com.example.common.base.AVFragment
+import com.example.common.extension.bind
+import com.example.common.extension.toast
 import com.example.main.R
 import com.example.main.adapter.discovery.DiscoveryAdapter
 import com.example.main.databinding.FragmentDiscoveryBinding
@@ -25,7 +24,7 @@ class DiscoveryFragment :AVFragment<DiscoveryViewModel>(),KodeinAware{
         import(DISCOVERY_FRAGMENT_MODULE)
     }
     override val viewModel: DiscoveryViewModel by instance()
-    lateinit var binding:FragmentDiscoveryBinding
+    private lateinit var binding:FragmentDiscoveryBinding
     private val adapter = DiscoveryAdapter(lifeCycleProvide)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

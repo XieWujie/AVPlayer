@@ -1,8 +1,8 @@
 package com.example.main.viewmodel
 
-import com.example.conmon.base.AVViewModel
-import com.example.conmon.base.AndroidLifeCycleProvide
-import com.example.conmon.extension.viewModelFactory
+import com.example.common.base.AVViewModel
+import com.example.common.base.AndroidLifeCycleProvide
+import com.example.common.extension.viewModelFactory
 import com.example.main.repository.IMainRepository
 
 class MainViewModel(repository:IMainRepository,

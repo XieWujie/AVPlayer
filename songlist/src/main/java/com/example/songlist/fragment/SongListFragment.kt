@@ -9,23 +9,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.conmon.base.AVFragment
-import com.example.conmon.extension.lifecycleObserve
+import com.example.common.base.AVFragment
+import com.example.common.extension.lifecycleObserve
 import com.example.songlist.R
 import com.example.songlist.adapter.AllSongListAdapter
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.bean.Playlists
 import com.example.songlist.di.songListModel
-import com.example.songlist.di.songSquareModule
 import com.example.songlist.vm.SongListViewModel
-import kotlinx.android.synthetic.main.fragment_song_square.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.AndroidLifecycleScope
-import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.scoped
-import org.kodein.di.generic.singleton
 
 class SongListFragment() : AVFragment<SongListViewModel>(), KodeinAware,
     FragmentCreator {

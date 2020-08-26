@@ -1,8 +1,8 @@
 package com.example.songlist.repository
 
 import android.util.Log
-import com.example.conmon.adapter.AVLiveData
-import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.common.adapter.AVLiveData
+import com.example.common.base.AndroidLifeCycleProvide
 import com.example.songlist.bean.IBean
 import com.example.songlist.bean.SongCategoryBean
 import com.example.songlist.http.SongSquareApi

@@ -10,17 +10,20 @@
 <RelativeLayout
     android:id="@+id/main_content_id"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <com.example.main.view.MainAppBar
         android:id="@+id/main_app_bar"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="?attr/actionBarSize"/>
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/main_page"
         android:background="@color/bg_white"
         android:orientation="horizontal"
+        android:fitsSystemWindows="true"
         android:layout_centerInParent="true"
         android:layout_below="@+id/main_app_bar"
         android:layout_width="match_parent"
@@ -28,12 +31,13 @@
     <fragment
         android:layout_width="match_parent"
         android:id="@+id/main_bottom_fragment"
-        android:name="com.example.conmon.playBottomState.PlayBottomStateFragment"
+        android:name="com.example.common.playBottomState.PlayBottomStateFragment"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"/>
 </RelativeLayout>
         <FrameLayout
             android:layout_width="match_parent"
+            android:fitsSystemWindows="true"
             android:background="@color/bg_white"
             android:layout_gravity="start"
             android:layout_height="match_parent"/>

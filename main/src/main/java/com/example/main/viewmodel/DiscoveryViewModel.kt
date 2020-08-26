@@ -1,11 +1,10 @@
 package com.example.main.viewmodel
 
-import com.example.conmon.adapter.AVLiveData
-import com.example.conmon.base.AVViewModel
-import com.example.conmon.base.AndroidLifeCycleProvide
-import com.example.conmon.extension.viewModelFactory
+import com.example.common.adapter.AVLiveData
+import com.example.common.base.AVViewModel
+import com.example.common.base.AndroidLifeCycleProvide
+import com.example.common.extension.viewModelFactory
 import com.example.main.http.entity.Block
-import com.example.main.repository.DiscoveryRepository
 import com.example.main.repository.IDiscoveryRepository
 
 class DiscoveryViewModel(repository: IDiscoveryRepository,

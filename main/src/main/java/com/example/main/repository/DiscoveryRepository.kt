@@ -1,8 +1,8 @@
 package com.example.main.repository
 
-import com.example.conmon.adapter.AVLiveData
-import com.example.conmon.base.AndroidLifeCycleProvide
-import com.example.conmon.base.IRepository
+import com.example.common.adapter.AVLiveData
+import com.example.common.base.AndroidLifeCycleProvide
+import com.example.common.base.IRepository
 import com.example.main.http.DiscoveryApi
 import com.example.main.http.entity.Block
 
@@ -20,6 +20,4 @@ class DiscoveryRepository(val api: DiscoveryApi, override val lifeCycleProvide: 
             .post()
         return blocks
     }
-
-
 }

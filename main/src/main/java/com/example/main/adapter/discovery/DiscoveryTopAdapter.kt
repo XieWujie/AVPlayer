@@ -3,7 +3,7 @@ package com.example.main.adapter.discovery
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.conmon.extension.bind
+import com.example.common.extension.bind
 import com.example.main.R
 import com.example.main.databinding.DiscoveryTopItemBinding
 
@@ -24,7 +24,6 @@ class DiscoveryTopAdapter :RecyclerView.Adapter<DiscoveryTopAdapter.ViewHolder>(
 
 
     class ViewHolder(binding:DiscoveryTopItemBinding) :RecyclerView.ViewHolder(binding.root){
-
 
     }
 }

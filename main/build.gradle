@@ -27,6 +27,7 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
 
     sourceSets {
@@ -64,4 +65,8 @@ dependencies {
     kapt project(':Route-compiler')
     annotationProcessor project(':Route-compiler')
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    kapt project(":di-compiler")
+    annotationProcessor project(":di-compiler")
+
 }

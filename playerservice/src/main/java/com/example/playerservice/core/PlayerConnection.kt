@@ -1,8 +1,9 @@
 package com.example.playerservice.core
 
 import android.content.Context
-import com.example.playerservice.IAVService
-import com.example.playerservice.IPlayerService
+import com.example.common.IAVService
+import com.example.common.IPlayerService
+
 
 class PlayerConnection(val context: Context, val player: IAVPlayer) : IPlayerService.Stub(){
 
@@ -13,7 +14,7 @@ class PlayerConnection(val context: Context, val player: IAVPlayer) : IPlayerSer
        }
     }
 
-    fun registerCallback(callback:IAVService){
+    fun registerCallback(callback: IAVService){
         player.registerCallback(callback)
     }
     override fun pause() {

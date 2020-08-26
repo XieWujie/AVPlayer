@@ -4,8 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
-import com.bumptech.glide.Glide
-import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.common.base.AndroidLifeCycleProvide
 import com.example.main.databinding.DiscoveryFirstItemBinding
 import com.example.main.databinding.DiscoveryListItemBinding
 import com.example.main.http.entity.Block

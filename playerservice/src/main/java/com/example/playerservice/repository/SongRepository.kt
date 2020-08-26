@@ -1,7 +1,10 @@
 package com.example.playerservice.repository
 
+import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.set
+import com.example.common.entity.SongDetail
+import com.example.common.entity.SongsDetail
 import com.example.playerservice.http.Api
 import com.example.playerservice.http.LyricEntity
 import com.example.playerservice.http.Song
@@ -18,6 +21,7 @@ interface ISongRepository{
     fun getLyric(id:Int,lyric:TreeMap<Int,String>,callback:(t:Throwable?)->Unit)
 
     fun request(ids:String,songs:SparseArray<Song>,callback:(t:Throwable?)->Unit)
+
 }
 
 class SongRepository(val api:Api) :ISongRepository{
@@ -37,6 +41,7 @@ class SongRepository(val api:Api) :ISongRepository{
                         callback.invoke(Throwable("歌词请求错误"))
                     }else{
                         Util.lyricFormal(lyr,lyric)
+                        Log.d(TAG,"歌词请求成功 $id")
                         callback.invoke(null)
                     }
                 }else{
@@ -55,6 +60,7 @@ class SongRepository(val api:Api) :ISongRepository{
                     response.body()!!.data.forEach {
                         songs[it.id] = it
                     }
+                    Log.d(TAG,"$ids 歌曲请求成功")
                     callback.invoke(null)
                 }else{
                     callback.invoke(Throwable(response.message()?:"请求错误"))
@@ -67,6 +73,8 @@ class SongRepository(val api:Api) :ISongRepository{
     })
     }
 
-
+    companion object{
+        const val TAG = "SongRepository"
+    }
 
 }

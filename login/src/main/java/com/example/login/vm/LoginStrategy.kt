@@ -2,6 +2,7 @@ package com.example.login.vm
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.xie.di.Service
 
 abstract class LoginStrategy :BaseObservable(){
     @Bindable var account:String = ""
@@ -9,7 +10,7 @@ abstract class LoginStrategy :BaseObservable(){
     abstract fun check():String?
 }
 
-
+@Service
 class CellPhoneLogin:LoginStrategy(){
 
     override fun check(): String? {

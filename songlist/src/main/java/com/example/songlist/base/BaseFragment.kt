@@ -1,7 +1,7 @@
 package com.example.songlist.base
 
-import com.example.conmon.base.AVFragment
-import com.example.conmon.base.AVViewModel
+import com.example.common.base.AVFragment
+import com.example.common.base.AVViewModel
 
 abstract class BaseFragment<R : AVViewModel<*>> : AVFragment<R>() {
 

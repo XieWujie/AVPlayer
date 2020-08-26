@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name="com.example.conmon.App"
+        android:name="com.example.common.App"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_config"

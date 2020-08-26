@@ -1,15 +1,21 @@
 package com.example.login.repository
 
-import com.example.conmon.AccountAccessor
-import com.example.conmon.adapter.AVLiveData
-import com.example.conmon.base.AndroidLifeCycleProvide
-import com.example.conmon.util.Md5Encrypt
+import com.example.common.AccountAccessor
+import com.example.common.adapter.AVLiveData
+import com.example.common.base.AndroidLifeCycleProvide
+import com.example.common.util.Md5Encrypt
+import com.example.login.LIFE_CYCLE_TAG
 import com.example.login.http.LoginApi
 import com.example.login.http.LoginEntry
+import com.xie.di.AutoWire
+import com.xie.di.Service
 
 
-class CellPhoneRepository(private val api: LoginApi, override val lifeCycleProvide: AndroidLifeCycleProvide
-) :ILoginRepository{
+class CellPhoneRepository @Service constructor(private val api: LoginApi) :ILoginRepository{
+
+    @AutoWire(TAG = LIFE_CYCLE_TAG)
+   lateinit var lifeCycleProvide:AndroidLifeCycleProvide
+
 
     override fun login(phone: String, password: String):AVLiveData<LoginEntry>{
         val md5Psw = Md5Encrypt.getMd5(password,32)

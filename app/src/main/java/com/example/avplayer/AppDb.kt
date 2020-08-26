@@ -5,11 +5,19 @@ import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.common.adapter.ARTypeConverter
+import com.example.common.database.SongDetailDao
+import com.example.common.entity.Al
+import com.example.common.entity.SongDetail
 
 
-@Database(entities = [],version = 1)
+@Database(entities = [SongDetail::class],version = 2)
+@TypeConverters(ARTypeConverter::class)
 abstract class AppDatabase: RoomDatabase(){
+
+   // abstract fun getSongDetail():SongDetailDao
 
     companion object {
 

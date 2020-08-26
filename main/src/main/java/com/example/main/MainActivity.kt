@@ -3,11 +3,10 @@ package com.example.main
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
-import com.example.conmon.ACCOUNT
-import com.example.conmon.Account
-import com.example.conmon.PASSWORD
-import com.example.conmon.base.AVActivity
-import com.example.conmon.util.StatusBarUtils
+import com.example.common.ACCOUNT
+import com.example.common.Account
+import com.example.common.PASSWORD
+import com.example.common.base.AVActivity
 import com.example.main.adapter.mine.PageTabAdapter
 import com.example.main.databinding.ActivityMainBinding
 import com.example.main.di.MAIN_ACTIVITY_MODULE
@@ -35,8 +34,8 @@ class MainActivity : AVActivity<MainViewModel>(),KodeinAware {
         }
     }
     override val viewModel: MainViewModel by instance()
-    val mainTapAdapter by instance<PageTabAdapter>()
-    lateinit var binding:ActivityMainBinding
+    private val mainTapAdapter by instance<PageTabAdapter>()
+    private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,13 +58,13 @@ class MainActivity : AVActivity<MainViewModel>(),KodeinAware {
             override fun onPageSelected(position: Int) {
               when(position){
                   0->{
-                      fitStateStyle(com.example.common.R.color.bg_black)
+                      fitStateStyle(resources.getColor(com.example.common.R.color.bg_black),STATE_STYLE_DARK)
                       binding.mainAppBar.setStyle(MainAppBar.Style.BLACK)
                   }
                   else->{
                       drawable.updateX(1f)
                       decorView.background = drawable
-                      fitStateStyle(com.example.common.R.color.bg_white)
+                      fitStateStyle(resources.getColor(com.example.common.R.color.bg_white),STATE_STYLE_LIGHT)
                       binding.mainAppBar.setStyle(MainAppBar.Style.WHILE)
                   }
               }

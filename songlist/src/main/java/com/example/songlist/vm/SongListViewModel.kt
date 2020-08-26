@@ -3,13 +3,12 @@ package com.example.songlist.vm
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.conmon.adapter.AVLiveData
-import com.example.conmon.base.AVViewModel
-import com.example.conmon.base.AndroidLifeCycleProvide
+import com.example.common.adapter.AVLiveData
+import com.example.common.base.AVViewModel
+import com.example.common.base.AndroidLifeCycleProvide
 import com.example.songlist.bean.HeightQualitySongListBean
 import com.example.songlist.bean.Playlists
 import com.example.songlist.bean.SongListBean
-import com.example.songlist.bean.Sub
 import com.example.songlist.repository.SongSquareFragmentRepository
 import com.example.songlist.utils.SafeMutableLiveData
 
