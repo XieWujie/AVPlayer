@@ -7,7 +7,7 @@ class PanDrawable :Drawable(){
 
     private val paintBlack = Paint()
     private val paintWhite = Paint()
-    var x = 1f
+    private var x = 1f
     init {
         paintBlack.color = Color.BLACK
         paintBlack.style = Paint.Style.FILL

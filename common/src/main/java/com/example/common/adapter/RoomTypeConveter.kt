@@ -6,7 +6,7 @@ import com.example.common.entity.Ar
 import com.google.gson.reflect.TypeToken
 
 
-class ARTypeConverter(){
+class ARTypeConverter {
 
     @TypeConverter
     fun revertArs(list:List<Ar>):String{

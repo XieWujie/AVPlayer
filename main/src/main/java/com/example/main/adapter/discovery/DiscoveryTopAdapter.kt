@@ -23,7 +23,5 @@ class DiscoveryTopAdapter :RecyclerView.Adapter<DiscoveryTopAdapter.ViewHolder>(
     }
 
 
-    class ViewHolder(binding:DiscoveryTopItemBinding) :RecyclerView.ViewHolder(binding.root){
-
-    }
+    class ViewHolder(binding:DiscoveryTopItemBinding) :RecyclerView.ViewHolder(binding.root)
 }

@@ -46,7 +46,7 @@ val httpClientModule = Kodein.Module(HTTP_CLIENT_MODUEL){
 @Service(CREATE_SINGLETON)
 class HttpDiService{
 
-     var client: OkHttpClient? = null
+     private var client: OkHttpClient? = null
 
     @Provide(CREATE_SINGLETON)
     fun provideRetrofit():Retrofit{

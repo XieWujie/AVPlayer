@@ -6,7 +6,4 @@ import com.example.main.MainActivity
 import com.example.main.repository.IMainRepository
 import com.xie.di.ViewModelService
 
-class MainViewModel @ViewModelService(MainActivity::class) constructor(val repository:IMainRepository):ViewModel() {
-
-
-}
+class MainViewModel @ViewModelService(MainActivity::class) constructor(val repository:IMainRepository):ViewModel()

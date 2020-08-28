@@ -14,7 +14,7 @@ class SongSquareFragmentRepository @Service constructor(
     private var api: SongSquareApi
 ) : ISongSquareFragmentRepository {
 
-    val lifeCycleProvide: AndroidLifeCycleProvide = DiBus.lifeCycle<SongListFragment>()
+    private val lifeCycleProvide: AndroidLifeCycleProvide = DiBus.lifeCycle<SongListFragment>()
 
     override fun getHeightQualitySongList(
         before: Long,

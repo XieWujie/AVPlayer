@@ -21,13 +21,13 @@ class MainDi {
     lateinit var retrofit:Retrofit
 
     @Provide
-   fun provideMineAPi() = retrofit.create(MineApi::class.java)
+   fun provideMineAPi(): MineApi = retrofit.create(MineApi::class.java)
 
     @Provide
-    fun provideDiscoveryApi() = retrofit.create(DiscoveryApi::class.java)
+    fun provideDiscoveryApi(): DiscoveryApi = retrofit.create(DiscoveryApi::class.java)
 
     @Provide
-    fun provideMainApi() = retrofit.create(MainApi::class.java)
+    fun provideMainApi(): MainApi = retrofit.create(MainApi::class.java)
 
     @Provide
     fun providePageTabAdapter():PageTabAdapter{

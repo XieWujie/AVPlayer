@@ -38,10 +38,7 @@ class MyMusicAdapter :RecyclerView.Adapter<MyMusicAdapter.ViewHolder>(){
     }
 
 
-    inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
-
-
-    }
+    inner class ViewHolder(view:View):RecyclerView.ViewHolder(view)
 
     companion object{
         const val MY_LOVE = 0

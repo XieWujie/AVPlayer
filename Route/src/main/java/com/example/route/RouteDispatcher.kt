@@ -4,10 +4,11 @@ import android.app.Activity
 import androidx.fragment.app.FragmentActivity
 import com.example.route.apt.IRouteGroup
 
+@Suppress("UNCHECKED_CAST")
 class RouteDispatcher {
 
     val indexMap = HashMap<String,Class<out IRouteGroup>>()
-    val pathMap = HashMap<String,Class<*>>()
+    private val pathMap = HashMap<String,Class<*>>()
 
     @Throws(IllegalArgumentException::class)
     @SuppressWarnings("unchecked cast")

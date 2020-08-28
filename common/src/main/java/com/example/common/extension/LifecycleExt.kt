@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.example.common.extension
 
 import android.view.LayoutInflater
@@ -15,7 +17,7 @@ inline fun< reified R> viewModelFactory(crossinline creator:()->R) = object: Vie
     }
 }
 
-inline fun<reified T : ViewDataBinding> LayoutInflater.bind(layoutId:Int, parent: ViewGroup?) = DataBindingUtil.inflate<T>(this,layoutId,parent,false)
+inline fun<reified T : ViewDataBinding> LayoutInflater.bind(layoutId:Int, parent: ViewGroup?): T = DataBindingUtil.inflate<T>(this,layoutId,parent,false)
 
 inline fun<reified T> LiveData<T>.lifecycleObserve(provider:AndroidLifeCycleProvide,observer: Observer<T>){
     this.observeForever(observer)

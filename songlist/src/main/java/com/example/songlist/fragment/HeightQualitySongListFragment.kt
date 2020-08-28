@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.common.base.AVFragment
-import com.example.common.extension.lifecycleObserve
 import com.example.songlist.R
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.vm.SongListViewModel
 import com.xie.di.AutoWire
-import com.xie.di.DiBus
 import com.xie.di.Service
 
 class HeightQualitySongListFragment @Service constructor(override var mCat: String) : AVFragment(), FragmentCreator {

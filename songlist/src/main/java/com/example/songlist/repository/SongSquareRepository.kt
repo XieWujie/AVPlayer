@@ -5,7 +5,6 @@ import com.example.common.adapter.AVLiveData
 import com.example.songlist.SongSquareActivity
 import com.example.songlist.bean.IBean
 import com.example.songlist.bean.SongCategoryBean
-import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.http.SongSquareApi
 import com.xie.di.AndroidLifeCycleProvide
 import com.xie.di.DiBus

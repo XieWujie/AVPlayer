@@ -46,7 +46,7 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
     fun post():AVLiveData<T>{
         val complete = onComplete
         val er = error
-        val observer =  Observer<AVLiveData.AVLiveDataWrap<T>>{
+        val observer =  Observer<AVLiveDataWrap<T>>{
             val value =dataWrap!!
             when(value.error){
                 null->complete?.invoke(value.data!!)

@@ -18,11 +18,8 @@ import com.example.songlist.bean.Playlists
 import com.example.songlist.vm.SongListViewModel
 import com.xie.di.AutoWire
 import com.xie.di.DiBus
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 
-class SongListFragment() : AVFragment(),
+class SongListFragment : AVFragment(),
     FragmentCreator {
     @AutoWire
     lateinit var viewModel: SongListViewModel

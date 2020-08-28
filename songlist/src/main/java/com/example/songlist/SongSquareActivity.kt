@@ -19,12 +19,7 @@ import com.example.songlist.view.ToolbarLayout
 import com.example.songlist.vm.SongSquareViewModel
 import com.google.android.material.tabs.TabLayout
 import com.xie.di.AutoWire
-import com.xie.di.BusEvent
 import com.xie.di.DiBus
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.AndroidLifecycleScope
-import org.kodein.di.generic.*
 
 @Route("songlist/songsquare")
 class SongSquareActivity : AVActivity() {
@@ -57,7 +52,7 @@ class SongSquareActivity : AVActivity() {
 
     private fun initData() {
         viewModel.getSongCategoryList()
-        fragmentList = ArrayList<FragmentCreator>()
+        fragmentList = ArrayList()
         pagerAdapter = FragmentPagerAdapter(fragmentList, supportFragmentManager)
     }
 

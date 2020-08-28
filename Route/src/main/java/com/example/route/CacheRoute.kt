@@ -9,8 +9,7 @@ object CacheRoute {
     private const val ROUTE_MAP = "route_map"
     fun cacheCanUse(context: Context):Boolean{
         val preferences = context.getSharedPreferences(ROUTE_MAP,Context.MODE_PRIVATE)
-        val canUse = preferences.getBoolean(IS_HAVE_ROUTE_MAP,false)
-        return canUse
+        return preferences.getBoolean(IS_HAVE_ROUTE_MAP,false)
     }
 
     fun cacheRoutePath(context: Context,classPaths:Set<String>){

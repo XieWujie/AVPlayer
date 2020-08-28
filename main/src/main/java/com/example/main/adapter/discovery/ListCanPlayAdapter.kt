@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.example.common.playservice.IConnectionCallback
 import com.example.common.playservice.PlayEvent
 import com.example.common.playservice.PlayerService
-import com.example.common.playservice.ResponseConnection
 import com.example.main.R
 import com.example.main.databinding.DiscoveryCanPlayItemBinding
 import com.example.main.http.entity.Resource
@@ -41,8 +40,8 @@ class ListCanPlayAdapter :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
             DiBus.register(this)
         }
         fun bind(resource: Resource){
-            binding.songTitle.text = resource.uiElement?.mainTitle?.title?:""
-            binding.songSubTitle.text = resource.uiElement?.subTitle?.title?:""
+            binding.songTitle.text = resource.uiElement.mainTitle.title
+            binding.songSubTitle.text = resource.uiElement.subTitle.title
             Glide.with(binding.songCoverView).load(resource.uiElement.image.imageUrl).into(binding.songCoverView)
             binding.songPlayStateView.setOnClickListener {view->
                 if(!view.isSelected) {

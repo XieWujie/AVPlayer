@@ -63,17 +63,14 @@ class MainAppBar:Toolbar{
         binding.video.setOnClickListener { pager2.currentItem = 3 }
     }
 
-    companion object{
-
-
-    }
+    companion object;
 
     sealed class Style{
-        class White:Style()
-        class Black:Style()
+        object White : Style()
+        object Black : Style()
         companion object{
-            val WHILE = White()
-            val BLACK = Black()
+            val WHILE = White
+            val BLACK = Black
         }
     }
 }

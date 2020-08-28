@@ -12,7 +12,7 @@ import com.example.main.view.MineFragment
 import com.xie.di.DiBus
 import com.xie.di.Service
 
-class MineRepository @Service constructor(private val mineLocal: MineLocal, val api:MineApi) :IMineIRepository{
+class MineRepository @Service constructor(private val mineLocal: MineLocal, private val api:MineApi) :IMineIRepository{
 
     private val lifeCycleProvide = DiBus.lifeCycle<MineFragment>()
 

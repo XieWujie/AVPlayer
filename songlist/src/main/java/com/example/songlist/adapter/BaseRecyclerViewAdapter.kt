@@ -1,7 +1,6 @@
 package com.example.songlist.adapter
 
 import android.content.Context
-import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseRecyclerViewAdapter<T>(private val layoutId: Int, var list: ArrayList<T>) :
     RecyclerView.Adapter<ViewHolder>() {
     lateinit var context: Context
-    var itemClickListener: ((View, T, Int) -> Unit)? = null
+    private var itemClickListener: ((View, T, Int) -> Unit)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

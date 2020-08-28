@@ -20,7 +20,6 @@ object ServiceInject {
         val api = retrofit.create(Api::class.java)
         val repository = SongRepository(api)
         val avPlay = AVPlayer(context, SongHouse(repository,context))
-        val connection = PlayerConnection(context,avPlay)
-        return connection
+        return PlayerConnection(context,avPlay)
     }
 }

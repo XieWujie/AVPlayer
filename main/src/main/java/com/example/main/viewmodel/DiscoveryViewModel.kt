@@ -18,7 +18,7 @@ class DiscoveryViewModel @ViewModelService(DiscoveryFragment::class) constructor
         val newBlocks = AVLiveData<List<Block>>()
         repository.blocks()
             .registerLifeCycle(lifeCycleProvide)
-            .doOnComplete {
+            .doOnComplete { it ->
                 val new = it.filter {
                     it.showType =="HOMEPAGE_SLIDE_PLAYLIST" ||
                             it.showType =="HOMEPAGE_SLIDE_SONGLIST_ALIGN"

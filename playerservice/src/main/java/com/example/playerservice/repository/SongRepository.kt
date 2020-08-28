@@ -3,8 +3,6 @@ package com.example.playerservice.repository
 import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.set
-import com.example.common.entity.SongDetail
-import com.example.common.entity.SongsDetail
 import com.example.playerservice.http.Api
 import com.example.playerservice.http.LyricEntity
 import com.example.playerservice.http.Song
@@ -14,7 +12,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-import kotlin.collections.HashMap
 
 interface ISongRepository{
 
@@ -24,7 +21,7 @@ interface ISongRepository{
 
 }
 
-class SongRepository(val api:Api) :ISongRepository{
+class SongRepository(private val api:Api) :ISongRepository{
 
     override   fun getLyric(id:Int,lyric:TreeMap<Int,String>,callback:(t:Throwable?)->Unit) {
         api.getLyric(id).enqueue(object :Callback<LyricEntity>{

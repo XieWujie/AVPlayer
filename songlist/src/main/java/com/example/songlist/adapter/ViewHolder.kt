@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.songlist.extentions.gone
 import com.example.songlist.extentions.load
@@ -21,7 +20,7 @@ class ViewHolder(context: Context, parent: ViewGroup, @LayoutRes layoutId: Int) 
 
     private val views = SparseArray<View>()
 
-    fun <T : View> getView(viewId: Int): T {
+    private fun <T : View> getView(viewId: Int): T {
         var view = views.get(viewId)
         if (view == null) {
             view = itemView.findViewById(viewId)

@@ -31,11 +31,11 @@ class SongListCommendAdapter :RecyclerView.Adapter<SongListCommendAdapter.ViewHo
     class ViewHolder(val binding:SongListSubItemBinding):RecyclerView.ViewHolder(binding.root){
 
         fun bind(creative: Creative){
-            binding.listDiscriptionText.text = creative.uiElement?.mainTitle?.title?:""
+            binding.listDiscriptionText.text = creative.uiElement.mainTitle.title
             Glide.with(binding.listCoverView).load(creative.uiElement.image.imageUrl).into(binding.listCoverView)
             val resource = creative.resources
             if(resource.isNotEmpty()){
-                binding.playCountText.text =  "${resource[0].resourceExtInfo?.playCount}"
+                binding.playCountText.text =  "${resource[0].resourceExtInfo.playCount}"
             }
         }
     }

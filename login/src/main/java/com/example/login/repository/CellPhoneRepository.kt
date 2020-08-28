@@ -4,11 +4,9 @@ import com.example.common.AccountAccessor
 import com.example.common.adapter.AVLiveData
 import com.example.common.util.Md5Encrypt
 import com.example.login.CellPhoneLoginActivity
-import com.example.login.LIFE_CYCLE_TAG
 import com.example.login.http.LoginApi
 import com.example.login.http.LoginEntry
 import com.xie.di.AndroidLifeCycleProvide
-import com.xie.di.AutoWire
 import com.xie.di.DiBus
 import com.xie.di.Service
 
@@ -16,7 +14,7 @@ import com.xie.di.Service
 class CellPhoneRepository @Service constructor(private val api: LoginApi) :ILoginRepository{
 
 
-  val lifeCycleProvide:AndroidLifeCycleProvide = DiBus.getInstance().lifeCycle<CellPhoneLoginActivity>()
+  private val lifeCycleProvide:AndroidLifeCycleProvide = DiBus.getInstance().lifeCycle<CellPhoneLoginActivity>()
 
 
     override fun login(phone: String, password: String):AVLiveData<LoginEntry>{
@@ -28,7 +26,7 @@ class CellPhoneRepository @Service constructor(private val api: LoginApi) :ILogi
             .doOnComplete(this::onSuccess).post()
     }
 
-    fun onSuccess(loginEntry: LoginEntry){
+    private fun onSuccess(loginEntry: LoginEntry){
 
         AccountAccessor().apply {
             this.uid = loginEntry.account.id

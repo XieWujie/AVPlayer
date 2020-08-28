@@ -9,7 +9,6 @@ import java.io.IOException
 import java.util.*
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
-import javax.lang.model.element.Element
 import javax.lang.model.element.Modifier
 import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
@@ -146,7 +145,7 @@ class  RouteProcessor : AbstractProcessor() {
             methodBuilder.addStatement("routes.put(\$S, \$T.class)", key, getClassName(value))
         }
 
-        val superClass = ClassName.get("$PACKAGE_PATH","IRouteGroup")
+        val superClass = ClassName.get(PACKAGE_PATH,"IRouteGroup")
         val typeSpec = TypeSpec.classBuilder(className)
             .addModifiers(Modifier.PUBLIC)
             .addSuperinterface(superClass)

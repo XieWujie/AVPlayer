@@ -1,7 +1,6 @@
 package com.example.login
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.common.ACCOUNT
@@ -14,9 +13,8 @@ import com.example.login.vm.LoginViewModel
 import com.example.route.AVRoute
 import com.example.route.annotation.Route
 import com.xie.di.AutoWire
-import com.xie.di.DiBus
-import com.xie.di.Provide
 
+internal const val LOGIN_SCOPE = "CellPhoneLoginActivity"
 @Route("login/cellphone")
 class CellPhoneLoginActivity : AVActivity() {
 

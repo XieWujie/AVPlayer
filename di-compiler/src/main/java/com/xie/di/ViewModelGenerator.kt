@@ -9,7 +9,7 @@ interface ViewModelCreator<T>{
     fun create():T
 }
 
-class ViewModelGenerator (private val filer: Filer, private val info: BusAwareInfo, private val createMethod: MethodSpec){
+class ViewModelGenerator (private val filer: Filer, private val info: BusAwareInfo, private val createMethod: MethodSpec,private val moduleName:String){
 
     val name:String ="${Utils.getClassNameFromPath(info.receiverClass).second}Factory"
 
@@ -53,7 +53,7 @@ class ViewModelGenerator (private val filer: Filer, private val info: BusAwareIn
             .addSuperinterface(sp)
             .build()
         try {
-            JavaFile.builder(BASE_PACKAGE, type).build()
+            JavaFile.builder("$BASE_PACKAGE.$moduleName", type).build()
                 .writeTo(filer)
         } catch (e: IOException) {
             e.printStackTrace()

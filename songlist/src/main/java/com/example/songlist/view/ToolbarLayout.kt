@@ -22,7 +22,7 @@ class ToolbarLayout : FrameLayout {
     /**
      * Back 按钮
      */
-    var showBack: Boolean = true
+    private var showBack: Boolean = true
         set(value) {
             field = value
             toolbarBack?.visibility(value)
@@ -31,17 +31,17 @@ class ToolbarLayout : FrameLayout {
     /**
      * 左边TextView
      */
-    var showLeftText: Boolean = false
+    private var showLeftText: Boolean = false
         set(value) {
             field = value
             toolbarLeftText?.visibility(value)
         }
-    var leftText: CharSequence? = ""
+    private var leftText: CharSequence? = ""
         set(value) {
             field = value
             toolbarLeftText?.text = value
         }
-    var leftTextColor = resources.getColor(R.color.textColor)
+    private var leftTextColor = resources.getColor(R.color.textColor)
         set(value) {
             field = value
             toolbarLeftText?.setTextColor(Color.parseColor(value.toString()))
@@ -50,7 +50,7 @@ class ToolbarLayout : FrameLayout {
     /**
      * 左边title and tips Text
      */
-    var showLeftFrameLayout: Boolean = false
+    private var showLeftFrameLayout: Boolean = false
         set(value) {
             field = value
             toolBarLeftFrameLayout?.visibility(value)
@@ -76,7 +76,7 @@ class ToolbarLayout : FrameLayout {
             toolbarLeftTipsText?.setTextColor(Color.parseColor(value.toString()))
         }
 
-    var showEditText: Boolean = false
+    private var showEditText: Boolean = false
         set(value) {
             field = value
             toolbarEditText?.visibility(value)
@@ -85,23 +85,23 @@ class ToolbarLayout : FrameLayout {
     /**
      * 右边 text
      */
-    var showRightText: Boolean = false
+    private var showRightText: Boolean = false
         set(value) {
             field = value
             toolbarRightText?.visibility(value)
         }
-    var rightText: CharSequence? = ""
+    private var rightText: CharSequence? = ""
         set(value) {
             field = value
             toolbarRightText?.text = value
         }
-    var rightTextColor = resources.getColor(R.color.textColor)
+    private var rightTextColor = resources.getColor(R.color.textColor)
         set(value) {
             field = value
             toolbarRightText?.setTextColor(Color.parseColor(value.toString()))
         }
 
-    var showLine: Boolean = false
+    private var showLine: Boolean = false
         set(value) {
             field = value
             toolbarLine?.visibility(value)
@@ -111,13 +111,13 @@ class ToolbarLayout : FrameLayout {
      * 下方未实现完全
      */
 
-    var showRightFirstIcon: Boolean = false
+    private var showRightFirstIcon: Boolean = false
         set(value) {
             field = value
             toolBarRightFirstIcon?.visibility(value)
         }
 
-    var showRightSecondIcon: Boolean = false
+    private var showRightSecondIcon: Boolean = false
         set(value) {
             field = value
             toolBarRightSecondIcon?.visibility(value)

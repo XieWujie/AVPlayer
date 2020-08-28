@@ -38,10 +38,10 @@ class AVPlayer(val context: Context,private val house: SongHouse) : IAVPlayer,Me
     }
 
 
-     fun preparedSong(song:Song) {
+     private fun preparedSong(song:Song) {
          releaseCurrentMedia()
-        val url = song?.url
-         if(url == null){
+        val url = song.url
+         if(null == url){
              context.toast("找不到歌曲URL")
              return
          }

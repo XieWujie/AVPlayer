@@ -29,7 +29,7 @@ class AVRoute private constructor(){
         private var isInit = false
         val routeDispatcher:RouteDispatcher by lazy { RouteDispatcher() }
 
-        val avRoute by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED){ AVRoute() }
+        private val avRoute by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED){ AVRoute() }
 
         @Synchronized
         fun init(application: Application){

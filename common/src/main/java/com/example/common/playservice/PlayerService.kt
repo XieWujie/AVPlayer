@@ -12,7 +12,7 @@ import com.example.common.PLAY_CONNECTION_ACTION
 
 class PlayerService : Service() {
 
-    var responseConnection:ResponseConnection? = null
+    private var responseConnection:ResponseConnection? = null
     override fun onBind(intent: Intent): IBinder {
         responseConnection = ResponseConnection()
         return responseConnection!!

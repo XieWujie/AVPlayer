@@ -8,7 +8,7 @@ import kotlin.collections.HashSet
 
 class ResponseConnection private constructor(): IAVService.Stub(){
 
-    val diBus = DiBus()
+    private val diBus = DiBus()
 
     override fun currentSongDetail(songDetail: SongDetail?) {
 

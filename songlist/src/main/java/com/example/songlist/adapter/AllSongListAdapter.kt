@@ -15,7 +15,7 @@ class AllSongListAdapter(@LayoutRes layoutId: Int, list: ArrayList<Playlists>) :
     }
 
 
-    fun transNum(num: Long): String {
+    private fun transNum(num: Long): String {
         return when {
             num < 100_000 -> num.toString()
             num < 100_000_000 -> "${(num / 100_000)}万"

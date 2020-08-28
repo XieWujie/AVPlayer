@@ -5,17 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.common.AccountAccessor
 import com.example.common.database.AppDbInstance
-import com.example.common.httpClientModule
 import com.example.common.playservice.PlayerService
 import com.example.route.AVRoute
-import com.google.gson.Gson
 import com.xie.di.DiBus
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.singleton
 
 /**
  * 初始路由，本地信息，绑定网络模块

@@ -1,7 +1,6 @@
 package com.example.login.repository
 
 import com.example.common.adapter.AVLiveData
-import com.example.common.base.IRepository
 import com.example.login.http.LoginEntry
 
 interface ILoginRepository {

@@ -9,7 +9,7 @@ import com.example.main.databinding.DiscoveryListItemBinding
 import com.example.main.http.entity.Block
 import com.example.route.AVRoute
 
-class DiscoveryAdapter() :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class DiscoveryAdapter :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val mList = ArrayList<Block>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -52,9 +52,9 @@ class DiscoveryAdapter() :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     companion object{
-        val TOP = 0
-        val SECOND = 1
-        val LIST = 2
+        const val TOP = 0
+        const val SECOND = 1
+        const val LIST = 2
     }
 
     fun setList(list:List<Block>){
@@ -63,9 +63,7 @@ class DiscoveryAdapter() :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         notifyDataSetChanged()
     }
 
-    private inner class ViewHolder(view: View):RecyclerView.ViewHolder(view){
-
-    }
+    private inner class ViewHolder(view: View):RecyclerView.ViewHolder(view)
 
     private inner class CommendViewHolder(val binding:DiscoveryListItemBinding):RecyclerView.ViewHolder(binding.root){
 
@@ -77,8 +75,8 @@ class DiscoveryAdapter() :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         private val HOMEPAGE_SLIDE_PLAYABLE_RESOURCE = "HOMEPAGE_SLIDE_PLAYABLE_RESOURCE"
 
         fun bind(block:Block){
-            binding.itemTitleText.text = block.uiElement?.subTitle?.title?:""
-            binding.actionText.text = block.uiElement?.button?.text?:""
+            binding.itemTitleText.text = block.uiElement.subTitle.title
+            binding.actionText.text = block.uiElement.button.text
             val recyclerView = binding.recommendListView
             LinearSnapHelper().attachToRecyclerView(recyclerView)
             when(block.showType){
@@ -86,10 +84,10 @@ class DiscoveryAdapter() :RecyclerView.Adapter<RecyclerView.ViewHolder>(){
                     binding.actionView.visibility = View.GONE
                     recyclerView.layoutManager = LinearLayoutManager(binding.root.context,RecyclerView.HORIZONTAL,false)
                     recyclerView.adapter = SongListCommendAdapter().apply {
-                        setList(block.creatives?: emptyList())
+                        setList(block.creatives)
                     }
                     binding.actionText.setOnClickListener {
-                        AVRoute().route("songlist/songsquare",binding.root.context,{}).execute()
+                        AVRoute().route("songlist/songsquare",binding.root.context) {}.execute()
                     }
                 }
                 SLIDE_SONGLIST_ALIGN->{

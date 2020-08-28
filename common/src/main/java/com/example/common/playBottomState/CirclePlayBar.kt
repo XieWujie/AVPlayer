@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
+import kotlin.math.min
 
 class CirclePlayBar :View{
 
@@ -35,7 +36,7 @@ class CirclePlayBar :View{
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        var r = Math.min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
+        var r = min(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
         radius = r.toFloat()
         cacheResult(radius)
         r = MeasureSpec.makeMeasureSpec(r,MeasureSpec.EXACTLY)

@@ -30,11 +30,7 @@ class AVService : Service(){
         return connection
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return super.onStartCommand(intent, flags, startId)
-    }
-
-    fun bindCallback(){
+    private fun bindCallback(){
         val intent = Intent(PLAY_CALLBACK_SERVICE_ACTION)
         intent.`package` = application.packageName
         this.bindService(intent,connect,Context.BIND_AUTO_CREATE)

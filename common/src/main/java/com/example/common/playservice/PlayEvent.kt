@@ -13,15 +13,7 @@ sealed class PlayEvent {
 
 }
 
-fun pause(id: Int){
 
-}
-fun started(id: Int){}
-
-fun playedTime(time: Int){}
-
-fun lyricChange(time: Int){}
 
 fun lyric(lyric: SortedMap<Int, String>){}
 
-fun playTime(time: Int) {}

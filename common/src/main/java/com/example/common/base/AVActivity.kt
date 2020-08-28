@@ -2,14 +2,11 @@ package com.example.common.base
 
 import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import com.xie.di.DiBus
-import org.kodein.di.android.closestKodein
 
 
 abstract class AVActivity : AppCompatActivity() {

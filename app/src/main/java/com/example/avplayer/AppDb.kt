@@ -9,7 +9,6 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.common.adapter.ARTypeConverter
 import com.example.common.database.SongDetailDao
-import com.example.common.entity.Al
 import com.example.common.entity.SongDetail
 
 

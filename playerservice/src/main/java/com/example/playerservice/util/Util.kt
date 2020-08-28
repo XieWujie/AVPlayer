@@ -3,8 +3,6 @@
 package com.example.playerservice.util
 
 import android.annotation.SuppressLint
-import android.util.Log
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.util.*
 import java.util.regex.Pattern
@@ -16,7 +14,7 @@ object Util {
     @SuppressLint("UseSparseArrays")
     fun lyricFormal(content: String, lyrics: TreeMap<Int, String>) {
         val rows = content.split("\n")
-        var time: Int = 0
+        var time = 0
         val cilent = Request.Builder()
         val p = Pattern.compile(pattern)
         for (row in rows) {

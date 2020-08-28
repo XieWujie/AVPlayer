@@ -19,13 +19,13 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 
-class SongHouse(val repository: ISongRepository, val context: Context) : Handler(Looper.myLooper()),
+class SongHouse(private val repository: ISongRepository, val context: Context) : Handler(Looper.myLooper()),
     Runnable {
 
     private val songs = SparseArray<Song>()
     private var playCallback: IAVService? = null
     private val executors = Executors.newCachedThreadPool()
-    var currentSongIndex: Int = 0
+    private var currentSongIndex: Int = 0
         set(value) {
             field = value % songs.size()
         }
@@ -58,7 +58,7 @@ class SongHouse(val repository: ISongRepository, val context: Context) : Handler
     }
 
 
-    var oneSecond = 0
+    private var oneSecond = 0
     /**
      * 时间调度
      */
@@ -137,7 +137,7 @@ class SongHouse(val repository: ISongRepository, val context: Context) : Handler
         }
     }
 
-    var isScheduleStart = false
+    private var isScheduleStart = false
     @SuppressLint("NewApi")
     private fun lyricSchedule() {
         lyricPosition = 0

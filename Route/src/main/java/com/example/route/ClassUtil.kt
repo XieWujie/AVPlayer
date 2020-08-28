@@ -16,16 +16,16 @@ import java.util.concurrent.Executors
 import java.util.regex.Pattern
 
 object ClassUtils {
-    private val EXTRACTED_NAME_EXT = ".classes"
-    private val EXTRACTED_SUFFIX = ".zip"
+    private const val EXTRACTED_NAME_EXT = ".classes"
+    private const val EXTRACTED_SUFFIX = ".zip"
 
     private val SECONDARY_FOLDER_NAME = "code_cache" + File.separator + "secondary-dexes"
 
-    private val PREFS_FILE = "multidex.version"
-    private val KEY_DEX_NUMBER = "dex.number"
+    private const val PREFS_FILE = "multidex.version"
+    private const val KEY_DEX_NUMBER = "dex.number"
 
-    private val VM_WITH_MULTIDEX_VERSION_MAJOR = 2
-    private val VM_WITH_MULTIDEX_VERSION_MINOR = 1
+    private const val VM_WITH_MULTIDEX_VERSION_MAJOR = 2
+    private const val VM_WITH_MULTIDEX_VERSION_MINOR = 1
 
     /**
      * Identifies if the current VM has a native support for multidex, meaning there is no need for
@@ -77,12 +77,13 @@ object ClassUtils {
      */
     private val isYunOS: Boolean
         get() {
-            try {
+            return try {
                 val version = System.getProperty("ro.yunos.version")
                 val vmName = System.getProperty("java.vm.name")
-                return vmName != null && vmName.toLowerCase().contains("lemur") || version != null && version.trim { it <= ' ' }.length > 0
+                vmName != null && vmName.toLowerCase().contains("lemur") || version != null && version.trim { it <= ' ' }
+                    .isNotEmpty()
             } catch (ignore: Exception) {
-                return false
+                false
             }
 
         }
@@ -113,15 +114,15 @@ object ClassUtils {
         val parserCtl = CountDownLatch(paths.size)
 
         for (path in paths) {
-            Executors.newSingleThreadExecutor().execute(Runnable {
+            Executors.newSingleThreadExecutor().execute({
                 var dexfile: DexFile? = null
 
                 try {
-                    if (path.endsWith(EXTRACTED_SUFFIX)) {
+                    dexfile = if (path.endsWith(EXTRACTED_SUFFIX)) {
                         //NOT use new DexFile(path), because it will throw "permission error in /data/dalvik-cache"
-                        dexfile = DexFile.loadDex(path, "$path.tmp", 0)
+                        DexFile.loadDex(path, "$path.tmp", 0)
                     } else {
-                        dexfile = DexFile(path)
+                        DexFile(path)
                     }
 
                     val dexEntries = dexfile!!.entries()
@@ -203,7 +204,7 @@ object ClassUtils {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && null != applicationInfo.splitSourceDirs) {
             // add the split apk, normally for InstantRun, and newest version.
-            instantRunSourcePaths.addAll(Arrays.asList(*applicationInfo.splitSourceDirs))
+            instantRunSourcePaths.addAll(listOf(*applicationInfo.splitSourceDirs))
 
         } else {
             try {

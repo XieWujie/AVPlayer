@@ -34,7 +34,7 @@ data class Al(
 
 
 
-@Entity()
+@Entity
 @TypeConverters(ARTypeConverter::class)
 data class SongDetail(
     @Embedded
@@ -108,8 +108,7 @@ data class SongDetail(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeParcelable(al, flags)
@@ -170,8 +169,7 @@ data class Ar(
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)

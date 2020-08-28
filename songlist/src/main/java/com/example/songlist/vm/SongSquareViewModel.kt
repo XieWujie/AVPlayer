@@ -12,7 +12,7 @@ class SongSquareViewModel @ViewModelService(SongSquareActivity::class) construct
     val repository: ISongSquareRepository):ViewModel() {
     var songCategorys = MutableLiveData<List<Sub>>()
 
-    val lifeCycleProvide = DiBus.lifeCycle<SongSquareActivity>()
+    private val lifeCycleProvide = DiBus.lifeCycle<SongSquareActivity>()
 
     fun getSongCategoryList() {
         repository.getSongCategoryList()
