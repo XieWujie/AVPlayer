@@ -7,10 +7,9 @@ import com.example.common.extension.toErrorLiveData
 import com.example.login.CellPhoneLoginActivity
 import com.example.login.LOGIN_SCOPE
 import com.example.login.repository.ILoginRepository
-import com.xie.di.AndroidLifeCycleProvide
-import com.xie.di.DiBus
-import com.xie.di.Scope
-import com.xie.di.ViewModelService
+import com.dibus.AndroidLifeCycleProvide
+import com.dibus.Scope
+import com.dibus.ViewModelService
 
 
 class LoginViewModel @ViewModelService(CellPhoneLoginActivity::class)

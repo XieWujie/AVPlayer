@@ -6,8 +6,8 @@ import com.example.common.base.IRepository
 import com.example.main.http.DiscoveryApi
 import com.example.main.http.entity.Block
 import com.example.main.view.DiscoveryFragment
-import com.xie.di.DiBus
-import com.xie.di.Service
+import com.dibus.DiBus
+import com.dibus.Service
 
 interface IDiscoveryRepository :IRepository {
     fun blocks():AVLiveData<List<Block>>

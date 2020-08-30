@@ -1,6 +1,7 @@
 package com.example.main.repository
 
 import android.content.SharedPreferences
+import com.dibus.*
 import com.example.common.Account
 import com.example.common.adapter.AVLiveData
 import com.example.common.extension.int
@@ -8,13 +9,13 @@ import com.example.main.http.MineApi
 import com.example.main.http.entry.PlayRecordList
 import com.example.main.http.entry.Playlist
 import com.example.main.http.entry.SubCountEntry
+import com.example.main.view.MINE_FRAGMENT_SCOPE
 import com.example.main.view.MineFragment
-import com.xie.di.DiBus
-import com.xie.di.Service
 
 class MineRepository @Service constructor(private val mineLocal: MineLocal, private val api:MineApi) :IMineIRepository{
 
-    private val lifeCycleProvide = DiBus.lifeCycle<MineFragment>()
+    @Scope(MINE_FRAGMENT_SCOPE)
+    lateinit var lifeCycleProvide:AndroidLifeCycleProvide
 
     override fun playList(): AVLiveData<List<Playlist>> {
         val playList = AVLiveData<List<Playlist>>()
@@ -32,6 +33,7 @@ class MineRepository @Service constructor(private val mineLocal: MineLocal, priv
        return fromCacheSubCount()?: api.getSubCount().registerLifeCycle(lifeCycleProvide)
            .doOnComplete(this::subCountComplete).post()
     }
+
 
     private fun subCountComplete(subCountEntry: SubCountEntry){
         with(subCountEntry){

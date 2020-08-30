@@ -1,4 +1,4 @@
-package com.xie.di
+package com.dibus
 
 internal object Utils {
 

@@ -8,10 +8,11 @@ import com.example.main.http.MainApi
 import com.example.main.http.MineApi
 import com.example.main.view.DiscoveryFragment
 import com.example.main.view.MineFragment
-import com.xie.di.AutoWire
-import com.xie.di.DiBus
-import com.xie.di.Provide
-import com.xie.di.Service
+import com.dibus.AutoWire
+import com.dibus.DiBus
+import com.dibus.Provide
+import com.dibus.Service
+import dibus.main.MainActivityCreator
 import retrofit2.Retrofit
 
 @Service
@@ -32,7 +33,7 @@ class MainDi {
     @Provide
     fun providePageTabAdapter():PageTabAdapter{
         val list = arrayListOf<Fragment>(MineFragment(),DiscoveryFragment())
-        return PageTabAdapter(DiBus.load<MainActivity>(),list)
+        return PageTabAdapter(MainActivityCreator.get(),list)
     }
 
 }

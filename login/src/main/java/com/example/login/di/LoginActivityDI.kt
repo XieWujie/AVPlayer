@@ -3,10 +3,10 @@ package com.example.login.di
 import com.example.login.CellPhoneLoginActivity
 import com.example.login.http.LoginApi
 import com.example.login.repository.CellPhoneRepository
-import com.xie.di.AutoWire
-import com.xie.di.DiBus
-import com.xie.di.Provide
-import com.xie.di.Service
+import com.dibus.AutoWire
+import com.dibus.DiBus
+import com.dibus.Provide
+import com.dibus.Service
 import retrofit2.Retrofit
 
 

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.example.songlist.SongSquareActivity
 import com.example.songlist.bean.Sub
 import com.example.songlist.repository.ISongSquareRepository
-import com.xie.di.DiBus
-import com.xie.di.ViewModelService
+import com.dibus.DiBus
+import com.dibus.ViewModelService
 
 class SongSquareViewModel @ViewModelService(SongSquareActivity::class) constructor(
     val repository: ISongSquareRepository):ViewModel() {

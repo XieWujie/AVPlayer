@@ -10,9 +10,10 @@ import com.example.common.playservice.PlayerService
 import com.example.main.R
 import com.example.main.databinding.DiscoveryCanPlayItemBinding
 import com.example.main.http.entity.Resource
-import com.xie.di.BusEvent
-import com.xie.di.DiBus
-import com.xie.di.Service
+import com.dibus.BusEvent
+import com.dibus.DiBus
+import com.dibus.Service
+import dibus.main.ViewHolderCreator
 
 class ListCanPlayAdapter :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
 
@@ -37,7 +38,7 @@ class ListCanPlayAdapter :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
      class ViewHolder @Service constructor(val binding:DiscoveryCanPlayItemBinding):RecyclerView.ViewHolder(binding.root),IConnectionCallback{
         private  var id = 0
         init {
-            DiBus.register(this)
+            ViewHolderCreator.inject(this)
         }
         fun bind(resource: Resource){
             binding.songTitle.text = resource.uiElement.mainTitle.title

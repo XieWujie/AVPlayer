@@ -1,8 +1,10 @@
 package com.example.login.vm
 
+import android.content.Context
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.xie.di.Service
+import com.dibus.AutoWire
+import com.dibus.Service
 
 abstract class LoginStrategy :BaseObservable(){
     @Bindable var account:String = ""
@@ -23,4 +25,10 @@ class CellPhoneLogin:LoginStrategy(){
         return null
     }
 
+}
+
+class Test{
+
+    @AutoWire
+  public lateinit var login:Context
 }

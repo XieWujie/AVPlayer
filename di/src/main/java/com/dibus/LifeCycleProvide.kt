@@ -1,4 +1,4 @@
-package com.xie.di
+package com.dibus
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver

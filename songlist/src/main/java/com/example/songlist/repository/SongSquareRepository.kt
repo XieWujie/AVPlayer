@@ -6,9 +6,9 @@ import com.example.songlist.SongSquareActivity
 import com.example.songlist.bean.IBean
 import com.example.songlist.bean.SongCategoryBean
 import com.example.songlist.http.SongSquareApi
-import com.xie.di.AndroidLifeCycleProvide
-import com.xie.di.DiBus
-import com.xie.di.Service
+import com.dibus.AndroidLifeCycleProvide
+import com.dibus.DiBus
+import com.dibus.Service
 
 class SongSquareRepository @Service constructor(
     private val api: SongSquareApi

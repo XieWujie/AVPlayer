@@ -12,8 +12,9 @@ import com.example.main.R
 import com.example.main.adapter.discovery.DiscoveryAdapter
 import com.example.main.databinding.FragmentDiscoveryBinding
 import com.example.main.viewmodel.DiscoveryViewModel
-import com.xie.di.AutoWire
-import com.xie.di.DiBus
+import com.dibus.AutoWire
+import com.dibus.DiBus
+import dibus.main.DiscoveryFragmentCreator
 
 class DiscoveryFragment :AVFragment(){
 
@@ -25,6 +26,7 @@ class DiscoveryFragment :AVFragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        DiscoveryFragmentCreator.inject(this)
         binding = inflater.bind(R.layout.fragment_discovery,container)
         init()
         dispatchEvent()

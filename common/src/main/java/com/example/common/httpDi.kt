@@ -2,12 +2,9 @@ package com.example.common
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.dibus.*
 import com.example.common.adapter.LiveDataCallAdapterFactory
 import com.google.gson.Gson
-import com.xie.di.CREATE_SINGLETON
-import com.xie.di.DiBus
-import com.xie.di.Provide
-import com.xie.di.Service
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -48,7 +45,7 @@ class HttpDiService{
 
      private var client: OkHttpClient? = null
 
-    @Provide(CREATE_SINGLETON)
+    @Register
     fun provideRetrofit():Retrofit{
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -58,7 +55,7 @@ class HttpDiService{
             .build()
     }
 
-    @Provide(CREATE_SINGLETON)
+    @Register(CREATE_SINGLETON)
     fun provideClient():OkHttpClient{
         return client?:OkHttpClient.Builder()
             .connectTimeout(8000,TimeUnit.MILLISECONDS)
@@ -66,9 +63,7 @@ class HttpDiService{
             .build().also { this.client = it }
     }
 
-    @Provide(CREATE_SINGLETON)
+    @Register(CREATE_SINGLETON)
     fun provideGson() = Gson()
 
-    @Provide(CREATE_SINGLETON)
-    fun provide(): SharedPreferences = DiBus.load<Context>().getSharedPreferences("av",Context.MODE_PRIVATE)
 }

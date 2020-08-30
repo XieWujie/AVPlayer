@@ -2,7 +2,7 @@ package com.example.common.playservice
 
 import com.example.common.IAVService
 import com.example.common.entity.SongDetail
-import com.xie.di.DiBus
+import com.dibus.DiBus
 import java.util.*
 import kotlin.collections.HashSet
 

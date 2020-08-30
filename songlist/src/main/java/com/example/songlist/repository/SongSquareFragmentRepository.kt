@@ -6,9 +6,9 @@ import com.example.songlist.bean.HeightQualitySongListBean
 import com.example.songlist.bean.SongListBean
 import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.http.SongSquareApi
-import com.xie.di.AndroidLifeCycleProvide
-import com.xie.di.DiBus
-import com.xie.di.Service
+import com.dibus.AndroidLifeCycleProvide
+import com.dibus.DiBus
+import com.dibus.Service
 
 class SongSquareFragmentRepository @Service constructor(
     private var api: SongSquareApi

@@ -9,8 +9,8 @@ import com.example.songlist.bean.SongListBean
 import com.example.songlist.fragment.SongListFragment
 import com.example.songlist.repository.SongSquareFragmentRepository
 import com.example.songlist.utils.SafeMutableLiveData
-import com.xie.di.DiBus
-import com.xie.di.ViewModelService
+import com.dibus.DiBus
+import com.dibus.ViewModelService
 
 class SongListViewModel @ViewModelService(SongListFragment::class)constructor(
     val repository: SongSquareFragmentRepository

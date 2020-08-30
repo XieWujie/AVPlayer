@@ -16,8 +16,8 @@ import com.example.songlist.adapter.AllSongListAdapter
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.bean.Playlists
 import com.example.songlist.vm.SongListViewModel
-import com.xie.di.AutoWire
-import com.xie.di.DiBus
+import com.dibus.AutoWire
+import com.dibus.DiBus
 
 class SongListFragment : AVFragment(),
     FragmentCreator {

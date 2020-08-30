@@ -12,9 +12,10 @@ import com.example.common.databinding.PlayBottomLayoutBinding
 import com.example.common.extension.bind
 import com.example.common.playservice.PlayEvent
 import com.example.common.playservice.PlayerService
-import com.xie.di.BusEvent
-import com.xie.di.DiBus
-import com.xie.di.THREAD_POLICY_MAIN
+import com.dibus.BusEvent
+import com.dibus.DiBus
+import com.dibus.THREAD_POLICY_MAIN
+import dibus.common.PlayBottomStateFragmentCreator
 import java.util.*
 
 class PlayBottomStateFragment :Fragment(){
@@ -26,7 +27,7 @@ class PlayBottomStateFragment :Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DiBus.register(this)
+        PlayBottomStateFragmentCreator.inject(this)
         viewModel = ViewModelProvider(this)[ViewModel::class.java]
     }
 

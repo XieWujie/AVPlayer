@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.example.common.playservice.PlayerService
 import com.example.route.AVRoute
 import com.google.gson.Gson
-import com.xie.di.DiBus
+import com.dibus.DiBus
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule

@@ -5,9 +5,9 @@ import com.example.common.adapter.AVLiveData
 import com.example.main.http.entity.Block
 import com.example.main.repository.IDiscoveryRepository
 import com.example.main.view.DiscoveryFragment
-import com.xie.di.AndroidLifeCycleProvide
-import com.xie.di.DiBus
-import com.xie.di.ViewModelService
+import com.dibus.AndroidLifeCycleProvide
+import com.dibus.DiBus
+import com.dibus.ViewModelService
 
 class DiscoveryViewModel @ViewModelService(DiscoveryFragment::class) constructor(val repository: IDiscoveryRepository):ViewModel() {
 

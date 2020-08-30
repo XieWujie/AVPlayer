@@ -10,8 +10,8 @@ import com.example.common.base.AVFragment
 import com.example.songlist.R
 import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.vm.SongListViewModel
-import com.xie.di.AutoWire
-import com.xie.di.Service
+import com.dibus.AutoWire
+import com.dibus.Service
 
 class HeightQualitySongListFragment @Service constructor(override var mCat: String) : AVFragment(), FragmentCreator {
     private lateinit var recyclerView: RecyclerView

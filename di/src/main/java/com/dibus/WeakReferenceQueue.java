@@ -1,4 +1,4 @@
-package com.xie.di;
+package com.dibus;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;

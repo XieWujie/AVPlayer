@@ -6,15 +6,18 @@ import com.example.common.util.Md5Encrypt
 import com.example.login.CellPhoneLoginActivity
 import com.example.login.http.LoginApi
 import com.example.login.http.LoginEntry
-import com.xie.di.AndroidLifeCycleProvide
-import com.xie.di.DiBus
-import com.xie.di.Service
+import com.dibus.AndroidLifeCycleProvide
+import com.dibus.DiBus
+import com.dibus.Scope
+import com.dibus.Service
+import com.example.login.LOGIN_SCOPE
 
 
 class CellPhoneRepository @Service constructor(private val api: LoginApi) :ILoginRepository{
 
 
-  private val lifeCycleProvide:AndroidLifeCycleProvide = DiBus.getInstance().lifeCycle<CellPhoneLoginActivity>()
+    @Scope(LOGIN_SCOPE)
+  lateinit var lifeCycleProvide:AndroidLifeCycleProvide
 
 
     override fun login(phone: String, password: String):AVLiveData<LoginEntry>{

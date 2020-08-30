@@ -18,8 +18,8 @@ import com.example.songlist.utils.setBarLightTransparent
 import com.example.songlist.view.ToolbarLayout
 import com.example.songlist.vm.SongSquareViewModel
 import com.google.android.material.tabs.TabLayout
-import com.xie.di.AutoWire
-import com.xie.di.DiBus
+import com.dibus.AutoWire
+import com.dibus.DiBus
 
 @Route("songlist/songsquare")
 class SongSquareActivity : AVActivity() {

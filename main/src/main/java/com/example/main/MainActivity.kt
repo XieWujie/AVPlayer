@@ -14,7 +14,8 @@ import com.example.main.view.PanDrawable
 import com.example.main.viewmodel.MainViewModel
 import com.example.route.AVRoute
 import com.example.route.annotation.Route
-import com.xie.di.AutoWire
+import com.dibus.AutoWire
+import dibus.main.MainActivityCreator
 
 @Route("main/main")
 class MainActivity : AVActivity() {
@@ -29,6 +30,7 @@ class MainActivity : AVActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MainActivityCreator.inject(this)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         checkAccount()
         initView()
