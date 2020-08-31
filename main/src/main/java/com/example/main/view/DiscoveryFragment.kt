@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dibus.AndroidLifeCycleProvide
 import com.example.common.base.AVFragment
 import com.example.common.extension.bind
 import com.example.common.extension.toast
@@ -39,7 +40,7 @@ class DiscoveryFragment :AVFragment(){
     }
 
     private fun dispatchEvent(){
-        viewModel.blocks().registerLifeCycle(DiBus.lifeCycle<DiscoveryFragment>())
+        viewModel.blocks()
             .doOnError { context?.toast(it.message?:"请求错误") }
             .doOnComplete {
                 adapter.setList(it)

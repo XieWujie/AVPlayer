@@ -2,6 +2,7 @@ package com.example.songlist.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dibus.AndroidLifeCycleProvide
 import com.example.songlist.SongSquareActivity
 import com.example.songlist.bean.Sub
 import com.example.songlist.repository.ISongSquareRepository
@@ -12,7 +13,7 @@ class SongSquareViewModel @ViewModelService(SongSquareActivity::class) construct
     val repository: ISongSquareRepository):ViewModel() {
     var songCategorys = MutableLiveData<List<Sub>>()
 
-    private val lifeCycleProvide = DiBus.lifeCycle<SongSquareActivity>()
+    private val lifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongSquareActivity>())
 
     fun getSongCategoryList() {
         repository.getSongCategoryList()

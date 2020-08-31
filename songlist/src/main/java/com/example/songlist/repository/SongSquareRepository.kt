@@ -14,7 +14,7 @@ class SongSquareRepository @Service constructor(
     private val api: SongSquareApi
 
 ) : ISongSquareRepository {
-    private val lifeCycleProvide: AndroidLifeCycleProvide = DiBus.lifeCycle<SongSquareActivity>()
+    private val lifeCycleProvide: AndroidLifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongSquareActivity>())
     override fun getSongCategoryList(): AVLiveData<SongCategoryBean> {
         return api.getSongCategoryList()
             .registerLifeCycle(lifeCycleProvide)

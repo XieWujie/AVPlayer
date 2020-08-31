@@ -1,13 +1,10 @@
 package com.example.main.repository
 
+import com.dibus.Service
 import com.example.common.adapter.AVLiveData
-
 import com.example.common.base.IRepository
 import com.example.main.http.DiscoveryApi
 import com.example.main.http.entity.Block
-import com.example.main.view.DiscoveryFragment
-import com.dibus.DiBus
-import com.dibus.Service
 
 interface IDiscoveryRepository :IRepository {
     fun blocks():AVLiveData<List<Block>>
@@ -17,7 +14,7 @@ class DiscoveryRepository @Service constructor(private val api: DiscoveryApi) :I
 
     override fun blocks(): AVLiveData<List<Block>> {
         val blocks = AVLiveData<List<Block>>()
-        api.blockPage().registerLifeCycle(DiBus.lifeCycle<DiscoveryFragment>())
+        api.blockPage()
             .doOnComplete { blocks.value(it.data.blocks) }
             .doOnError { blocks.error(it) }
             .post()

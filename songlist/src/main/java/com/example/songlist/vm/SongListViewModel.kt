@@ -2,6 +2,7 @@ package com.example.songlist.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dibus.AndroidLifeCycleProvide
 import com.example.common.adapter.AVLiveData
 import com.example.songlist.bean.HeightQualitySongListBean
 import com.example.songlist.bean.Playlists
@@ -17,7 +18,7 @@ class SongListViewModel @ViewModelService(SongListFragment::class)constructor(
 ) :ViewModel() {
     val songList = SafeMutableLiveData<List<Playlists>>()
     private val heightQualitySongList = MutableLiveData<List<Playlists>>()
-   private val  lifeCycleProvide = DiBus.lifeCycle<SongListFragment>()
+   private val  lifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongListFragment>())
 
     fun getHeightQualitySongList(
         before: Long = 0,

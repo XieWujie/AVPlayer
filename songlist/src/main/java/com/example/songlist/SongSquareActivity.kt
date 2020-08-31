@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
+import com.dibus.AndroidLifeCycleProvide
 import com.example.common.base.AVActivity
 import com.example.common.extension.lifecycleObserve
 import com.example.route.annotation.Route
@@ -68,7 +69,7 @@ class SongSquareActivity : AVActivity() {
         tabLayout.setText("精品")
         fragmentList.add(HeightQualitySongListFragment("精品"))
         viewModel.songCategorys.lifecycleObserve(
-            DiBus.lifeCycle(this),
+            AndroidLifeCycleProvide(this),
             Observer {
                 Log.e(TAG, it.toString())
                 it.forEach { sub ->

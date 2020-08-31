@@ -6,8 +6,6 @@ import java.io.IOException
 import java.lang.ref.WeakReference
 import javax.annotation.processing.*
 import javax.lang.model.element.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 @Suppress("MISSING_DEPENDENCY_CLASS")
 @AutoService(Processor::class)
@@ -154,46 +152,29 @@ class DiBusProcessor : AbstractProcessor() {
 
 
 
-    private fun eventAware(info: BusAwareInfo): MethodSpec {
-        val p = ParameterizedTypeName.get(
-            ClassName.get(List::class.java),
-            WildcardTypeName.subtypeOf(ClassName.get(Any::class.java))
-        )
+    private fun registerEventMethod(info: BusAwareInfo,instanceType: ClassName): MethodSpec {
 
-        val eventAwareMethod = MethodSpec.methodBuilder("eventAware")
-            .addModifiers(Modifier.PUBLIC)
-            .addParameter(ParameterSpec.builder(p, "args").build())
-            .addAnnotation(Override::class.java)
-        for (event in info.busEvent) {
-            val types =
-                Utils.getFieldFromSignature(event.argsSignature).map { Utils.getClassName(it) }
-                    .toTypedArray()
-            if (types.size > 1) {
-                val builder = StringBuilder()
-                builder.append("if(args.size() == ${types.size}")
-                for (index in types.indices) {
-                    builder.append("&& args.get($index) instanceof \$T")
-                }
-                builder.append(")")
-                eventAwareMethod.beginControlFlow(builder.toString(), *types)
-                builder.delete(0, builder.length)
-                builder.append("instance.${event.functionName}(")
-                for (index in types.indices) {
-                    builder.append("(\$T)args.get($index),")
-                }
-                builder.deleteCharAt(builder.length - 1)
-                builder.append(")")
-                eventAwareMethod.addStatement(builder.toString(), *types)
-                    .endControlFlow()
-            } else if (types.size == 1) {
-                eventAwareMethod.beginControlFlow("if(args.get(0) instanceof \$T)", types[0])
-                    .addStatement("instance.${event.functionName}((\$T)args.get(0))", types[0])
-                    .endControlFlow()
-            } else if (types.isEmpty()) {
-                throw RuntimeException("@busEvent不能在无参方法中执行")
+        val method = MethodSpec.methodBuilder("registerEvents")
+            .addModifiers(Modifier.STATIC)
+            .addParameter(instanceType,"receiver")
+        val executorType = ClassName.get(DIBUS_PAC,"AndroidEventExecutor")
+        for(event in info.busEvent){
+            val argsType = Utils.getFieldFromSignature(event.argsSignature).map { Utils.getClassName(it) }.toTypedArray()
+            val builder = StringBuilder()
+            for(t in argsType.indices){
+                builder.append("(\$T)args[$t],")
             }
+            builder.deleteCharAt(builder.length-1)
+          val c = "\$T ${event.functionName} =  new \$T<\$T>(${event.thread}){\n" +
+                  "      @Override\n" +
+                  "      public void realExecutor(\$T receiver,Object ...args) {\n" +
+                  "        receiver.${event.functionName}(${builder.toString()});\n" +
+                  "      }\n" +
+                  "    }\n"
+            method.addStatement(c,executorType,executorType,instanceType,instanceType,*argsType)
+                .addStatement("\$T.registerEvent(\$S,${event.functionName},receiver)",dibusType,event.argsSignature)
         }
-        return eventAwareMethod.build()
+        return method.build()
     }
 
     private fun registerMethod(info: BusAwareInfo):CodeBlock{
@@ -363,9 +344,6 @@ class DiBusProcessor : AbstractProcessor() {
     }
 
     private fun fetchStrategy(typeKey:String, leftCode:String):CodeBlock{
-        if(typeKey == "com.example.main.http.DiscoveryApi"){
-            typeKey
-        }
        return if(staticInfo.containsKey(typeKey)){
             val value = staticInfo[typeKey]!!
            val name = Utils.getClassNameFromPath(value.ClazzName).second
@@ -475,6 +453,9 @@ class DiBusProcessor : AbstractProcessor() {
             .addParameter(instanceType,"receiver")
             .addCode(setInstance("receiver",busAwareInfo,instanceType))
             .addStatement("autoWire(receiver)")
+        if(busAwareInfo.busEvent.isNotEmpty()){
+            method.addStatement("registerEvents(receiver)")
+        }
         return method.build()
     }
 
@@ -505,6 +486,9 @@ class DiBusProcessor : AbstractProcessor() {
           }
         if(info.service != null){
             type.addMethod(createIsViewModelMethod(info))
+        }
+        if(info.busEvent.isNotEmpty()){
+            type.addMethod(registerEventMethod(info,instanceType))
         }
         try {
             JavaFile.builder("$BASE_PACKAGE.$moduleName", type.build()).build()

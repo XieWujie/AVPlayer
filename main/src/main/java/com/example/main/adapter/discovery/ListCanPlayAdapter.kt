@@ -41,8 +41,8 @@ class ListCanPlayAdapter :RecyclerView.Adapter<ListCanPlayAdapter.ViewHolder>(){
             ViewHolderCreator.inject(this)
         }
         fun bind(resource: Resource){
-            binding.songTitle.text = resource.uiElement.mainTitle.title
-            binding.songSubTitle.text = resource.uiElement.subTitle.title
+            binding.songTitle.text = resource.uiElement.mainTitle?.title?:""
+            binding.songSubTitle.text = resource.uiElement.subTitle?.title?:""
             Glide.with(binding.songCoverView).load(resource.uiElement.image.imageUrl).into(binding.songCoverView)
             binding.songPlayStateView.setOnClickListener {view->
                 if(!view.isSelected) {

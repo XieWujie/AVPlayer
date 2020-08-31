@@ -4,7 +4,7 @@ import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
 
- class WeakReferenceQueue<E> {
+ class WeakEventQueue<E> {
     /**
      * Reference queue for cleared weak references
      */
@@ -14,7 +14,7 @@ import java.util.Iterator;
      * Strongly referenced list head
      */
     private Object strongRef = new Object();
-    private ListEntry head = new ListEntry(strongRef, garbage);
+    private ListEntry head = new ListEntry(strongRef, garbage,null);
 
     /**
      * Size of the queue
@@ -22,10 +22,10 @@ import java.util.Iterator;
     int size = 0;
 
     @SuppressWarnings("unchecked")
-    public void add(E obj) {
+    public void add(E obj,EventExecutor<E>eventExecutor) {
         cleanup();
         size++;
-        new ListEntry(obj, garbage).insert(head.prev);
+        new ListEntry(obj, garbage,eventExecutor).insert(head.prev);
     }
 
     public void remove(E obj) {
@@ -51,10 +51,10 @@ import java.util.Iterator;
         }
     }
 
-    public Iterator<? super E> iterator() {
+    public Iterator<ListEntry> iterator() {
         return new Iterator() {
             private ListEntry index = head;
-            private Object next = null;
+            private ListEntry next = null;
 
             public boolean hasNext() {
                 next = null;
@@ -63,7 +63,7 @@ import java.util.Iterator;
                     if (nextIndex == head) {
                         break;
                     }
-                    next = nextIndex.get();
+                    next = nextIndex;
                     if (next == null) {
                         size--;
                         nextIndex.remove();
@@ -73,7 +73,7 @@ import java.util.Iterator;
                 return next != null;
             }
 
-            public Object next() {
+            public ListEntry next() {
                 hasNext(); // forces us to clear out crap up to the next
                            // valid spot
                 index = index.prev;
@@ -91,13 +91,19 @@ import java.util.Iterator;
         };
     }
 
-    private static class ListEntry extends WeakReference {
-        ListEntry prev, next;
+    static class ListEntry extends WeakReference {
+        private ListEntry prev, next;
+        private EventExecutor eventExecutor;
 
-        public ListEntry(Object o, ReferenceQueue queue) {
+        public ListEntry(Object o, ReferenceQueue queue,EventExecutor eventExecutor) {
             super(o, queue);
             prev = this;
             next = this;
+            this.eventExecutor = eventExecutor;
+        }
+
+        public void execute(Object ...args){
+            eventExecutor.execute(get(),args);
         }
 
         public void insert(ListEntry where) {

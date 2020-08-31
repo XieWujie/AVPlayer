@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dibus.AndroidLifeCycleProvide
 import com.example.common.base.AVFragment
 import com.example.common.extension.lifecycleObserve
 import com.example.songlist.R
@@ -58,7 +59,7 @@ class SongListFragment : AVFragment(),
     private fun bindViewData() {
         sourceList = ArrayList()
         recyclerAdapter = AllSongListAdapter(R.layout.item_all_song_list, sourceList)
-        viewModel.songList.lifecycleObserve(DiBus.lifeCycle(this), Observer {
+        viewModel.songList.lifecycleObserve(AndroidLifeCycleProvide(this), Observer {
             Log.e(TAG, it.toString())
             sourceList.addAll(it)
             recyclerAdapter.addData(sourceList)

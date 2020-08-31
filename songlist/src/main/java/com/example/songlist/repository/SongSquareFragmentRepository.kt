@@ -9,12 +9,14 @@ import com.example.songlist.http.SongSquareApi
 import com.dibus.AndroidLifeCycleProvide
 import com.dibus.DiBus
 import com.dibus.Service
+import com.example.songlist.SongSquareActivity
 
 class SongSquareFragmentRepository @Service constructor(
     private var api: SongSquareApi
 ) : ISongSquareFragmentRepository {
 
-    private val lifeCycleProvide: AndroidLifeCycleProvide = DiBus.lifeCycle<SongListFragment>()
+
+    val  lifeCycleProvide: AndroidLifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongSquareActivity>())
 
     override fun getHeightQualitySongList(
         before: Long,

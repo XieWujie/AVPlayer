@@ -2,9 +2,6 @@ package com.dibus
 
 internal object Utils {
 
-    fun getModuleName(path:String):String{
-       return path.substringBeforeLast(".").substringAfterLast(".")
-    }
 
     fun getSignatureFromArgs(args: Array<out Any>):String{
         if(args.size == 1){
