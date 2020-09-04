@@ -10,6 +10,8 @@ import android.os.Message
 import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.containsKey
+import com.dibus.Provide
+import com.dibus.Service
 import com.example.common.IAVService
 import com.example.common.extension.toast
 import com.example.playerservice.http.Song
@@ -19,7 +21,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 
-class SongHouse(private val repository: ISongRepository, val context: Context) : Handler(Looper.myLooper()),
+class SongHouse @Service constructor(private val repository: ISongRepository, val context: Context) : Handler(Looper.myLooper()),
     Runnable {
 
     private val songs = SparseArray<Song>()

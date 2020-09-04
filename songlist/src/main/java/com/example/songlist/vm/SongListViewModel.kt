@@ -12,13 +12,13 @@ import com.example.songlist.repository.SongSquareFragmentRepository
 import com.example.songlist.utils.SafeMutableLiveData
 import com.dibus.DiBus
 import com.dibus.ViewModelService
+import com.dibus.scope
 
 class SongListViewModel @ViewModelService(SongListFragment::class)constructor(
     val repository: SongSquareFragmentRepository
 ) :ViewModel() {
     val songList = SafeMutableLiveData<List<Playlists>>()
     private val heightQualitySongList = MutableLiveData<List<Playlists>>()
-   private val  lifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongListFragment>())
 
     fun getHeightQualitySongList(
         before: Long = 0,
@@ -27,10 +27,9 @@ class SongListViewModel @ViewModelService(SongListFragment::class)constructor(
     ): AVLiveData<HeightQualitySongListBean> {
         return repository
             .getHeightQualitySongList(before, limit, cat)
-            .registerLifeCycle(lifeCycleProvide)
             .doOnComplete { heightQualitySongList.value = it.playlists }
             .doOnError { heightQualitySongList.value = null }
-            .post()
+            .post(scope(SongListFragment::class))
     }
 
     fun getSongList(
@@ -41,10 +40,9 @@ class SongListViewModel @ViewModelService(SongListFragment::class)constructor(
     ): AVLiveData<SongListBean> {
         return repository
             .getSongList(cat, offset, limit, order)
-            .registerLifeCycle(lifeCycleProvide)
             .doOnComplete { songList.value = it.playlists }
             .doOnError { songList.value = null }
-            .post()
+            .post(scope(SongListFragment::class))
     }
 
 }

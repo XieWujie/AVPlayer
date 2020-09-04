@@ -13,14 +13,6 @@ import retrofit2.Retrofit
 @Service
 class LoginActivityDI {
 
-
-
-    @AutoWire
-    lateinit var repository: CellPhoneRepository
-
-    @AutoWire
-    lateinit var cellPhoneLoginActivity: CellPhoneLoginActivity
-
     @Provide
     fun loginApi():LoginApi{
         return DiBus.load<Retrofit>().create(LoginApi::class.java)

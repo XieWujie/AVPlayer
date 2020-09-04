@@ -3,14 +3,19 @@ package com.example.playerservice.repository
 import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.set
+import com.dibus.DiBus
+import com.dibus.Provide
+import com.dibus.Service
 import com.example.playerservice.http.Api
 import com.example.playerservice.http.LyricEntity
 import com.example.playerservice.http.Song
 import com.example.playerservice.http.SongEntity
 import com.example.playerservice.util.Util
+import dibus.common.HttpDiServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
 import java.util.*
 
 interface ISongRepository{
@@ -21,7 +26,8 @@ interface ISongRepository{
 
 }
 
-class SongRepository(private val api:Api) :ISongRepository{
+
+class SongRepository @Service constructor(private val api:Api) :ISongRepository{
 
     override   fun getLyric(id:Int,lyric:TreeMap<Int,String>,callback:(t:Throwable?)->Unit) {
         api.getLyric(id).enqueue(object :Callback<LyricEntity>{
@@ -69,7 +75,6 @@ class SongRepository(private val api:Api) :ISongRepository{
             }
     })
     }
-
     companion object{
         const val TAG = "SongRepository"
     }

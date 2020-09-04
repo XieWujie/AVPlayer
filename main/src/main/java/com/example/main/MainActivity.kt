@@ -15,9 +15,12 @@ import com.example.main.viewmodel.MainViewModel
 import com.example.route.AVRoute
 import com.example.route.annotation.Route
 import com.dibus.AutoWire
+import com.dibus.LifeCycle
 import dibus.main.MainActivityCreator
 
+internal const val MAIN_SCOPE = "main_scope"
 @Route("main/main")
+@LifeCycle(MAIN_SCOPE)
 class MainActivity : AVActivity() {
 
 
@@ -82,4 +85,5 @@ class MainActivity : AVActivity() {
             }.execute()
         }
     }
+
 }

@@ -55,7 +55,7 @@ class PlayBottomStateFragment :Fragment(){
         })
     }
 
-    @BusEvent
+    @BusEvent(stick = true)
      fun started(event:PlayEvent.Started) {
         if(songId !=event.id){
             songId = event.id
@@ -70,7 +70,7 @@ class PlayBottomStateFragment :Fragment(){
         binding.circlePlayBar.setIsPlaying(false)
     }
 
-    @BusEvent
+    @BusEvent(stick = true)
      fun playTime(playTime: PlayEvent.PlayTime) {
         binding.circlePlayBar.setAllTime(playTime.time)
     }
@@ -80,7 +80,7 @@ class PlayBottomStateFragment :Fragment(){
         binding.circlePlayBar.setTime(playedTime.time)
     }
 
-    @BusEvent(threadPolicy = THREAD_POLICY_MAIN)
+    @BusEvent(threadPolicy = THREAD_POLICY_MAIN,stick = true)
      fun lyric(lyric: PlayEvent.Lyric) {
         this.lyric = lyric.lyric
     }

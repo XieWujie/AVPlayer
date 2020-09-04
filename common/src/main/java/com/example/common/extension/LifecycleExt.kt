@@ -38,11 +38,10 @@ inline fun<reified T> AVLiveData<T>.lifecycleObserve(provider:AndroidLifeCyclePr
 }
 
 
-inline fun <reified T>AVLiveData<T>.toErrorLiveData(lifeCycleProvide: AndroidLifeCycleProvide):LiveData<Throwable?>{
+inline fun <reified T>AVLiveData<T>.toErrorLiveData(lifecycleOwner: LifecycleOwner):LiveData<Throwable?>{
     val error = MutableLiveData<Throwable>()
     this.doOnError { error.value = getError() }
         .doOnComplete { error.value = null }
-        .registerLifeCycle(lifeCycleProvide)
-        .post()
+        .post(lifecycleOwner)
     return error
 }

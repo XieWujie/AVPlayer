@@ -19,6 +19,7 @@ import com.example.songlist.bean.Playlists
 import com.example.songlist.vm.SongListViewModel
 import com.dibus.AutoWire
 import com.dibus.DiBus
+import dibus.songlist.SongListFragmentCreator
 
 class SongListFragment : AVFragment(),
     FragmentCreator {
@@ -33,6 +34,7 @@ class SongListFragment : AVFragment(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        SongListFragmentCreator.inject(this)
         initData()
     }
 

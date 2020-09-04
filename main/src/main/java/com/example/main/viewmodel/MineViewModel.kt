@@ -21,17 +21,17 @@ class MineViewModel @ViewModelService(MineFragment::class) internal constructor(
 
     fun subCount():LiveData<SubCountEntry>{
         val subCountEntry = MutableLiveData<SubCountEntry>()
-        repository.subCount().registerLifeCycle(lifeCycleProvide)
+        repository.subCount()
             .doOnComplete { subCountEntry.value = it }
-            .post()
+            .post(scope(MineFragment::class))
         return subCountEntry
     }
 
     fun played():LiveData<PlayRecordList>{
         val playedEntry = MutableLiveData<PlayRecordList>()
-        repository.played().registerLifeCycle(lifeCycleProvide)
+        repository.played()
             .doOnComplete { playedEntry.value = it }
-            .post()
+            .post(scope(MineFragment::class))
         return playedEntry
     }
 

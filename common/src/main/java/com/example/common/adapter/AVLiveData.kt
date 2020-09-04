@@ -1,5 +1,6 @@
 package com.example.common.adapter
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.dibus.AndroidLifeCycleProvide
@@ -10,7 +11,6 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
     private var dataWrap:AVLiveDataWrap<T>? = null
     private var canceled = false
     private var call:(()->Unit)?  = null
-    private var lifeCycleProvide:AndroidLifeCycleProvide? = null
     private var onComplete:((data:T)->Unit)? = null
     private var error:((error:Throwable)->Unit)? = null
 
@@ -27,10 +27,10 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
     }
 
 
-
-    fun registerLifeCycle(provide: AndroidLifeCycleProvide):AVLiveData<T>{
-        this.lifeCycleProvide = provide
-        return this
+    override fun onInactive() {
+        if(!hasCanceled()){
+            cancel()
+        }
     }
 
     fun doOnComplete(block:(data:T)->Unit):AVLiveData<T>{
@@ -43,7 +43,7 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
         return this
     }
 
-    fun post():AVLiveData<T>{
+    fun post(lifecycleOwner: LifecycleOwner):AVLiveData<T>{
         val complete = onComplete
         val er = error
         val observer =  Observer<AVLiveDataWrap<T>>{
@@ -53,13 +53,7 @@ class AVLiveData<T> :LiveData<AVLiveData.AVLiveDataWrap<T>>(){
                 else->er?.invoke(value.error!!)
             }
         }
-        this.observeForever(observer)
-        lifeCycleProvide?.provide{
-            removeObserver(observer)
-            if(!hasCanceled()){
-                cancel()
-            }
-        }
+        this.observe(lifecycleOwner,observer)
         onComplete = null
         error = null
         return this

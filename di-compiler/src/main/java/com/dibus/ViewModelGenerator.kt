@@ -5,11 +5,9 @@ import java.io.IOException
 import javax.annotation.processing.Filer
 import javax.lang.model.element.Modifier
 
-class ViewModelGenerator (private val filer: Filer, private val info: BusAwareInfo, private val createMethod: MethodSpec,private val moduleName:String){
+internal class ViewModelGenerator (private val filer: Filer, private val info: BusAwareInfo, private val createMethod: MethodSpec,private val moduleName:String){
 
     val name:String ="${Utils.getClassNameFromPath(info.receiverClass).second}Factory"
-
-
 
     private fun generateCreate():MethodSpec{
         val viewModelType = ClassName.get("androidx.lifecycle","ViewModel")
@@ -28,7 +26,6 @@ class ViewModelGenerator (private val filer: Filer, private val info: BusAwareIn
 
 
     fun generate(){
-       val fetcherType = ClassName.get(Fetcher::class.java)
         val instanceType =Utils.getClassName(info.receiverClass)
 
         val instance = FieldSpec.builder(instanceType,"instance").build()
@@ -47,6 +44,5 @@ class ViewModelGenerator (private val filer: Filer, private val info: BusAwareIn
             e.printStackTrace()
         }
     }
-
 
 }

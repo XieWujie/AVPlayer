@@ -22,12 +22,12 @@ class ResponseConnection private constructor(): IAVService.Stub(){
 
 
     override fun started(id: Int) {
-        diBus.sendEvent(PlayEvent.Started(id))
+        diBus.sendStickEvent(PlayEvent.Started(id))
 
     }
 
     override fun playTime(time: Int) {
-        diBus.sendEvent(PlayEvent.PlayTime(time))
+        diBus.sendStickEvent(PlayEvent.PlayTime(time))
 
     }
 
@@ -43,7 +43,7 @@ class ResponseConnection private constructor(): IAVService.Stub(){
 
     @Suppress("UNCHECKED_CAST")
     override fun lyric(lyric: MutableMap<Any?, Any?>?) {
-        diBus.sendEvent(PlayEvent.Lyric((lyric as MutableMap<Int, String>).toSortedMap()))
+        diBus.sendStickEvent(PlayEvent.Lyric((lyric as MutableMap<Int, String>).toSortedMap()))
     }
 
     override fun playList(ids: IntArray?) {

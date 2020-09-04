@@ -1,11 +1,12 @@
 package com.example.playerservice.core
 
 import android.content.Context
+import com.dibus.Service
 import com.example.common.IAVService
 import com.example.common.IPlayerService
 
 
-class PlayerConnection(val context: Context, private val player: IAVPlayer) : IPlayerService.Stub(){
+class PlayerConnection @Service constructor(val context: Context, private val player: IAVPlayer) : IPlayerService.Stub(){
 
     private val house = player.getHouse()
     override fun rquestPlaySong(id: Int,ids:String?) {

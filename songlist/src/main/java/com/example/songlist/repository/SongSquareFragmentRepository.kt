@@ -9,6 +9,7 @@ import com.example.songlist.http.SongSquareApi
 import com.dibus.AndroidLifeCycleProvide
 import com.dibus.DiBus
 import com.dibus.Service
+import com.dibus.diBus
 import com.example.songlist.SongSquareActivity
 
 class SongSquareFragmentRepository @Service constructor(
@@ -16,7 +17,6 @@ class SongSquareFragmentRepository @Service constructor(
 ) : ISongSquareFragmentRepository {
 
 
-    val  lifeCycleProvide: AndroidLifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongSquareActivity>())
 
     override fun getHeightQualitySongList(
         before: Long,
@@ -24,10 +24,9 @@ class SongSquareFragmentRepository @Service constructor(
         cat: String
     ): AVLiveData<HeightQualitySongListBean> {
         return api.getHeightQualitySongList(before, limit, cat)
-            .registerLifeCycle(lifeCycleProvide)
             .doOnError(this::onHeightQualitySongListError)
             .doOnComplete(this::onHeightQualitySongListSuccess)
-            .post()
+            .post(diBus.scope(SongSquareActivity::class)!!)
     }
 
     private fun onHeightQualitySongListSuccess(bean: HeightQualitySongListBean) {
@@ -45,10 +44,9 @@ class SongSquareFragmentRepository @Service constructor(
         order: String
     ): AVLiveData<SongListBean> {
         return api.getSongList(cat, offset, limit, order)
-            .registerLifeCycle(lifeCycleProvide)
             .doOnError(this::onSongListError)
             .doOnComplete(this::onSongListSuccess)
-            .post()
+            .post(diBus.scope(SongSquareActivity::class)!!)
     }
 
     private fun onSongListSuccess(bean: SongListBean) {

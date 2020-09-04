@@ -21,6 +21,7 @@ import com.example.songlist.vm.SongSquareViewModel
 import com.google.android.material.tabs.TabLayout
 import com.dibus.AutoWire
 import com.dibus.DiBus
+import dibus.songlist.SongSquareActivityCreator
 
 @Route("songlist/songsquare")
 class SongSquareActivity : AVActivity() {
@@ -37,6 +38,7 @@ class SongSquareActivity : AVActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        SongSquareActivityCreator.inject(this)
         setBarLightTransparent(this)
         setContentView(R.layout.activity_song_square)
         initView()

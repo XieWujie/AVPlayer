@@ -3,13 +3,11 @@ package com.example.login.vm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dibus.*
 import com.example.common.extension.toErrorLiveData
 import com.example.login.CellPhoneLoginActivity
 import com.example.login.LOGIN_SCOPE
 import com.example.login.repository.ILoginRepository
-import com.dibus.AndroidLifeCycleProvide
-import com.dibus.Scope
-import com.dibus.ViewModelService
 
 
 class LoginViewModel @ViewModelService(CellPhoneLoginActivity::class)
@@ -27,7 +25,7 @@ constructor(private val repository:ILoginRepository):ViewModel(){
             return error
         }
         return repository.login(loginStrategy.account,loginStrategy.password).toErrorLiveData(
-            lifeCycleProvide
+          diBus.scope(CellPhoneLoginActivity::class)
         )
     }
 

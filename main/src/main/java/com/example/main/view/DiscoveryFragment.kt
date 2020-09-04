@@ -15,8 +15,10 @@ import com.example.main.databinding.FragmentDiscoveryBinding
 import com.example.main.viewmodel.DiscoveryViewModel
 import com.dibus.AutoWire
 import com.dibus.DiBus
+import com.dibus.LifeCycle
 import dibus.main.DiscoveryFragmentCreator
 
+@LifeCycle
 class DiscoveryFragment :AVFragment(){
 
 
@@ -45,6 +47,6 @@ class DiscoveryFragment :AVFragment(){
             .doOnComplete {
                 adapter.setList(it)
             }
-            .post()
+            .post(this)
     }
 }

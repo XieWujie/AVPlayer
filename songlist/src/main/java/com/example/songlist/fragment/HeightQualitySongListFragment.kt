@@ -12,6 +12,7 @@ import com.example.songlist.adapter.FragmentCreator
 import com.example.songlist.vm.SongListViewModel
 import com.dibus.AutoWire
 import com.dibus.Service
+import dibus.songlist.HeightQualitySongListFragmentCreator
 
 class HeightQualitySongListFragment @Service constructor(override var mCat: String) : AVFragment(), FragmentCreator {
     private lateinit var recyclerView: RecyclerView
@@ -21,6 +22,7 @@ class HeightQualitySongListFragment @Service constructor(override var mCat: Stri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        HeightQualitySongListFragmentCreator.inject(this)
         initData()
     }
 

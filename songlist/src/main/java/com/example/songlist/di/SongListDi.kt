@@ -13,6 +13,6 @@ class SongListDi {
 
     private val retrofit:Retrofit = DiBus.load()
 
-    @Provide
+    @Provide()
     fun provideSongApi(): SongSquareApi = retrofit.create( SongSquareApi::class.java)
 }

@@ -9,29 +9,28 @@ import com.example.main.http.MineApi
 import com.example.main.http.entry.PlayRecordList
 import com.example.main.http.entry.Playlist
 import com.example.main.http.entry.SubCountEntry
+import com.example.main.view.DiscoveryFragment
 import com.example.main.view.MINE_FRAGMENT_SCOPE
 import com.example.main.view.MineFragment
 
 class MineRepository @Service constructor(private val mineLocal: MineLocal, private val api:MineApi) :IMineIRepository{
 
-    @Scope(MINE_FRAGMENT_SCOPE)
-    lateinit var lifeCycleProvide:AndroidLifeCycleProvide
 
     override fun playList(): AVLiveData<List<Playlist>> {
         val playList = AVLiveData<List<Playlist>>()
-        api.userSongList(Account.uid).registerLifeCycle(lifeCycleProvide)
+        api.userSongList(Account.uid)
             .doOnComplete { playList.value(it.playlist)}
             .doOnError {
                 playList.error(it)
                 it.printStackTrace()
             }
-            .post()
+            .post(diBus.scope(MineFragment::class))
         return playList
     }
 
     override fun subCount(): AVLiveData<SubCountEntry> {
-       return fromCacheSubCount()?: api.getSubCount().registerLifeCycle(lifeCycleProvide)
-           .doOnComplete(this::subCountComplete).post()
+       return fromCacheSubCount()?: api.getSubCount()
+           .doOnComplete(this::subCountComplete).post(diBus.scope(MineFragment::class))
     }
 
 
@@ -67,16 +66,14 @@ class MineRepository @Service constructor(private val mineLocal: MineLocal, priv
 
     override fun played(): AVLiveData<PlayRecordList>{
        return api.playRecord(Account.uid)
-           .registerLifeCycle(lifeCycleProvide)
            .doOnError { it.printStackTrace() }
            .doOnComplete(this::played)
-           .post()
+           .post(diBus.scope(MineFragment::class))
     }
 
     private fun played(playRecordList: PlayRecordList){
        // Log.d("MineRepository",playRecordList.toString())
     }
-
 }
 
 

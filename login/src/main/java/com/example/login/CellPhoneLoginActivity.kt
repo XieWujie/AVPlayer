@@ -1,6 +1,8 @@
 package com.example.login
 
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.dibus.AndroidLifeCycleProvide
@@ -14,11 +16,13 @@ import com.example.login.vm.LoginViewModel
 import com.example.route.AVRoute
 import com.example.route.annotation.Route
 import com.dibus.AutoWire
+import com.dibus.LifeCycle
 import com.dibus.Scope
 import dibus.login.CellPhoneLoginActivityCreator
 
 internal const val LOGIN_SCOPE = "CellPhoneLoginActivity"
 @Route("login/cellphone")
+@LifeCycle
 class CellPhoneLoginActivity : AVActivity() {
 
     @AutoWire
@@ -42,6 +46,10 @@ class CellPhoneLoginActivity : AVActivity() {
     @Scope(LOGIN_SCOPE)
     public fun provideScope() = AndroidLifeCycleProvide(this)
 
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
+
 
     private fun dispatchEvent() {
         val request = Observer<Throwable?> {
@@ -55,6 +63,10 @@ class CellPhoneLoginActivity : AVActivity() {
         binding.loginButton.setOnClickListener {
             viewModel.login(loginStrategy).observe(this, request)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
 

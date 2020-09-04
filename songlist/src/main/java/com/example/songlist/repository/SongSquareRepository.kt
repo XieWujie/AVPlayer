@@ -9,18 +9,18 @@ import com.example.songlist.http.SongSquareApi
 import com.dibus.AndroidLifeCycleProvide
 import com.dibus.DiBus
 import com.dibus.Service
+import com.dibus.diBus
 
 class SongSquareRepository @Service constructor(
     private val api: SongSquareApi
 
 ) : ISongSquareRepository {
-    private val lifeCycleProvide: AndroidLifeCycleProvide = AndroidLifeCycleProvide(DiBus.load<SongSquareActivity>())
+
     override fun getSongCategoryList(): AVLiveData<SongCategoryBean> {
         return api.getSongCategoryList()
-            .registerLifeCycle(lifeCycleProvide)
             .doOnError(this::onHttpError)
             .doOnComplete(this::onHttpSuccess)
-            .post()
+            .post(diBus.scope(SongSquareActivity::class))
     }
 
     private fun <T : IBean> onHttpSuccess(songCategoryBean: T) {

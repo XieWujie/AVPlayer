@@ -1,8 +1,11 @@
+
 package com.example.playerservice.core
+
 
 import android.content.Context
 import android.media.MediaPlayer
 import android.util.Log
+import com.dibus.Service
 import com.example.common.IAVService
 import com.example.common.extension.toast
 import com.example.playerservice.http.Song
@@ -20,7 +23,7 @@ interface IAVPlayer{
     fun registerCallback(callback: IAVService)
 
 }
-class AVPlayer(val context: Context,private val house: SongHouse) : IAVPlayer,MediaPlayer.OnPreparedListener,MediaPlayer.OnCompletionListener {
+class AVPlayer @Service constructor(val context: Context,private val house: SongHouse) : IAVPlayer,MediaPlayer.OnPreparedListener,MediaPlayer.OnCompletionListener {
 
 
     private var currentMedia:MediaPlayer? = null
